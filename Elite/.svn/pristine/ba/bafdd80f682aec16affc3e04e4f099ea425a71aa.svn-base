@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.notice">
+
+	<select id="notice_list" parameterType="map" resultType="com.elite.vo.DaangnNoticeVO">
+		 select * from
+		(select rownum rno,nid,ntitle,ncontent,nfile,onfile,to_char(ndate,'yyyy-mm-dd')ndate,nhits
+		from (select * from daangn_notice order by ndate desc)) where rno between #{start} and #{end} 
+		
+	</select>
+
+	<select id="prev" parameterType="java.lang.String" resultType="com.elite.vo.DaangnNoticeVO">
+	
+			SELECT * FROM 
+			(SELECT NID,NTITLE,
+			LAG(NTITLE,1)OVER (ORDER BY NID DESC)PT,
+			LAG(nid,1,#{nid})OVER(ORDER BY NID DESC)pp,
+			LEAD(NTITLE,1)OVER (ORDER BY NID DESC)NT,
+			LEAD(nid,1,#{nid})OVER(ORDER BY NID DESC)np
+			FROM DAANGN_NOTICE
+			)
+			WHERE NID=#{nid}
+			
+			<!-- SELECT * FROM 
+				(SELECT rownum,NID,NTITLE,
+				LAG(rownum,1)OVER(ORDER BY rownum DESC)PREV,
+				LAG(NTITLE,1,'이전글 없다')OVER (ORDER BY rownum DESC)PT,
+				LAG(nid,1,#{nid})OVER(ORDER BY rownum DESC)pp,
+				LEAD(rownum,1)OVER(ORDER BY rownum DESC)NEXT,
+				LEAD(NTITLE,1,'다음글 없다')OVER (ORDER BY rownum DESC)NT,
+				LEAD(nid,1,#{nid})OVER(ORDER BY rownum DESC)np
+				FROM DAANGN_NOTICE
+				)
+				WHERE NID=#{nid} -->
+	</select>
+
+	<select id="notice_content" parameterType="java.lang.String"
+		resultType="com.elite.vo.DaangnNoticeVO">
+		select rownum rno, ntitle, ncontent, nfile, onfile,
+		to_char(ndate,'yyyy-mm-dd') ndate, nhits from daangn_notice
+		where
+		nid=#{nid}
+	</select>
+
+	<insert id="notice_question" parameterType="com.elite.vo.DaangnAnswerVO">
+		insert into daangn_answer(aid, id, atype, atitle, acontent, afile,
+		oafile, adate)
+		<choose>
+			<when test="afile != null">
+				values(sequ_daangn_answer.nextval, #{id}, #{atype},
+				#{atitle}, #{acontent}, #{afile}, #{oafile}, sysdate)
+			</when>
+			<otherwise>
+				values(sequ_daangn_answer.nextval, #{id}, #{atype},
+				#{atitle}, #{acontent}, null, null, sysdate)
+			</otherwise>
+		</choose>
+	</insert>
+
+	<select id="notice_question_list" parameterType="java.lang.String"
+		resultType="com.elite.vo.DaangnAnswerVO">
+		select aid, id, atype, atitle, acontent, afile, oafile,
+		to_char(adate,'yyyy-mm-dd') adate, reply
+		from (select * from daangn_answer where id=#{id} order by adate desc)
+	</select>
+
+	<select id="notice_check_answer" parameterType="java.lang.String"
+		resultType="com.elite.vo.DaangnAnswerVO">
+		select aid, id, atype, atitle, acontent, afile, oafile,
+		to_char(adate,'yyyy-mm-dd') adate, reply
+		from daangn_answer where aid=#{aid}
+	</select>
+
+	<select id="admin_answer_list2" parameterType="map"
+		resultType="com.elite.vo.DaangnAnswerVO">
+		select * from(select rownum rno, aid, id, atype, atitle,
+		acontent, afile, oafile, to_char(adate, 'yyyy-mm-dd') adate, reply
+		from(select * from daangn_answer where id=#{id} order by adate desc)) where rno
+		between #{start} and #{end}
+	</select>
+	
+	<select id="admin_answer_list" parameterType="map"
+		resultType="com.elite.vo.DaangnAnswerVO">
+		select * from(select rownum rno, aid, id, atype, atitle,
+		acontent, afile, oafile, to_char(adate, 'yyyy-mm-dd') adate, reply
+		from(select * from daangn_answer order by adate desc)) where rno
+		between #{start} and #{end}
+	</select>
+
+	<select id="admin_answer_check" parameterType="java.lang.String"
+		resultType="com.elite.vo.DaangnAnswerVO">
+		select aid, name, a.id, phone, atype, atitle, acontent,
+		afile, oafile, reply from daangn_answer a ,daangn_member m
+		where a.id=m.id and aid=#{aid}
+	</select>
+
+	<update id="admin_question_return" parameterType="com.elite.vo.DaangnAnswerVO">
+		update
+		daangn_answer set reply=#{reply} where aid=#{aid}
+	</update>
+
+	<insert id="admin_notice_insert" parameterType="com.elite.vo.DaangnNoticeVO">
+		insert into daangn_notice
+		(nid,id,ntitle,ncontent,nfile,onfile,ndate,nhits)values
+
+		<choose>
+			<when test="nfile != null ">
+				(sequ_daangn_notice.nextval,'',#{ntitle},#{ncontent},#{nfile},#{onfile},sysdate,0)
+			</when>
+			<otherwise>
+				(sequ_daangn_notice.nextval,'',#{ntitle},#{ncontent},null,null,sysdate,0)
+			</otherwise>
+		</choose>
+	</insert>
+
+	<select id="notice_admin_content" parameterType="java.lang.String"
+		resultType="com.elite.vo.DaangnNoticeVO">
+		select ntitle,to_char(ndate,'yyyy-mm-dd')ndate,ncontent,nfile,onfile from
+		daangn_notice where nid =#{nid}
+	</select>
+	
+	<!--  <select id="prev" parameterType="java.lang.String" resultType="com.elite.vo.DaangnNoticeVO">
+		SELECT MAX(NID)FROM DAANGN_NOTICE WHERE NID <![CDATA[<]]> #{nid}
+	</select>  -->
+	
+	<update id="admin_notice_update" parameterType="com.elite.vo.DaangnNoticeVO">
+		update daangn_notice set ntitle=#{ntitle}, ncontent=#{ncontent}
+			<if test="nfile !=null">
+				,nfile=#{nfile},onfile=#{onfile}
+			</if> 
+		  where nid=#{nid}
+		
+			
+	</update>
+	<update id="hits" parameterType="java.lang.String">
+			update daangn_notice set nhits = nhits+1 where nid=#{nid}
+        
+	</update>
+	<delete id="admin_notice_delete" parameterType="java.lang.String">
+		delete from daangn_notice where nid =#{nid}
+	</delete>
+	
+	<delete id="check_delete" parameterType="java.lang.reflect.Array">
+		delete from daangn_notice where nid in
+		<foreach item="stArray" index="index" collection="array" open="(" separator="," close=")">
+		#{stArray}
+		
+		</foreach>
+	
+	</delete>
+	
+	
+
+	<select id="answer_dbCount" resultType="int">
+		select count(*) from daangn_answer
+	</select>
+	
+	<select id="answer_dbCount2" parameterType="java.lang.String" resultType="int">
+		select count(*) from daangn_answer where id=#{id}
+	</select>
+	
+	<select id="notice_dbCount" resultType="int">
+		select count(*) from daangn_notice
+	</select>
+	
+	<select id="notice_search" parameterType="map" resultType="com.elite.vo.DaangnNoticeVO">
+	select * from(
+	select rownum rno,ntitle,to_char(ndate,'yyyy-mm-dd')ndate, nhits from daangn_notice where ntitle like '%'||#{keyword}||'%')
+	where rno between #{start} and #{end} 
+	
+	</select>
+	
+	<select id="searchCount" parameterType="java.lang.String" resultType="int">
+		select count(*) from daangn_notice where ntitle like '%'||#{keyword}||'%'
+	</select>
+	
+</mapper>
+
+
+
+

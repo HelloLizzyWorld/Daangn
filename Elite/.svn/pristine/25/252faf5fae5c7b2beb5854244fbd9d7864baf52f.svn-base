@@ -1,0 +1,221 @@
+package com.elite.vo;
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+public class DaangnMemberVO {
+	
+	String id,pass,name,email,phone,address,address1,address2,addr_sido,addr_sigungu,addr_bname,mfile,omfile,
+			gender,birth,birth_year,birth_month,birth_day,mdate, is_account_lock,latest_login_date,ptitle,nick;
+	
+	int grade,warn,rno,scount;
+	CommonsMultipartFile file1;
+
+	
+	
+	
+	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	public int getScount() {
+		return scount;
+	}
+	public void setScount(int scount) {
+		this.scount = scount;
+	}
+	public String getPtitle() {
+		return ptitle;
+	}
+	public void setPtitle(String ptitle) {
+		this.ptitle = ptitle;
+	}
+	public String getMfile() {
+		return mfile;
+	}
+	public void setMfile(String mfile) {
+		this.mfile = mfile;
+	}
+	public String getOmfile() {
+		return omfile;
+	}
+	public void setOmfile(String omfile) {
+		this.omfile = omfile;
+	}
+	public CommonsMultipartFile getFile1() {
+		return file1;
+	}
+	public void setFile1(CommonsMultipartFile file1) {
+		this.file1 = file1;
+	}
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getAddress() {
+		
+		String a="";
+		if(address1 !=null){
+			a=address1+address2;
+		}else{
+			a=address;
+		}
+		return a;
+		
+	/*	return "서울시 강남구 역삼동";*/
+	}
+	public void setAddress(String address) {
+		
+		this.address = address;
+	}
+	
+	public String getAddress1() {
+		return address1;
+	}
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+	
+	public String getAddr_sido() {
+		return addr_sido;
+	}
+	public void setAddr_sido(String addr_sido) {
+		this.addr_sido = addr_sido;
+	}
+	public String getAddr_sigungu() {
+		return addr_sigungu;
+	}
+	public void setAddr_sigungu(String addr_sigungu) {
+		this.addr_sigungu = addr_sigungu;
+	}
+	public String getAddr_bname() {
+		return addr_bname;
+	}
+	public void setAddr_bname(String addr_bname) {
+		this.addr_bname = addr_bname;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getBirth() {
+		String b="";
+		if(birth_year !=null){
+			b= birth_year+"/"+birth_month+"/"+birth_day;
+		}else{
+			b=birth;
+		}
+		return b;
+	}
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+	public String getBirth_year() {
+		return birth_year;
+	}
+	public void setBirth_year(String birth_year) {
+		this.birth_year = birth_year;
+	}
+	public String getBirth_month() {
+		return birth_month;
+	}
+	public void setBirth_month(String birth_month) {
+		this.birth_month = birth_month;
+	}
+	public String getBirth_day() {
+		return birth_day;
+	}
+	public void setBirth_day(String birth_day) {
+		this.birth_day = birth_day;
+	}
+	public String getMdate() {
+		return mdate;
+	}
+	public void setMdate(String mdate) {
+		this.mdate = mdate;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	public int getWarn() {
+		return warn;
+	}
+	public void setWarn(int warn) {
+		this.warn = warn;
+	}
+	public String getIs_account_lock() {
+		return is_account_lock;
+	}
+	public void setIs_account_lock(String is_account_lock) {
+		this.is_account_lock = is_account_lock;
+	}
+	public String getLatest_login_date() {
+		return latest_login_date;
+	}
+	public void setLatest_login_date(String latest_login_date) {
+		this.latest_login_date = latest_login_date;
+	}
+	
+}
+
+
+
+/*ID           NOT NULL VARCHAR2(30)  
+PASS         NOT NULL VARCHAR2(30)  
+NAME         NOT NULL VARCHAR2(30)  
+EMAIL        NOT NULL VARCHAR2(50)  
+PHONE        NOT NULL VARCHAR2(30)  
+ADDRESS      NOT NULL VARCHAR2(100) 
+ADDR_SIDO    NOT NULL VARCHAR2(20)  
+ADDR_SIGUNGU NOT NULL VARCHAR2(20)  
+ADDR_BNAME   NOT NULL VARCHAR2(20)  
+GENDER                VARCHAR2(10)  
+BIRTH                 VARCHAR2(20)  
+GRADE                 NUMBER(10)    
+WARN                  NUMBER(3)  */

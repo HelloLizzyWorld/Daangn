@@ -1,0 +1,174 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="http://211.63.89.225:9000/daangn/resources/css/index.css">
+<link rel="stylesheet" type="text/css"
+	href="http://211.63.89.225:9000/daangn/resources/css/regist.css">
+<script
+	src="http://211.63.89.225:9000/daangn/resources/js/jquery-3.3.1.min.js"></script>
+<title>Insert title here</title>
+<style>
+.item_img:hover {
+	cursor: pointer;
+}
+</style>
+<script>
+	// 이미지 정보들을 담을 배열
+	var sel_files = [];
+	
+
+	$(document).ready(function() {
+		
+		$(".item").on("click",fileUploadAction);
+		// 파일 미리보기 실행
+		$("#upFile").on("change", handleImgFileSelect);
+		
+	});
+	
+	// 이미지만 눌러도 파일 업로드 실행 
+	function fileUploadAction() {
+		console.log("fileUploadAction");
+		$("#upFile").trigger("click");
+	}
+
+	function handleImgFileSelect(e) {
+		// 이미지 정보들을 초기화
+		sel_files = [];
+		//$(".imgs_wrap").empty();
+
+		var files = e.target.files;
+		//console.log("files : "+files);
+		var filesArr = Array.prototype.slice.call(files);
+		console.log("filesArr : "+filesArr.length);
+
+		var index = 0;
+		
+		filesArr.forEach(function(f) {
+
+			if (!f.type.match("image.*")) {
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;
+			}
+
+			sel_files.push(f);
+			console.log()
+
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("
+						+ index
+						+ ")\" id=\"img_id_"
+						+ index
+						+ "\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
+				$(".item div").append(html);
+				index++;
+
+			}
+			reader.readAsDataURL(f);
+
+		});
+	}
+
+	function deleteImageAction(index) {
+		console.log("index : " + index);
+		console.log("sel length : " + sel_files.length);
+
+		sel_files.splice(index, 1);
+
+		var img_id = "#img_id_" + index;
+		$(img_id).remove();
+	}
+</script>
+</head>
+<body>
+	<!-- 사진 올리기 -->
+	<div class="regist_box" id="presentation">
+		<div class="img_area">
+			<div class="presentation">
+				<ul>
+					<!--  -->
+					<!--  -->
+					<!--  -->
+					<!--  -->
+					<!--  -->
+					<!-- 					<input accept="image/jpeg, image/png" class="multiple_input"
+						id="upFile" multiple="multiple" name="file" type="file"> -->
+					<input class="multiple_input" id="upFile" multiple="multiple"
+						name="file" type="file">
+					<!--  -->
+					<!--  -->
+					<!--  -->
+					<!--  -->
+					<!--  -->
+					<!--  -->
+
+					<li class="item">
+						<div class="up_img_box">
+							<img alt="아이템 업로드 이미지" class="up_img item_img"
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+						</div>
+					</li>
+
+					<li class="item">
+						<div class="up_img_box">
+							<img alt="아이템 업로드 이미지" class="up_img item_img"
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+						</div>
+					</li>
+					<li class="item">
+						<div class="up_img_box">
+							<img alt="아이템 업로드 이미지" class="up_img item_img"
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+						</div>
+					</li>
+					<li class="item">
+						<div class="up_img_box">
+							<img alt="아이템 업로드 이미지" class="up_img item_img" 
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+						</div>
+					</li>
+					<li class="item">
+						<div class="up_img_box">
+							<img alt="아이템 업로드 이미지" class="up_img item_img"
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+						</div>
+					</li>
+					<li class="item">
+						<div class="up_img_box">
+							<img alt="아이템 업로드 이미지" class="up_img item_img" 
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+						</div>
+					</li>
+					<li class="item">
+						<div class="up_img_box">
+							<img alt="아이템 업로드 이미지" class="up_img item_img"
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+						</div>
+					</li>
+					<li class="item">
+						<div class="up_img_box">
+							<img alt="아이템 업로드 이미지" class="up_img item_img" 
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+						</div>
+					</li>
+				</ul>
+				<div class="up_img_label">대표이미지</div>
+				<div class="up_img_description">
+					<span class="up_img_description_title"> * 첫번째 사진은 직접 촬영한 아이템
+						사진을 등록해주세요.</span> <span> &nbsp; - 판매자의 아이템 보유 유무와 실물 상태 확인을 위해 <br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;직접 촬영한 실제 아이템 사진을 첫번째 이미지로 첨부해주시기
+						바랍니다.
+					</span> <span class="img_hover_margin"> &nbsp; - 아이템 첫번째 이미지에 실제
+						사진이 첨부되지 않은 경우, 사전안내 없이 수정 또는 삭제될 수 있습니다.</span> <br> <br> <span
+						class="img_hover_margin">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(삽니다.
+						무형의 아이템 제외)</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

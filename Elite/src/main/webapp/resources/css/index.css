@@ -1,0 +1,1154 @@
+/* 공통 */
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit
+}
+
+html {
+	min-width: 980px;
+	height: 100%
+}
+
+body {
+	font-family : 'NanumBarunGothic';
+	min-height: calc(100% - 77px);
+	position: relative
+}
+
+h3 {
+	font-size: 32px;
+	font-weight: 600;
+	letter-spacing: -0.6px;
+	color: #212529;
+	text-align: center;
+	margin-bottom: 40px
+}
+
+.clear {
+	clear: both
+}
+
+.hide {
+	position: absolute;
+	left: -9999px;
+	top: -9999px
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ol, ul {
+	list-style-type: none;
+}
+
+::-webkit-input-placeholder {
+	color: #adb5bd;
+	opacity: 1
+}
+
+:-ms-input-placeholder {
+	color: #adb5bd;
+	opacity: 1
+}
+
+::-ms-input-placeholder {
+	color: #adb5bd;
+	opacity: 1
+}
+
+::placeholder {
+	color: #adb5bd;
+	opacity: 1
+}
+
+/* header.jsp  */
+#fixed-bar {
+	width: 100%;
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+}
+
+#fixed-bar #fixed-bar-wrap {
+	width: 1060px;
+	margin: 0 auto;
+	padding: 17px 0;
+	position: relative
+}
+
+#fixed-bar #fixed-bar-wrap .fixed-logo {
+    width: 132px;
+    vertical-align: text-bottom;
+    margin-bottom: 5px;
+}
+/*
+#fixed-bar #fixed-bar-wrap img.fixed-logo {
+	vertical-align: text-bottom;
+	margin-bottom: 5px;
+	margin-top : 0px;
+}
+*/
+#fixed-bar #fixed-bar-wrap #fixed-bar-search {
+	position: absolute;
+	left: 150px;
+	top: 17px;
+	border-radius: 4px;
+	border: solid 1px #f76707;
+	text-decoration: none;
+	padding: 0px 8px 0 14px;
+	height: 40px
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-search .search-input-wrap {
+	position: relative;
+	padding-right: 40px
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-search .search-input-wrap .fixed-search-input
+	{
+	width: 440px;
+	height: 40px;
+	border: none;
+	font-size: 18px;
+	color: #212529;
+	margin-right: 6px
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-search .search-input-wrap .fixed-search-input:focus
+	{
+	outline: none
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-search .search-input-wrap .fixed-search-icon
+	{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 26px;
+	height: 26px;
+	fill: #f76707;
+	padding: 7px 7px
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-search .search-keyword-wrap {
+	position: absolute;
+	left: 20px;
+	top: 40px;
+	border: 1px solid #f76707;
+	width: 448px;
+	padding: 10px;
+	background: #fff;
+	z-index: 101;
+	line-height: 2;
+	display: none;
+	font-size: 16px;
+	font-weight: 600
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-search .search-keyword-wrap .search-keyword-text
+	{
+	color: #f76707
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-search .search-keyword-wrap .search-keyword-list
+	{
+	white-space: normal;
+	word-break: normal
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-search .search-keyword-wrap .search-keyword-list .search-keyword
+	{
+	text-decoration: none;
+	color: #212529;
+	white-space: nowrap;
+	margin-right: 8px
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-download {
+	position: absolute;
+	right: 0;
+	top: 17px
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-download .fixed-download-button {
+	border-radius: 100px;
+	border: solid 1px #f76707;
+	text-decoration: none;
+	padding: 0 18px;
+	height: 40px;
+	line-height: 40px;
+	display: inline-block;
+	vertical-align: middle
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-download .fixed-download-button .fixed-download-text
+	{
+	display: inline-block;
+	color: #f76707;
+	font-size: 17px;
+	margin-left: 4px;
+	vertical-align: middle
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-download .fixed-download-button .fixed-google-play,
+	#fixed-bar #fixed-bar-wrap #fixed-bar-download .fixed-download-button .fixed-apple-store
+	{
+	fill: #f76707;
+	vertical-align: middle
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-download .fixed-download-button:hover
+	{
+	background-color: #f76707
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-download .fixed-download-button:hover .fixed-download-text
+	{
+	color: #fff
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-download .fixed-download-button:hover .fixed-google-play,
+	#fixed-bar #fixed-bar-wrap #fixed-bar-download .fixed-download-button:hover .fixed-apple-store
+	{
+	-webkit-filter: brightness(0) invert(1);
+	filter: brightness(0) invert(1)
+}
+
+#fixed-bar #fixed-bar-wrap #fixed-bar-download #header-download-button-ios
+	{
+	margin-right: 7px
+}
+
+.fixed-bar-box-shadow {
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1)
+}
+
+* {
+	margin: 0;
+	padding: 0
+}
+
+/* footer.jsp */
+footer {
+	padding: 40px 0 67px 0;
+	background-color: #495057;
+	color: #dee2e6;
+	font-size: 15px;
+	line-height: 1.6;
+	letter-spacing: -0.6px;
+	text-align: center;
+	z-index: 100
+}
+
+footer .text-bold {
+	font-weight: bold
+}
+
+footer .footer-list {
+	list-style-type: none;
+	margin: 24px 0
+}
+
+footer .footer-list .footer-list-item {
+	display: inline-block
+}
+
+footer .footer-list .footer-list-item a {
+	color: #dee2e6;
+	text-decoration: none
+}
+
+footer .footer-list .footer-list-item a:hover {
+	text-decoration: underline
+}
+
+footer .footer-list .footer-list-item:after {
+	content: '|';
+	margin: 0 16px;
+	color: #868e96;
+	font-weight: normal;
+	
+	
+}
+
+footer .footer-list .footer-list-item:last-child:after {
+	content: none
+}
+
+footer #footer-address-list {
+	margin-bottom: 4px;
+	font-weight: 200
+}
+
+footer #footer-address-list address {
+	display: inline-block;
+	font-style: normal
+}
+
+footer #ceo {
+	font-weight: 200
+}
+
+footer #copyright {
+	color: #868e96;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.6;
+	letter-spacing: -0.6px;
+	margin: 8px 0
+}
+
+footer #social .footer-list-item {
+	margin: 0 13px
+}
+
+footer #social .footer-list-item:after {
+	content: none
+}
+
+.footer-facebook:hover, .footer-facebook, .footer-instagram:hover,
+	.footer-instagram {
+	display: inline-block;
+	background:
+		url(https://d3qlrgda07sb6k.cloudfront.net/assets/home/base/footer-icon-set-5e89acd5ab956a53b446bdde998de3cc2eeab92c99efd13689c44689e070e1af.png)
+		no-repeat;
+	overflow: hidden;
+	text-indent: -9999px;
+	text-align: left
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) , only
+	screen and (min-resolution: 1.5dppx) {
+	.footer-facebook:hover, .footer-facebook, .footer-instagram:hover,
+		.footer-instagram {
+		background:
+			url(https://d3qlrgda07sb6k.cloudfront.net/assets/home/base/footer-icon-set@2x-ec9d7dc937fd425a202978d6af5a6a5e646ab631cec8a699cd3b0852c3c03451.png)
+			no-repeat;
+		background-size: 104px 104px
+	}
+}
+
+.footer-facebook:hover {
+	background-position: -0px -0px;
+	width: 52px;
+	height: 52px
+}
+
+.footer-facebook {
+	background-position: -52px -0px;
+	width: 52px;
+	height: 52px
+}
+
+.footer-instagram:hover {
+	background-position: -0px -52px;
+	width: 52px;
+	height: 52px
+}
+
+.footer-instagram {
+	background-position: -52px -52px;
+	width: 52px;
+	height: 52px
+}
+
+::-moz-selection {
+	color: #fff;
+	background: #f76707
+}
+
+::-moz-selection {
+	color: #fff;
+	background: #f76707
+}
+
+::selection {
+	color: #fff;
+	background: #f76707
+}
+
+@
+-webkit-keyframes fadeIn {
+	from {opacity: 0
+}
+
+to {
+	opacity: 1
+}
+
+}
+@
+keyframes fadeIn {
+	from {opacity: 0
+}
+
+to {
+	opacity: 1
+}
+
+}
+@
+-webkit-keyframes fadeOut {
+	from {opacity: 1
+}
+
+to {
+	opacity: 0
+}
+
+}
+@
+keyframes fadeOut {
+	from {opacity: 1
+}
+
+to {
+	opacity: 0
+}
+
+}
+.fade-in {
+	-webkit-animation: fadeIn ease-in 1;
+	animation: fadeIn ease-in 1;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	-webkit-animation-duration: 0.2s;
+	animation-duration: 0.2s
+}
+
+.fade-out { -
+	webkit-animation: fadeOut ease-in 1;
+	animation: fadeOut ease-in 1;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	-webkit-animation-duration: 0.2s;
+	animation-duration: 0.2s
+}
+
+/* 사용자메뉴공통 */
+/* width:1050px */
+#userMenu {
+	width: 400px;
+	margin: 0 auto;
+	padding-left: -10px;
+	padding-top: 2px;
+	font-size: 15px;
+
+}
+
+#userMenu * {
+	font-family: 'Noto Sans';
+	font-weight: 400;
+	letter-spacing: -0.3px
+}
+
+#userMenu:after {
+	content: "";
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	height: 0;
+	font-size: 0;
+	text-indent: -9999px
+}
+
+#userMenu .list_menu {
+	float: right;
+	
+}
+
+#userMenu .menu {
+	position: relative;
+	z-index: 400;
+	float: left
+}
+
+#userMenu .menu:after {
+	content: "";
+	float: right;
+	
+	height: 13px;
+	margin-top: 12px;
+	
+}
+
+#userMenu .link_menu {
+	float: left;
+	height: 37px;
+	padding: 0 23px 0 10px;
+	color: #f76707;
+	line-height: 35px;
+	white-space: nowrap;
+}
+
+#userMenu .txt {
+	float: left;
+	padding-right: 4px;
+}
+
+#userMenu .name {
+	overflow: hidden;
+	float: left;
+	width: 88px;
+	text-align: right;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+#userMenu .sir {
+	float: left;
+	padding-left: 4px
+}
+
+#userMenu .ico_grade {
+	float: left;
+	margin-top: 10px
+}
+
+#userMenu .menu_user .sub {
+	left: auto;
+	right: 11px
+}
+
+#userMenu .sub {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 34px;
+	width: 102px;
+	padding: 3px 9px;
+	border: 1px solid #ddd;
+	background-color: #fff
+}
+
+#userMenu .menu:hover .sub {
+	display: block
+}
+
+#userMenu .none_sub:hover .sub {
+	display: none
+}
+
+#userMenu .sub a {
+	font-size: 12px;
+	color: #404040;
+	line-height: 24px;
+	white-space: nowrap
+}
+
+#userMenu .none_sub:before, #userMenu .lst:before, #userMenu .lst:after
+	{
+	display: none
+}
+
+#userMenu .none_sub .link_menu {
+	padding-right: 10px;
+	border:1px solid #f76707;
+	border-radius: 30px;
+	margin-right: 5px;
+	font-weight: bold;
+	width: 70px;
+
+	text-align: center;
+	
+	
+}
+
+#userMenu .menu_join .link_menu {
+	
+}
+
+#userMenu .lst .link_menu {
+	padding-right: 0
+}
+/* SNB공통 */
+#snb {
+	float: left;
+}
+
+#snb .inner_snb {
+	border: 1px solid #dcdbde;
+	border-bottom: 0 none
+}
+
+#snb .tit_snb {
+	padding: 0 0 30px 2px;
+	font-weight: 700;
+	font-size: 28px;
+	line-height: 41px;
+	color: #0c2711
+}
+
+#snb .list_menu li {
+	border-bottom: 1px solid #dcdbde
+}
+
+#snb .list_menu li a {
+	display: block;
+	overflow: hidden;
+	padding: 16px 0 16px 19px;
+	background: #fff;
+	background-size: 6px 10px;
+	font-size: 12px;
+	
+	line-height: 18px
+}
+
+#snb .list_menu li a span {
+	font-weight: bold;
+}
+
+/* #snb .list_menu li.on a, #snb .list_menu li a:hover {
+	background: #f7f5f8
+		url(https://res.kurly.com/pc/ico/1803/ico_arrow_on_12x22.png)
+		no-repeat 174px 50%;
+	background-size: 6px 10px;
+	color: #512772
+} */
+
+#snb .list_menu li.on a, #snb .list_menu li a:hover {
+	background: #fef0e6;
+	background-size: 6px 10px;
+	/*color: #f76707 수직메뉴-개인정보 폰트 컬러*/
+}
+
+#snb .link_inquire {
+	display: block;
+	overflow: hidden;
+	width: 200px;
+	height: 60px;
+	margin-top: 16px;
+	padding: 9px 0 0 19px;
+	border: 1px solid #f7f5f7;
+	border-radius: 0 100px 100px 0;
+	background: #f7f5f8
+		url(https://res.kurly.com/pc/ico/1803/ico_arrow_on_12x22.png)
+		no-repeat 173px 24px;
+	background-size: 6px 11px;
+	font-size: 12px;
+	color: #514859;
+	line-height: 20px
+}
+
+#snb .link_inquire .emph {
+	display: block;
+	padding-bottom: 1px;
+	font-weight: 700;
+	font-size: 14px
+}
+
+#gnb.gnb_stop {
+	position: fixed;
+	z-index: 300;
+	left: 0;
+	top: 0;
+	width: 100%
+}
+
+#gnb .gnb_daangn {
+	position: relative;
+	z-index: 300;
+	min-width: 1050px;
+	background-color: #fff;
+	font-family: 'Noto Sans';
+	letter-spacing: -0.3px
+}
+
+#gnb .gnb_daangn:after {
+	content: "";
+	position: absolute;
+	z-index: 299;
+	left: 0;
+	top: 56px;
+	width: 100%;
+	height: 9px;
+	
+}
+
+#gnb .inner_daangn {
+	position: relative;
+	width: 1050px;
+	height: 56px;
+	margin: 0 auto
+}
+/* 검색창 */
+#gnb .gnb_search {
+	position: absolute;
+	right: 54px;
+	top: 10px;
+	width: 230px
+}
+
+#gnb .gnb_search .inp_search {
+	width: 230px;
+	height: 36px;
+	padding: 0 50px 0 20px;
+	border: 1px solid #f3f2f3;
+	border-radius: 18px;
+	background-color: #f3f2f4;
+	font-family: 'Noto Sans';
+	font-weight: 400;
+	font-size: 12px;
+	color: #666;
+	line-height: 16px;
+	outline: none
+}
+
+#gnb .gnb_search .inp_search.focus {
+	background-color: #fff;
+	color: #333
+}
+
+#gnb .gnb_search .btn_search {
+	position: absolute;
+	right: 10px;
+	top: 3px;
+	width: 30px;
+	height: 30px
+}
+/* 장바구니 */
+#gnb .cart_count {
+	position: absolute;
+	right: 8px;
+	top: 10px
+}
+
+#gnb .cart_count .inner_cartcount {
+	text-align: center;
+	font-weight: 400
+}
+
+#gnb .cart_count .num {
+	display: none;
+	position: absolute;
+	left: 20px;
+	top: 0;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 5px;
+	border: 1px solid #fff;
+	border-radius: 9px;
+	background-color: #512772;
+	font-size: 9px;
+	color: #fff;
+	line-height: 15px;
+	text-align: center;
+	white-space: nowrap
+}
+
+#gnb .cart_count img {
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: 0 auto
+}
+
+#gnb .cart_count .msg_cart {
+	display: none;
+	position: absolute;
+	right: -7px;
+	top: 61px;
+	width: 348px;
+	height: 102px;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	opacity: 0
+}
+
+#gnb .cart_count .inner_msgcart {
+	display: block;
+	overflow: hidden;
+	padding: 20px 0 0 20px
+}
+
+#gnb .cart_count .msg_cart .thumb {
+	float: left;
+	width: 46px;
+	height: 60px
+}
+
+#gnb .cart_count .msg_cart .desc {
+	float: left;
+	width: 240px;
+	padding: 8px 0 0 20px;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 21px
+}
+
+#gnb .cart_count .msg_cart .tit {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	color: #999;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+#gnb .cart_count .msg_cart .name {
+	overflow: hidden;
+	float: left;
+	max-width: 178px;
+	text-overflow: ellipsis
+}
+
+#gnb .cart_count .msg_cart .txt {
+	display: block;
+	padding-top: 3px;
+	color: #333;
+}
+
+#gnb .cart_count .msg_cart .point {
+	position: absolute;
+	right: 13px;
+	top: -14px;
+	width: 20px;
+	height: 14px;
+	background: url(https://res.kurly.com/pc/ico/1903/ico_layer_point.png)
+		no-repeat 0 0
+}
+/* GNB메인 */
+#gnb .gnb_main {
+	overflow: hidden;
+	width: 1050px;
+	margin: 0 auto;
+}
+
+#gnb .gnb_main .gnb {
+	float: left;
+	width: 100%;
+	padding-left: 100px;
+}
+
+#gnb .gnb_main .gnb li {
+	float: left;
+	}
+
+#gnb .gnb_main .gnb .lst {
+	background: none
+}
+
+#gnb .gnb_main .gnb a {
+	overflow: hidden;
+	float: left;
+	height: 55px;
+	padding: 16px 50px 0 48px;
+	font-size: 20px;
+	color: #333;
+	line-height: 20px
+}
+
+#gnb .gnb_main .gnb a:hover, #gnb .gnb_main .gnb a.on {
+	font-weight: 700;
+	color: #f76707
+}
+
+#gnb .gnb_main .gnb a:hover .txt {
+	border-bottom: 1px solid #f76707
+}
+
+#gnb .gnb_main .menu1 a {
+	padding-left: 19px;
+	color: #37b24d
+}
+
+#gnb .gnb_main .menu1 img {
+	float: left;
+	width: 16px;
+	height: 14px;
+	margin: 4px 14px 0 0
+}
+
+#gnb .gnb_main .menu1 a:hover .txt, #gnb .gnb_main .menu1 .txt {
+	float: left;
+	font-weight: bold;
+	border-bottom: 0;
+	font-size: 20px;
+}
+/* GNB서브 */
+#gnb .gnb_sub {
+	display: none;
+	overflow: hidden;
+	position: absolute;
+	z-index: 301;
+	left: 0;
+	top: 55px;
+	width: 213px;
+	padding-top: 1px
+}
+
+#gnb .gnb_sub .inner_sub {
+	width: 100%;
+	border: 1px solid #dcdbde;
+	background:
+		url(https://res.kurly.com/pc/service/common/1902/bg_gnb_sub.png)
+		repeat-y 0 0
+}
+
+#gnb .size_over {
+	overflow-x: hidden;
+	overflow-y: auto
+}
+
+#gnb .gnb_sub .gnb_menu {
+	width: 212px
+}
+
+#gnb .gnb_sub .gnb_menu li {
+	width: 100%;
+	text-align: left
+}
+
+#gnb .gnb_sub .gnb_menu li:first-child {
+	padding-top: 10px
+}
+
+#gnb .gnb_sub .gnb_menu li:last-child {
+	padding-bottom: 11px
+}
+
+#gnb .gnb_sub .menu {
+	display: block;
+	overflow: hidden;
+	width: 212px;
+	height: 38px;
+	padding: 7px 0 0 14px;
+	cursor: pointer
+}
+
+#gnb .gnb_sub .current .menu {
+	background: #f3f2f4
+}
+
+#gnb .gnb_sub .current .txt, #gnb .gnb_sub .menu.on.off:hover .txt, #gnb .gnb_sub .menu.on .txt
+	{
+	font-weight: 700;
+	color: #512772
+}
+
+#gnb .gnb_sub .ico {
+	float: left;
+	width: 24px;
+	height: 24px
+}
+
+#gnb .gnb_sub .ico img {
+	width: 24px;
+	height: 24px
+}
+
+#gnb .gnb_sub .ico .ico_off {
+	display: block
+}
+
+#gnb .gnb_sub .ico .ico_on {
+	display: none
+}
+
+#gnb .gnb_sub .current .ico_off, #gnb .gnb_sub .menu.on .ico_off, #gnb .gnb_sub .menu:hover .ico_off
+	{
+	display: none
+}
+
+#gnb .gnb_sub .current .ico_on, #gnb .gnb_sub .menu.on .ico_on, #gnb .gnb_sub .menu:hover .ico_on
+	{
+	display: block
+}
+
+#gnb .gnb_sub .ico_arrow {
+	display: none;
+	float: right;
+	width: 16px;
+	height: 17px;
+	padding: 6px 9px 0 0
+}
+
+#gnb .gnb_sub .ico_arrow img {
+	width: 7px;
+	height: 11px
+}
+
+#gnb .gnb_sub .current .ico_arrow {
+	display: block
+}
+
+#gnb .gnb_sub .txt {
+	float: left;
+	padding: 0 5px 0 10px;
+	font-weight: 400;
+	font-size: 14px;
+	color: #333;
+	line-height: 22px;
+	white-space: nowrap
+}
+
+#gnb .gnb_sub .ico_new {
+	overflow: hidden;
+	float: left;
+	width: 8px;
+	height: 8px;
+	margin-top: 5px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 8px 8px;
+	font-size: 0;
+	line-height: 0;
+	text-indent: -9999px
+}
+
+#gnb .gnb_sub .sub_menu {
+	position: absolute;
+	z-index: 0;
+	left: 192px;
+	top: 0;
+	width: 200px;
+	height: 100%;
+	padding: 10px 0 0 20px;
+	background: url(https://res.kurly.com/images/common/bg_1_1.gif) repeat 0
+		0;
+	opacity: 0;
+	transition: opacity 0.2s
+}
+
+#gnb .gnb_sub .current .sub_menu {
+	z-index: 1;
+	opacity: 1;
+	transition: opacity 0.5s
+}
+
+#gnb .gnb_sub .sub_menu li:first-child {
+	padding-top: 11px
+}
+
+#gnb .gnb_sub .sub_menu .sub {
+	display: block;
+	overflow: hidden;
+	height: 38px;
+	padding-left: 20px;
+	font-size: 14px;
+	color: #333;
+	line-height: 18px;
+	cursor: pointer
+}
+
+#gnb .gnb_sub .sub_menu .sub:hover .name {
+	border-bottom: 1px solid #512772;
+	font-weight: 700;
+	color: #512772
+}
+
+#gnb .gnb_sub .sub_menu .sub.on {
+	font-weight: 700;
+	color: #512772
+}
+
+#gnb .gnb_sub .recommend {
+	overflow: hidden;
+	width: 529px;
+	padding: 20px 0 0 40px
+}
+
+#gnb .gnb_sub .recommend li {
+	float: left;
+	width: 120px;
+	height: 130px;
+	padding: 0 10px 0 0
+}
+
+#gnb .gnb_sub .recommend li:first-child {
+	padding-top: 0
+}
+
+#gnb .gnb_sub .recommend .sub {
+	display: block;
+	overflow: hidden;
+	width: 120px;
+	height: 130px;
+	padding: 0;
+	cursor: pointer
+}
+
+#gnb .gnb_sub .recommend .thumb {
+	display: block;
+	width: 110px;
+	height: 83.4px;
+	margin-bottom: 8px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+#gnb .gnb_sub .recommend .thumb img {
+	width: 110px;
+	height: 83.4px
+}
+
+#gnb .gnb_sub .recommend .name {
+	font-size: 14px;
+	line-height: 18px
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) , only screen and
+		(min-device-pixel-ratio: 1.5) , only screen and (min-resolution:
+	1.5dppx) {
+	#gnb .gnb_sub .ico_new {
+		background: url(https://res.kurly.com/pc/ico/1808/ico_new_gnb_16x16.png)
+			no-repeat 0 0;
+		background-size: 8px 8px
+	}
+	#gnb .cart_count .msg_cart .point {
+		background:
+			url(https://res.kurly.com/pc/ico/1903/ico_layer_point_x2.png)
+			no-repeat 0 0;
+		background-size: 20px 14px
+	}
+}
+
+/* 폰트 지정 */
+/* body, input, select, textarea, button {
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #4c4c4c;
+  font-size: 15px;
+  max-width: 100%;
+} */
+/* button{outline:none}
+div,th,td,li,dt,dd,p{word-break:break-all} */
+
+/* table {
+  border-collapse: collapse;
+  border-spacing: 0;
+} */
+
+/* td,
+th {
+  padding: 0;
+} */
+
+/* html, body {
+  height: 100%;
+}
+ */

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.member">
+
+	<insert id="join" parameterType="com.elite.vo.DaangnMemberVO">
+	insert into daangn_member values
+	(#{id},#{pass},#{name},#{email},#{phone},#{address},#{addr_sido},#{addr_sigungu},#{addr_bname},#{gender},
+	#{birth},#{grade},0,sysdate,'','',0,'No',sysdate, #{nick})
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="login" parameterType="com.elite.vo.DaangnMemberVO" resultType="com.elite.vo.SessionVO">
+		select count(*) result, id, name, grade,warn from daangn_member 
+		where id=#{id} and pass=#{pass}
+		group by id, name, grade,warn
+	</select>
+	
+	<update id="login_success">
+		update daangn_member
+		set login_fail_count = 0,
+	    is_account_lock = 'No',
+	    latest_login_date = sysdate where id = #{id}
+	</update>
+	
+	<update id="login_update_accountlock">
+		update daangn_member
+		set is_account_lock = 'Yes'
+		where id = #{id}
+		and login_fail_count >= 5
+	</update>
+	
+	<update id="login_fail_count">
+		update daangn_member
+		set login_fail_count = login_fail_count + 1,
+	    latest_login_date = sysdate where id = #{id}
+	</update>
+	
+	
+	<select id="login_account_lock" resultType="com.elite.vo.DaangnMemberVO">
+		select IS_ACCOUNT_LOCK, TO_CHAR(LATEST_LOGIN_DATE, 'SS')LATEST_LOGIN_DATE from daangn_member where id=#{id}
+	</select>
+	
+	<select id="id_check" parameterType="java.lang.String" resultType="int">
+		select count(*) from daangn_member where id=#{id}
+	</select>
+	
+	<select id="email_check" parameterType="java.lang.String" resultType="int">
+		select count(*) from daangn_member where email=#{email}
+	</select>
+	
+	<select id="nick_check" parameterType="java.lang.String" resultType="int">
+		select count(*) from daangn_member where nick=#{nick}
+	</select>
+	
+	<select id ="listAll" parameterType="map" resultType="com.elite.vo.DaangnMemberVO">
+		select * from (select rownum rno,name,id,nick, to_char(mdate,'yyyy-mm-dd')mdate
+		from (select * from daangn_member order by mdate desc)) where rno between #{start} and #{end}
+	</select>
+	
+	<select id="memberContent" parameterType="java.lang.String" resultType="com.elite.vo.DaangnMemberVO">
+		   select name,id,nick,email,gender,phone,to_char(mdate,'yyyy-mm-dd')mdate,warn from daangn_member where id = #{id}
+	</select>
+	
+	<update id="memberWarn" parameterType="java.lang.String">
+		update daangn_member set warn = warn +1 where id=#{id}
+	</update>
+	
+	<select id="member_dbCount" resultType="int">
+		select count(*) from daangn_member
+	</select>
+	
+	<!-- get Chat List -->
+	<select id="getChatList" parameterType="java.util.List" resultType="com.elite.vo.DaangnMemberVO">
+		SELECT ID, NAME, ADDR_BNAME, MFILE FROM DAANGN_MEMBER WHERE ID IN
+		<foreach collection="list" item="item" index="index" open="(" separator=", " close=")">
+			#{item.id}
+		</foreach>
+	</select>
+</mapper>
+

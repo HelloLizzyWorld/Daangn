@@ -1,0 +1,63 @@
+package com.elite.daangn;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.elite.service.MemberService;
+import com.elite.vo.DaangnMemberVO;
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class JoinController {
+	
+@Resource(name="memberService")
+private MemberService memberService;
+
+	@RequestMapping (value="/join.carrot", method=RequestMethod.GET)
+	public String join2(){
+		
+		return "/join/join";
+	}
+	
+	@RequestMapping(value="/join_proc.carrot",method=RequestMethod.POST)
+	public ModelAndView join_proc(DaangnMemberVO vo){
+		ModelAndView mv= new ModelAndView();
+		boolean result=memberService.getInsertResult(vo);
+	
+		if(result) mv.setViewName("/index");
+		
+		return mv;
+	}
+	//¾ÆÀÌµðÁßº¹Ã¼Å©
+	@RequestMapping(value="/id_check.carrot")
+	@ResponseBody
+	public String id_check(String id){
+		int result=memberService.getResultIdCheck(id);
+		
+		return String.valueOf(result);
+	}
+	//email
+	@RequestMapping(value="/email_check.carrot")
+	@ResponseBody
+	public String email_check(String email){
+		int result=memberService.getResultEmailCheck(email);
+	
+		return String.valueOf(result);
+	}
+	//´Ð³×ÀÓÁßº¹®c
+	@RequestMapping(value="/nick_check.carrot")
+	@ResponseBody
+	public String nick_check(String nick){
+		int result=memberService.getResultNickCheck(nick);
+		
+		return String.valueOf(result);
+	}
+	
+}

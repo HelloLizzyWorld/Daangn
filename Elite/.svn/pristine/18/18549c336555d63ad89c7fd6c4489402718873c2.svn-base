@@ -1,0 +1,22 @@
+package com.elite.service;
+
+import java.util.HashMap;
+
+public interface PageService {
+
+	int getPageSize();
+	int getPageSize(int number);
+	int getReqPage();
+	int getDbCount();
+	int getDbCount(String countName);
+	int getDbCount(String countName, String id);
+	int getDbProductCount(String countName, String category);
+	int getSearchDbCount(String keyword);
+	/*int getSearchDbCount2(String keyword);*/
+	//공지사항 페이징
+	HashMap<String,Object> getSearchList(String rpage,String keyword);
+	HashMap<String, Object> getPageList(String rpage, String countName);
+	HashMap<String, Object> getPageList(String rpage, String countName, String id);
+	HashMap<String, Object> getPageList(String rpage, String countName, String category, int number);
+	
+}

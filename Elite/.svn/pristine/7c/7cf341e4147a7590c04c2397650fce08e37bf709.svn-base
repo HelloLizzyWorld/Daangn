@@ -1,0 +1,208 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="http://211.63.89.225:9000/daangn/resources/css/index.css">
+<link rel="stylesheet" type="text/css"
+	href="http://211.63.89.225:9000/daangn/resources/css/regist.css">
+<script
+	src="http://211.63.89.225:9000/daangn/resources/js/jquery-3.3.1.min.js"></script>
+<title>Insert title here</title>
+<style type="text/css">
+input[type=file] {
+	display: none;
+}
+
+.upload_link {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+}
+</style>
+<script type="text/javascript">
+	// 이미지 정보들을 담을 배열
+	var sel_files = [];
+	var li_class;
+	var index;
+	var array_index;
+
+	$(document).ready(function() {
+		$("#input_imgs").on("change", handleImgFileSelect);
+		
+		$('.img_ul li').on('click', function(){
+		    li_class = $(this).attr("class");
+		    index = $(this).attr("class").substr(5,1);
+		 });
+
+	});
+
+ 	function fileUploadAction() {
+		console.log("fileUploadAction");
+		$("#input_imgs").trigger('click');
+	}
+
+	function handleImgFileSelect(e) {
+
+		// 이미지 정보들을 초기화
+		//sel_files = [];
+		//$(".imgs_wrap").empty();
+
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		console.log(files);
+		console.log(filesArr);
+		
+		array_index = 0;
+		
+		filesArr.forEach(function(f) {
+					if (!f.type.match("image.*")) {
+						alert("확장자는 이미지 확장자만 가능합니다.");
+						return;
+					}
+
+					sel_files.push(f);
+					
+					for(var i=0;i<sel_files.length;i++){ //배열 출력
+						console.log(sel_files[i].name+"<br>");
+					}
+
+					var reader = new FileReader();
+					
+					reader.onload = function(e) {
+						var html = "<div class='up_img_box'><a href=\"javascript:void(0);\" onclick=\"deleteImageAction("
+								+ array_index
+								+ ")\" class='upload_link' id=\"img_id_"
+								+ index
+								+ "\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a></div>";
+								
+						var name = ".item_"+index
+						$(name).children().remove();
+						$(name).append(html);
+
+						array_index++;
+						
+						console.log("index : " + index);
+						console.log("array_index : " + array_index);
+						console.log("sel length : " + sel_files.length);
+					}
+					reader.readAsDataURL(f);
+
+				});
+	}
+
+	function deleteImageAction(array_index) {
+		console.log("index : " + index);
+		console.log("array_index : " + array_index);
+		console.log("sel length : " + sel_files.length);
+
+		sel_files.splice(array_index, 1);
+		
+		for(var i=0;i<sel_files.length;i++){ //배열 출력
+			console.log(sel_files[i].name+"<br>");
+		}
+
+		//var img_id = "#img_id_" + index;
+		//$(img_id).remove();
+		
+		var html = "<div class='up_img_box'><a href='javascript:' onclick='fileUploadAction();' class='upload_link'><img alt='아이템 업로드 이미지' class='up_img item_img' src='https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png'></a></div>";
+
+		$("."+li_class).children().remove();
+		$("."+li_class).append(html);
+		
+	}
+
+	function fileUploadAction() {
+		console.log("fileUploadAction");
+		$("#input_imgs").trigger('click');
+	}
+
+	function submitAction() {
+		console.log("업로드 파일 갯수 : " + sel_files.length);
+		var data = new FormData();
+
+		for (var i = 0, len = sel_files.length; i < len; i++) {
+			var name = "image_" + i;
+			data.append(name, sel_files[i]);
+		}
+		data.append("image_count", sel_files.length);
+
+		if (sel_files.length < 1) {
+			alert("한개이상의 파일을 선택해주세요.");
+			return;
+		}
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "./study01_af.php");
+		xhr.onload = function(e) {
+			if (this.status == 200) {
+				console.log("Result : " + e.currentTarget.responseText);
+			}
+		}
+
+		xhr.send(data);
+
+	}
+</script>
+</head>
+<body>
+	<div class="regist_box">
+		<div class="img_area">
+			<div class="presentation">
+				<ul class="img_ul">
+
+					<!-- <input type="file" id="input_imgs" multiple /> -->
+
+					<li class="item_0">
+						<div class="up_img_box">
+							<a href="javascript:" onclick="fileUploadAction();"
+								class="upload_link"> 
+								<input type="file" class="input_imgs_1">
+								<img alt="아이템 업로드 이미지"
+								class="up_img item_img"
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+							</a>
+						</div>
+					</li>
+					<li class="item_1">
+						<div class="up_img_box">
+							<a href="javascript:" onclick="fileUploadAction();"
+								class="upload_link"> 
+								<input type="file" class="input_imgs_2">
+								<img alt="아이템 업로드 이미지"
+								class="up_img item_img"
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+							</a>
+						</div>
+					</li>
+<!-- 					<li class="item_2">
+						<div class="up_img_box">
+							<a href="javascript:" onclick="fileUploadAction();"
+								class="upload_link"> <img alt="아이템 업로드 이미지"
+								class="up_img item_img"
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+							</a>
+						</div>
+					</li>
+					<li class="item_3">
+						<div class="up_img_box">
+							<a href="javascript:" onclick="fileUploadAction();"
+								class="upload_link"> <img alt="아이템 업로드 이미지"
+								class="up_img item_img"
+								src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+							</a>
+						</div>
+					</li> -->
+
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

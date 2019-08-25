@@ -1,0 +1,225 @@
+package com.elite.service;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.elite.dao.DaangnMemberDAO;
+import com.elite.dao.DaangnProductDAO;
+import com.elite.vo.DaangnChatVO;
+import com.elite.vo.DaangnFileVO;
+import com.elite.vo.DaangnJusoVO;
+import com.elite.vo.DaangnMemberVO;
+import com.elite.vo.DaangnProductVO;
+import com.elite.vo.DaangnReviewVO;
+
+@Service
+public class ProductServiceImpl implements ProductService {
+
+	@Autowired
+	private DaangnProductDAO productDAO;
+	
+	@Autowired
+	private DaangnMemberDAO memberDAO;
+
+	// 물품등록
+	@Override
+	public boolean productInsert(DaangnProductVO vo,HttpServletRequest request, List<MultipartFile> fileList)
+			throws Exception {
+		
+		//System.out.println("welcome serviceImple");
+		
+		boolean result = false;
+		String root_path = "", att_path = "";
+		
+		List<DaangnFileVO> insertFileList = new ArrayList<DaangnFileVO>();
+		
+		String pid = productDAO.getInsertResult(vo);
+		//System.out.println("impl bid : " + pid);
+
+		if (!pid.equals("") && fileList.size() != 0) {
+			
+			root_path = request.getSession().getServletContext().getRealPath("/");
+			att_path = "\\resources\\upload\\";
+
+			for(MultipartFile fileOne : fileList){
+				DaangnFileVO fvo = new DaangnFileVO();
+				UUID uuid = UUID.randomUUID();
+				
+				String originalfileName = fileOne.getOriginalFilename();
+				String saveFileName = uuid + "_" + originalfileName;
+				//System.out.println("impl originalfileName : "+originalfileName);
+
+				fvo.setPid(pid);
+				fvo.setPfile(saveFileName);
+				fvo.setOpfile(originalfileName);
+				
+				insertFileList.add(fvo);
+				//System.out.println("arraylist");
+				
+				String savePath = root_path + att_path + saveFileName;
+				File file = new File(savePath);
+				//System.out.println("transfer to file");
+				fileOne.transferTo(file);
+				// multiFile.get(i).transferTo(new File(savePath));
+			}
+
+			int value = productDAO.getInsertFile(insertFileList);
+			//System.out.println("dao insert value : " + value);
+
+			if (value != 0)
+				result = true;
+			
+		} else if (!pid.equals(""))
+			result = true;
+
+		return result;
+	}
+
+	// 관심등록
+	@Override
+	public boolean getLike(String pid) {
+		// return productDAO.getLike(pid);
+		return true;
+	}
+
+	// 물품 전체 리스트
+	@Override
+	public ArrayList<DaangnProductVO> getProductList(String page) {
+		ArrayList<DaangnProductVO> list = new ArrayList<DaangnProductVO>();
+		list = productDAO.getProductList(page);
+		for(DaangnProductVO vo : list){
+			String pid = vo.getPid();
+			ArrayList<DaangnFileVO> fileArray = productDAO.getSalesListFile(pid);
+			vo.setFileArray(fileArray);
+		}
+		return list;
+	}
+
+/*	// 내가 판매한 물품 리스트
+	@Override
+	public ArrayList<DaangnProductVO> getSalesList(String id) {
+		//System.out.println("serviceImpe - "+id);
+		ArrayList<DaangnProductVO> list = new ArrayList<DaangnProductVO>();
+		list = productDAO.getSalesList(id);
+		
+		for(DaangnProductVO vo : list){
+			String pid = vo.getPid();
+			//System.out.println("serviceImpel pid - "+pid);
+			ArrayList<DaangnFileVO> fileArray = productDAO.getSalesListFile(pid);
+			vo.setFileArray(fileArray);
+		}
+		
+		return list;
+	}*/
+
+	// 물품 상태 변경
+	@Override
+	public int getPstateUpdate(String pid, String pstate) {
+		return productDAO.getPstateUpdate(pid, pstate);
+	}
+
+	// 물품 날짜 변경
+	@Override
+	public int getPdateUpdate(String pid) {
+		return productDAO.getPdateUpdate(pid);
+	}
+
+
+	// 물품 수정 전 내용 불러오기
+	@Override
+	public DaangnProductVO getProductContent(String pid) {
+		return productDAO.getProductContent(pid);
+	}
+
+	// 물품 수정
+	@Override
+	public int productUpdate(DaangnProductVO vo) {
+		System.out.println("spid - " + vo.getPid());
+		return productDAO.getUpdateResult(vo);
+	}
+
+	
+	//물품삭제
+	@Override
+	public void getProductDelete(String pid){
+		productDAO.getProductDelete(pid);
+	}
+	
+	//검색
+	@Override
+	public ArrayList<DaangnProductVO> getSearch(String keyword){
+		return productDAO.getSearch(keyword);
+	}
+	
+	//시도 데이터 가져오기
+	@Override
+	public ArrayList<DaangnJusoVO> getSido() {
+		return productDAO.getSido();
+	}
+
+	// 시도에 따른 시군구 데이터 가져오기
+	@Override
+	public ArrayList<DaangnJusoVO> getSigungu(String sido) {
+		//System.out.println("welcome serviceImpl : " + sido);
+		return productDAO.getSigungu(sido);
+	}
+
+	// 시군구 데이터에 따른 동 데이터 가져오기
+	@Override
+	public ArrayList<DaangnJusoVO> getHname(String sigungu) {
+		//System.out.println("welcome serviceImpl : " + sigungu);
+		return productDAO.getHname(sigungu);
+	}
+
+	// 판매하는 물품 정보 가져오기
+	@Override
+	public DaangnProductVO getSaleProductData(String pid) {
+		DaangnProductVO productData = productDAO.getProductContent(pid);
+		ArrayList<DaangnFileVO> productFile = productDAO.getSalesListFile(pid);
+		
+		if(productFile.size() != 0){
+			productData.setFileArray(productFile);
+		}
+		
+		return productData;
+	}
+
+	//판매 할 상품 채팅 목록 가져오기
+	@Override
+	public ArrayList<DaangnMemberVO> getChatList(String pid, String rid) {
+		//System.out.println("hello product service world");
+		
+		ArrayList<DaangnChatVO> chatIDList = new ArrayList<DaangnChatVO>();
+		ArrayList<DaangnMemberVO> chatList = new ArrayList<DaangnMemberVO>(); 
+		
+		chatIDList = productDAO.getChatIDList(pid, rid);
+		
+		if(chatIDList.size() != 0){
+			chatList = memberDAO.getChatList(chatIDList);
+		}
+		return chatList;
+	}
+
+	// 리뷰 & 구매 등록
+	@Override
+	public boolean getSalesReview(DaangnReviewVO vo) {
+		//System.out.println("welcome service world");
+		boolean result = false;
+		
+		int reviewResult = productDAO.getReviewResult(vo);
+		
+		if (reviewResult != 0){
+			int orderResult = productDAO.getOrderResult(vo);
+			if(orderResult != 0) result = true;
+		}
+		return result;
+	}
+}

@@ -1,0 +1,408 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>당근마켓 - 우리 동네 중고 직거래</title>
+
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:9000/daangn/resources/css/index.css">
+<script	src="http://localhost:9000/daangn/resources/js/jquery-3.3.1.min.js"></script>
+<style>
+.nav-bar {
+	width: 100%;
+	position: relative; /* background: #000; */
+	height: 50px;
+}
+
+.dot-nav {
+	position: absolute;
+	right: 60px;
+	top: 10px;
+}
+
+.dot-line {
+	display: block;
+	border: 1px solid #90979e;
+	height: 1px;
+	border-radius: 10px;
+	background: #90979e;
+	margin-top: 4px;
+}
+
+div#userMenu ul.list_menu li:hover a.link_menu {
+	background: rgb(247, 103, 7);
+	color: white;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'NanumBarunGothic';
+}
+
+.dropbtn {
+	background-color: white;
+	color: black;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+	height: 52px;
+	/* margin-left:400px; */
+}
+
+#ham {
+	width: 20px;
+	height: 20px;
+	margin-right: 140px;
+	padding-left: 5px;
+}
+
+#cate {
+	font-size: 15px;
+	color: rgb(103, 107, 118);
+	margin-top:-24px;
+
+}
+.dropdown_div{
+	width : 58%;
+	/* margin : auto; */
+	margin-left: 55PX;
+	
+}
+.dropdown {
+/* position: relative;
+  display: inline-block; */
+	
+}
+
+.header_box {
+	display: none;
+	position: absolute;
+	background-color: white;
+	border: 1px solid #dbdbdb;
+	width: 830px;
+	margin-left: 420px;
+}
+
+.header_img {
+	vertical-align: top;
+	margin-right: 5px;
+	width: 40px;
+	margin-left: 5px;
+}
+
+.header_text {
+	/* color: #4e4e4c; */
+	color: #514859;
+	font-size: 13px;
+	line-height: 15px;
+	padding-top: 15px;
+	display: inline-block;
+	font-family: 'AppleSDGothicNeoH00';
+}
+
+.header_box a {
+	color: black;
+	padding: 12px 0 12px 7px;
+	text-decoration: none;
+	display: inline-block;
+	background-color: white;
+}
+
+.header_box li {
+	list-style-type: none;
+	display: inline;
+}
+
+.header_box .header_box_list li {
+	float: left;
+	border-right: 1px solid #ebebeb;
+	box-sizing: border-box;
+	height: 80px;
+	width: 165px;
+}
+
+.header_box .header_box_list li.header_category:nth-child(5n) {
+	border-right: none;
+}
+
+.header_box .header_box_list li.header_box_space {
+	height: 20px;
+	border-right: none;
+}
+
+/* .dropdown:hover .header_box {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: white;
+} */
+</style>
+<script>
+	$(document).ready(function(){
+		$(".dropbtn").click(function(){
+			$(".header_box").toggle();
+		});
+		
+		$("#header-search-button").click(function(){
+			if($("#header-search-input").val() == ""){
+					alert("검색어를 입력해주세요");
+					$("#header-search-input").focus();
+					return false;
+				 }
+				search_form.submit();	
+			});
+		
+	});
+</script>
+</head>
+<body>
+
+	<header id="fixed-bar" class="fixed-bar-box-shadow">
+	<div id="fixed-bar-wrap">
+
+		<h1 id="fixed-bar-logo-title">
+			<a href="http://localhost:9000/daangn/index.carrot"> <img
+				class="fixed-logo" alt="당근마켓"
+				src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/logo-basic-00b7e471b721ce9db8b0758c05a84684413c8aef1ad54caa0f3fcbe7328c947f.svg" />
+			</a>
+		</h1>
+		<form action ="product_list.carrot" name ="search_form" method="get">
+			<section id="fixed-bar-search">
+				<div class="search-input-wrap">
+					<input type="hidden" name="state" value="3">
+					<input type="text" name="keyword" id="header-search-input" class="fixed-search-input" placeholder="지역, 상품을 검색해보세요." />
+					<button id="header-search-button">
+						<img class="fixed-search-icon" alt="Search"
+							src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/search-icon-db20a2e9e6b0fc922b44982d451cf1c967c86e8e8df270e71c300832a6f31f1a.svg" />
+					</button>
+				</div>
+			</section>
+		</form>
+		<section id="fixed-bar-download">
+		<div id="userMenu">
+			<ul class="list_menu">
+				<c:choose>
+					<c:when test="${ sessionScope.svo != null && sessionScope.svo.id !='admin'}">
+						<li class="menu none_sub"><a href="http://localhost:9000/daangn/mypage_info_pass_check.carrot" class="link_menu">나의당근</a></li>
+						<li class="menu none_sub"><a href="http://localhost:9000/daangn/logout.carrot" class="link_menu">로그아웃</a></li>
+					</c:when>
+					<c:when test="${ sessionScope.svo != null && sessionScope.svo.id == 'admin'}">
+						<li class="menu none_sub"><a href="http://localhost:9000/daangn/admin.carrot" class="link_menu">관리자</a></li>
+						<li class="menu none_sub"><a href="http://localhost:9000/daangn/logout.carrot" class="link_menu">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="menu none_sub"><a href="http://localhost:9000/daangn/login.carrot" class="link_menu">로그인</a></li>
+						<li class="menu none_sub menu_join"><a href="http://localhost:9000/daangn/join.carrot" class="link_menu">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li class="menu none_sub"><a href="http://localhost:9000/daangn/notice.carrot" class="link_menu">공지사항</a></li>
+				<li class="menu none_sub"><a href="http://localhost:9000/daangn/notice_question_part1.carrot" class="link_menu">고객센터</a></li>
+				
+				<!-- <li class="menu none_sub menu_join"><a
+					href="http://localhost:9000/daangn/join.carrot" class="link_menu">회원가입</a>
+				</li>
+				<li class="menu none_sub"><a
+					href="http://localhost:9000/daangn/login.carrot" class="link_menu">로그인</a>
+				</li>
+
+				<li class="menu none_sub"><a
+					href="http://localhost:9000/daangn/mypage.carrot" class="link_menu">나의당근</a>
+				</li>
+				<li class="menu none_sub"><a
+					href="http://localhost:9000/daangn/admin.carrot" class="link_menu">관리자</a>
+				</li>
+				<li class="menu none_sub"><a
+					href="http://localhost:9000/daangn/logout.carrot" class="link_menu">로그아웃</a>
+				</li> -->
+			</ul>
+		</div>
+		</section>
+
+	</div>
+
+	<div class="dropdown">
+		<div class="dropdown_div">
+			<button class="dropbtn">
+				<img src="http://localhost:9000/daangn/resources/images/ham.png"
+					id="ham">
+				<div id="cate">전체 카테고리</div>
+			</button>
+		</div>
+		<div class="header_box">
+			<ul class="header_box_list">
+				<li class="header_box_space"></li>
+				<li class="header_box_space"></li>
+				<li class="header_box_space"></li>
+				<li class="header_box_space"></li>
+				<li class="header_box_space"></li>
+
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=자동차용품">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hfa0000.png">
+						<span class="header_text">자동차용품 </span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=핸드메이드">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hba0000.png">
+						<span class="header_text">핸드메이드 </span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=유아동/완구 ">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hae0000.png">
+						<span class="header_text">유아동/완구 </span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=뷰티">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_had0000.png">
+						<span class="header_text">뷰티 </span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=여성의류">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_haa0000.png">
+						<span class="header_text">여성의류</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=남성의류">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hab0000.png">
+						<span class="header_text">남성의류 </span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=신발/가방/잡화">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hac0000.png">
+						<span class="header_text">신발/가방/잡화 </span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=휴대폰/태블릿">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hak0000.png">
+						<span class="header_text">휴대폰/태블릿 </span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=컴퓨터/주변기기">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hai0000.png">
+						<span class="header_text">컴퓨터/주변기기 </span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=카메라">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_haj0000.png">
+						<span class="header_text">카메라</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=디지털/가전">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hah0000.png">
+						<span class="header_text">디지털/가전</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=게임">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_han0000.png">
+						<span class="header_text">게임</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=스포츠/레저">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hao0000.png">
+						<span class="header_text">스포츠/레저</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=가구">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_haf0000.png">
+						<span class="header_text">가구</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=생활">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hag0000.png">
+						<span class="header_text">생활</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=골동품/희귀품">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hat0000.png">
+						<span class="header_text">골동품/희귀품</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=여행/숙박">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hga0000.png">
+						<span class="header_text">여행/숙박 </span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=티켓,상품권">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_haq0000.png">
+						<span class="header_text">티켓,상품권</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=재능/서비스">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hda0000.png">
+						<span class="header_text">재능/서비스</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=도서">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hap0000.png">
+						<span class="header_text">도서</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=스타굿즈">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hax0000.png">
+						<span class="header_text">스타굿즈</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=문구">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_haw0000.png">
+						<span class="header_text">문구</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=피규어/키덜트">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hav0000.png">
+						<span class="header_text">피규어/키덜트</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=CD/DVD">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hal0000.png">
+						<span class="header_text">CD/DVD</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=음향기기/악기">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_ham0000.png">
+						<span class="header_text">음향기기/악기</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=예술/미술">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_has0000.png">
+						<span class="header_text">예술/미술</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=반려동물">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hea0000.png">
+						<span class="header_text">반려동물</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=포장식품">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hau0000.png">
+						<span class="header_text">포장식품</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=기타">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_hzz0000.png">
+						<span class="header_text">기타</span>
+				</a></li>
+				<li class="header_category"><a class="header_link" href="http://localhost:9000/daangn/product_list.carrot?state=2&keyword=삽니다">
+						<img class="header_img"
+						src="http://localhost:9000/daangn/resources/images/cate_h0000.png">
+						<span class="header_text">삽니다</span>
+				</a></li>
+				<li class="header_box_space"></li>
+				<li class="header_box_space"></li>
+				<li class="header_box_space"></li>
+				<li class="header_box_space"></li>
+				<li class="header_box_space"></li>
+
+			</ul>
+		</div>
+	</div>
+
+	</header>
+	<div style="height: 130px;"></div>
+</body>
+</html>

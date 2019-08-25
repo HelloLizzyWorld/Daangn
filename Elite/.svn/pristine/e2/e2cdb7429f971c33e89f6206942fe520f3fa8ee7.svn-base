@@ -1,0 +1,191 @@
+package com.elite.dao;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.elite.vo.DaangnChatVO;
+import com.elite.vo.DaangnFileVO;
+import com.elite.vo.DaangnNoticeVO;
+import com.elite.vo.DaangnJusoVO;
+import com.elite.vo.DaangnProductVO;
+
+@Repository
+public class DaangnProductDAO {
+
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+
+	private static String namespace = "mapper.product";
+
+	// 물품등록
+	public String getInsertResult(DaangnProductVO vo) {
+		// System.out.println("welcome dao");
+		String result = "";
+		int val = sqlSession.insert(namespace + ".insert_product", vo);
+		// System.out.println("dao pid : " + vo.getPid());
+		if (val != 0)
+			result = vo.getPid();
+		return result;
+	}
+
+	// 물품 파일 등록
+	public int getInsertFile(List<DaangnFileVO> insertFileList) {
+		return sqlSession.insert(namespace + ".insert_product_file", insertFileList);
+	}
+
+	// 물품 전체 리스트
+	public ArrayList<DaangnProductVO> getProductList(String page) {
+		List<DaangnProductVO> list = new ArrayList<DaangnProductVO>();
+
+		Map param = new HashMap<String, String>();
+		param.put("page", page);
+
+		list = sqlSession.selectList(namespace + ".list_product", param);
+		return (ArrayList<DaangnProductVO>) list;
+	}
+
+	// product_list
+	public ArrayList<DaangnProductVO> getProductList2(String category, int startCount, int endCount) {
+		List<DaangnProductVO> list = new ArrayList<DaangnProductVO>();
+
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("cate", category);
+		param.put("start", startCount);
+		param.put("end", endCount);
+
+		list = sqlSession.selectList(namespace + ".product_list", param);
+		return (ArrayList<DaangnProductVO>) list;
+	}
+	
+	
+
+	// 내가 판매한 물품 리스트
+	public ArrayList<DaangnProductVO> getSalesList(String id) {
+		// System.out.println("productDAO - " + id);
+		List<DaangnProductVO> list = new ArrayList<DaangnProductVO>();
+		list = sqlSession.selectList(namespace + ".sales_list", id);
+		// System.out.println("dao pid = " + list.get(0).getPid());
+		return (ArrayList<DaangnProductVO>) list;
+	}
+
+	// 내가 판매한 물품 리스트 파일
+	public ArrayList<DaangnFileVO> getSalesListFile(String pid) {
+		// System.out.println("productDAO file - " + pid);
+		List<DaangnFileVO> fileArray = new ArrayList<DaangnFileVO>();
+		fileArray = sqlSession.selectList(namespace + ".sales_file_list", pid);
+		return (ArrayList<DaangnFileVO>) fileArray;
+	}
+
+	// 물품 상태 변경
+	public int getPstateUpdate(String pid, String pstate) {
+		boolean result = false;
+		// String ps_name = "";
+
+		/*
+		 * if(pstate.equals("0")) ps_name="판매중"; if(pstate.equals("1"))
+		 * ps_name="예약중"; if(pstate.equals("2")) ps_name="판매완료";
+		 */
+
+		Map param = new HashMap<String, String>();
+		param.put("pid", pid);
+		param.put("pstate", pstate);
+
+		return sqlSession.update(namespace + ".pstate_update", param);
+	}
+
+	// dbcount
+	public int getDbcount() {
+		return sqlSession.selectOne(namespace + ".dbCount");
+	}
+	
+	/*public int searchCount(String keyword){
+		return sqlSession.selectOne(namespace+".searchCount",keyword);
+	}*/
+	
+	
+	public int getDbProductCount(String category){
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("cate", category);
+		return sqlSession.selectOne(namespace + ".dbProductCount", param);
+	}
+	// 물품 날짜 변경
+	public int getPdateUpdate(String pid) {
+		return sqlSession.update(namespace + ".pdate_update", pid);
+	}
+
+	// 물품 수정 전 내용 불러오기
+	public DaangnProductVO getProductContent(String pid) {
+		return sqlSession.selectOne(namespace + ".product_content", pid);
+	}
+
+	// 물품 수정
+	public int getUpdateResult(DaangnProductVO vo) {
+		System.out.println("dpid - " + vo.getPid());
+		// map param = new Hash
+		return sqlSession.update(namespace + ".update_product", vo);
+	}
+
+	// 물품삭제
+	public void getProductDelete(String pid) {
+		sqlSession.delete(namespace + ".product_delete", pid);
+	}
+
+	// 검색
+	public ArrayList<DaangnProductVO> getSearch(String keyword) {
+		List<DaangnProductVO> list = new ArrayList<DaangnProductVO>();
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		param.put("keyword", keyword);
+		/*param.put("startCount", startCount);
+		param.put("endCount", endCount);*/
+		
+		list = sqlSession.selectList(namespace+".getSearch", param);
+		
+	/*	return (ArrayList<DaangnProductVO>)list;
+		list = sqlSession.selectList(namespace + ".getSearch", keyword);*/
+
+		return (ArrayList<DaangnProductVO>) list;
+	}
+
+	// 시도 가져오기
+	public ArrayList<DaangnJusoVO> getSido() {
+		//System.out.println("product dao");
+		List<DaangnJusoVO> sido = new ArrayList<DaangnJusoVO>();
+		sido = sqlSession.selectList(namespace+".getSido");
+		return (ArrayList<DaangnJusoVO>)sido;
+	}
+	// 시군구 가져오기
+	public ArrayList<DaangnJusoVO> getSigungu(String sido) {
+		//System.out.println("product dao");
+		List<DaangnJusoVO> sigungu = new ArrayList<DaangnJusoVO>();
+		sigungu = sqlSession.selectList(namespace+".getSigungu", sido);
+		return (ArrayList<DaangnJusoVO>)sigungu;
+	}
+	// 동 가져오기
+	public ArrayList<DaangnJusoVO> getHname(String sigungu) {
+		//System.out.println("product dao");
+		List<DaangnJusoVO> hname = new ArrayList<DaangnJusoVO>();
+		hname = sqlSession.selectList(namespace+".getHname", sigungu);
+		return (ArrayList<DaangnJusoVO>)hname;
+	}
+
+	//판매 할 상품 채팅 목록 가져오기
+	public ArrayList<DaangnChatVO> getChatIDList(String pid, String rid) {
+		//System.out.println("hello product dao world");
+		List<DaangnChatVO> chatIDList = new ArrayList<DaangnChatVO>();
+		
+		Map param = new HashMap<String, String>();
+		param.put("pid", pid);
+		param.put("rid", rid);
+		
+		chatIDList = sqlSession.selectList(namespace+".getChatIDList", param);
+		return (ArrayList<DaangnChatVO>)chatIDList;
+	}
+
+}

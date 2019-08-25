@@ -1,0 +1,339 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="http://localhost:9000/daangn/resources/css/index.css">
+<link rel="stylesheet" type="text/css" href="http://localhost:9000/daangn/resources/css/regist.css">
+<script src="http://localhost:9000/daangn/resources/js/jquery-3.3.1.min.js"></script>
+<script src="http://localhost:9000/daangn/resources/js/product_write.js"></script>
+<title>당근마켓 - 우리 동네 중고 직거래</title>
+</head>
+<body>
+	<!-- header -->
+	<%-- <c:import url="http://localhost:9000/daangn/header.carrot" /> --%>
+	<div id="mypage_content">
+		<div id="top_div">
+			<div id="title_div"></div>
+		</div>
+		<%-- <c:import url="http://localhost:9000/daangn/box.carrot" /> --%>
+		<%-- <jsp:include page="../mypage/mypage_box.jsp"></jsp:include> --%>
+
+		<div class="main">
+			<div class="title_div">
+				<h2 class="title_h2">물품등록
+					<span>당근마켓에 물품을 등록해보세요!</span>
+					<a href="http://localhost:9000/daangn/mypage_info_pass_check.carrot">나의당근으로 돌아가기</a>
+				</h2>
+				<div class="line_member"></div>
+			</div>
+
+			<!-- 내용 시작 -->
+			<div class="content_frame">
+				<div class="content">
+
+					<!-- 수평 메뉴 -->
+					<div class="page-tabs" style="height: 50px;">
+						<div class="tabs">
+							<a href="#" class="tab active" id="cat">카테고리 선택</a> 
+							<a href="#" class="tab" id="des">상세정보입력</a>
+							<a href="#" class="tab" id="pre">사진올리기</a>
+						</div>
+					</div>
+					 
+					<!-- 폼시작 -->
+					<form id="product_write" name="product_write" action="product_write_proc.carrot" method="post" enctype="multipart/form-data">
+
+						<!-- 카테고리 선택 -->
+						<div class="regist_box" id="category">
+							<ul class="cat_list">
+								<li class="cat_space"></li>
+								<li class="cat_space"></li>
+								<li class="cat_space"></li>
+								<li class="cat_space"></li>
+								<li class="cat_space"></li>
+
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hfa0000.png">
+										<span class="cat_text">자동차용품</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hba0000.png">
+										<span class="cat_text">핸드메이드</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hae0000.png">
+										<span class="cat_text">유아동/완구</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_had0000.png">
+										<span class="cat_text">뷰티</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_haa0000.png">
+										<span class="cat_text">여성의류</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hab0000.png">
+										<span class="cat_text">남성의류</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hac0000.png">
+										<span class="cat_text">신발/가방/잡화</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hak0000.png">
+										<span class="cat_text">휴대폰/태블릿</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hai0000.png">
+										<span class="cat_text">컴퓨터/주변기기</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_haj0000.png">
+										<span class="cat_text">카메라</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hah0000.png">
+										<span class="cat_text">디지털/가전</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_han0000.png">
+										<span class="cat_text">게임</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hao0000.png">
+										<span class="cat_text">스포츠/레저</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_haf0000.png">
+										<span class="cat_text">가구</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hag0000.png">
+										<span class="cat_text">생활</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hat0000.png">
+										<span class="cat_text">골동품/희귀품</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hga0000.png">
+										<span class="cat_text">여행/숙박</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_haq0000.png">
+										<span class="cat_text">티켓,상품권</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hda0000.png">
+										<span class="cat_text">재능/서비스</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hap0000.png">
+										<span class="cat_text">도서</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hax0000.png">
+										<span class="cat_text">스타굿즈</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_haw0000.png">
+										<span class="cat_text">문구</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hav0000.png">
+										<span class="cat_text">피규어/키덜트</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hal0000.png">
+										<span class="cat_text">CD/DVD</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_ham0000.png">
+										<span class="cat_text">음향기기/악기</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_has0000.png">
+										<span class="cat_text">예술/미술</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hea0000.png">
+										<span class="cat_text">반려동물</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hau0000.png">
+										<span class="cat_text">포장식품</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_hzz0000.png">
+										<span class="cat_text">기타</span>
+								</a></li>
+								<li class="category"><a class="cat_link" href="#null">
+										<img class="cat_img"
+										src="http://localhost:9000/daangn/resources/images/cate_h0000.png">
+										<span class="cat_text">삽니다</span>
+								</a></li>
+							</ul>
+
+
+
+						</div>
+
+						<div class="btn_box" id="cat_btn">
+							<button type="button" class="btn_ btn_next">다음</button>
+							<a href="http://localhost:9000/daangn/mypage.carrot"></a>
+						</div>
+
+						<!-- 상세 정보 입력 -->
+						<div class="regist_box" id="description">
+							<div class="description">
+								<table class="des_table">
+
+									<tr>
+										<td class="des_label"><label>제목</label></td>
+										<td class="des_input"><input type=text name="ptitle"
+											label="제목" maxlength="25" class="reg_title"
+											placeholder="제목을 입력해주세요." /></td>
+									</tr>
+
+									<tr>
+										<td class="des_label"><label>거래종류</label></td>
+										<td class="des_input">
+											<div class="des_sell_box">
+												<ul class="item_status_list">
+
+													<li>
+														<div class="text_wrapper click">
+															<div class="text">판매</div>
+														</div>
+													</li>
+
+													<li>
+														<div class="text_wrapper">
+															<div class="text">무료나눔</div>
+														</div>
+													</li>
+
+													<li><div class="text_wrapper">
+															<div class="text">삽니다</div>
+														</div></li>
+
+													<li><div class="text_wrapper">
+															<div class="text">가격제안</div>
+														</div></li>
+												</ul>
+
+											</div>
+										</td>
+									</tr>
+
+									<tr class="price_area">
+										<td class="des_label"><label></label></td>
+										<td class="des_input">
+											<div class="box_price">
+												<input name="pprice" value="0" class="sell_type_input"
+													maxlength="12" placeholder="판매희망 가격을 입력하세요" type="text" />
+												<span class="box_prive_text">원</span>
+											</div>
+										</td>
+									</tr>
+
+									<tr>
+										<td class="des_label"><label>내용</label></td>
+										<td class="des_input"><textarea name="pcontent"
+												maxlength="1000" class="reg_intro"
+												placeholder="상품 소개를 입력해주세요." cols="30" rows="10"></textarea>
+										</td>
+									</tr>
+
+								</table>
+							</div>
+						</div>
+						<div class="btn_box" id="des_btn">
+							<button type="button" class="btn_ btn_next">다음</button>
+							<button type="button" class="btn_">뒤로</button>
+						</div>
+
+						<!-- 사진 올리기 -->
+						<div class="regist_box" id="presentation">
+							<div class="img_area">
+								<div class="presentation">
+									<ul>
+										<input accept="image/jpeg, image/png" class="multiple_input" id="upFile" multiple="multiple" name="file1" type="file"/>
+
+								     	<c:forEach begin = "1" end = "8">
+					   						<li class="item">
+												<div class="up_img_box">
+													<img alt="아이템 업로드 이미지" class="up_img item_img"
+														src="https://ccimage.hellomarket.com/web/2018/auto/img_car_pic_basic.png">
+												</div>
+											</li>
+					      				</c:forEach>
+
+									</ul>
+									<div class="up_img_label">대표이미지</div>
+									<div class="up_img_description">
+										<span class="up_img_description_title"> * 첫번째 사진은 직접 촬영한 아이템 사진을 등록해주세요.</span> 
+										<span> &nbsp; - 판매자의 아이템 보유 유무와 실물 상태 확인을 위해 
+										<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;직접 촬영한 실제 아이템 사진을 첫번째 이미지로 첨부해주시기 바랍니다.</span> 
+										<span class="img_hover_margin"> &nbsp; - 아이템 첫번째 이미지에 실제 사진이 첨부되지 않은 경우, 
+										사전안내 없이 수정 또는 삭제될 수 있습니다.</span> 
+										<br><br>
+										<span class="img_hover_margin">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(삽니다. 무형의 아이템 제외)</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- script로 insert -->
+						<input type="hidden" name="pcate" value="" /> 
+						<input type="hidden" name="ptype" value="판매" />
+
+						<div class="btn_box" id="pre_btn">
+							<button type="button" class="btn_ btn_next">등록</button>
+							<button type="button" class="btn_">뒤로</button>
+						</div>
+
+					</form>
+					<!-- 폼 끝 -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer"></div>
+	<!-- footer -->
+	<%-- <c:import url="http://localhost:9000/daangn/footer.carrot" /> --%>
+</body>
+</html>

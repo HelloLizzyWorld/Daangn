@@ -1,0 +1,112 @@
+package com.elite.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.elite.dao.DaangnMemberDAO;
+import com.elite.vo.DaangnMemberVO;
+import com.elite.vo.SessionVO;
+
+@Service("memberService")
+public class MemberServiceImpl implements MemberService {
+	
+	@Autowired
+	private DaangnMemberDAO memberDAO;
+	
+	@Override
+	//회원가입
+	public boolean getInsertResult(DaangnMemberVO vo) {
+		
+		return memberDAO.getInsertResult(vo);
+	}
+	
+	@Override
+	//로그인
+	public SessionVO getLoginResult(DaangnMemberVO vo){
+		
+		return memberDAO.getLoginResult(vo);
+	}
+	
+	@Override
+	//로그인 성공시 리셋
+	public int getLoginSuccess(String id){
+		
+		return memberDAO.getLoginSuccess(id);
+	}
+	
+	@Override
+	//로그인 실패시 카운트
+	public int getLoginFailCount(String id){
+		
+		return memberDAO.getLoginFailCount(id);
+	}
+	
+	@Override
+	//로그인 5번 실패시 계정 잠금
+	public DaangnMemberVO getLoginAccountLock(String id){
+		
+		DaangnMemberVO vo = new DaangnMemberVO();
+		vo = memberDAO.getLoginAccountLock(id);
+		return vo;
+	}
+	
+	@Override
+	public int getUpdateAccountLock(String id){
+		
+		return memberDAO.getUpdateAccountLock(id);
+	} 
+	
+	//idCheck
+	@Override
+	public int getResultIdCheck(String id) {
+		
+		return memberDAO.getResultIdCheck(id);
+	}
+	//emailCheck
+	@Override
+	public int getResultEmailCheck(String email) {
+		
+		return memberDAO.getResultEmailCheck(email);
+	}
+	//admin Member List
+	/*@Override
+	public ArrayList<DaangnMemberVO> getTotalList() {
+		
+		return memberDAO.getTotalList();
+	}*/
+	//admin member content
+	@Override
+	public DaangnMemberVO getMemberContent(String id) {
+		DaangnMemberVO vo = new DaangnMemberVO();
+		vo = memberDAO.getMemberContent(id);
+		return vo;
+	}
+
+	@Override
+	public int getMemberWarn(String id) {
+		
+		return memberDAO.getMemberWarn(id);
+	}
+
+	@Override
+	public int getResultNickCheck(String nick) {
+		
+		return memberDAO.getResultNickCheck(nick);
+	}
+
+/*	@Override
+	public SessionVO getBlackLogin(DaangnMemberVO vo) {
+		
+		return memberDAO.getBlackLogin(vo);
+	}
+	*/
+	
+	@Override
+	public SessionVO getLoginlock(String id){
+		return memberDAO.getLoginlock(id);
+	}
+	
+	
+}

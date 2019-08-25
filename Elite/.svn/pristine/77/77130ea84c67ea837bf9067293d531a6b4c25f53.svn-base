@@ -1,0 +1,314 @@
+var buyer_id;
+var buyer_name;
+var pid;
+var rstate;
+var rcomment;
+var rdetail;
+
+
+$(document).ready(function() {
+	// 판매중이 아닌 물품에 대하여 버튼 비활성화
+	$(".pstate").each(function() {
+		var pstate = $(this).val();
+		var state_id = $(this).attr("id").substr(7, 5);
+	
+		if (pstate != "판매중") {
+			$('#' + state_id + ' a').css('pointer-events', 'none').css('background-color', '#e7eaec').css('color', '#a9b4bc');
+			/*
+			 * if((pstate == "판매완료")){
+			 * $(this).attr("disabled","true"); }
+			 */
+		}
+	});
+	
+	// 버튼 기능 구현
+	$(".func_group_item a").click(function() {
+			var pid = $(this).attr("id").substr(5,5);
+	
+			// 물품 날짜 변경 ( 끌어올리기 )
+			if ($(this).text() == 'UP') {
+				$.ajax({
+					url : "product_update_date.carrot",
+					type : "get",
+					data : "pid=" + pid,
+					dataType : "text",
+					success : function(data) {
+						if (data == "1") {
+							//alert(data);
+							location.reload();
+						}
+					}
+				});
+			}
+			// 물품 수정
+			else if ($(this).text() == "수정") {
+				//alert("2");
+				location.href = "http://localhost:9000/daangn/product_update.carrot?pid="+ pid;
+			}
+			// 물품 삭제
+			else if ($(this).text() == "삭제") {
+				var result = confirm("삭제를 진행하시겠습니까?");
+	
+				if (result) {
+					location.href = "http://localhost:9000/daangn/product_delete.carrot?pid="+ pid;
+					alert("삭제가 완료되었습니다.");
+					//이전에 삭제할지 confirm창 띄워서 진행할 것 , ajax로 구현하고 나서 result 값이 있을 때 완료 창 띄울 것
+				}
+			}
+		});
+	
+	/* MODAL */
+	// 판매 완료 후 구매자 선택
+	$(document).on("click",".buyer",function(){
+		buyer_id = $(this).attr("id").substr(6, 5);
+		buyer_name = $(this).find('.buyer_span1').text();
+		$(this).css("background-color","#ffd7b3");
+		$(this).siblings().css("background-color","white");
+	});
+	
+	// 리뷰 구매후기 남기기
+	$(".review_choice_img").click(function(){
+		$("input:checkbox[name=rcomment]:checked").prop("checked", false);
+		rstate = $(this).attr("id");
+		
+		if(rstate == "best"){
+			best();
+		}
+		else if(rstate == "good"){
+			good();
+		}
+		else if(rstate == "bad"){
+			bad();
+		}
+	});
+
+	// 리뷰 선택 시
+	$(".best_choice div").click(function(){
+		$(this).css("border", "1px solid #f76707").css("color","#f76707");
+		$(this).siblings().css("border", "1px solid #8d9ba5").css("color","#8d9ba5");
+		var rcommentList = [];
+		alert(com);
+		rcommentList.push(com);
+		console.log(rcommentList);
+	});
+	
+	// 물품 상태 변화
+	$(".pstate").change(function() {
+		pid = $(this).attr("id").substr(7, 5);
+		var pstate = $(this).val();
+	
+		pstate_modal(pid, pstate);
+		
+	});
+});// document ready end
+
+/* function */
+// modal on
+function pstate_modal(pid, pstate) {
+	//판매완료 모달
+	if(pstate == "판매완료"){
+		product_data(pid);
+		chat_list(pid);
+	// 판매중, 예약중 모달
+	}else{
+		$("#myModal_1").css("display", "block");
+		pstate_change(pid, pstate);
+	}
+}
+// 판매 할 상품 정보 가져오기
+function product_data(pid){
+	var html = "";
+	
+	$.ajax({
+		url : "sale_product_data.carrot",
+		type : "get",
+		data : "pid=" + pid,
+		dataType : "text",
+		success : function(data) {
+			var product_data = JSON.parse(data);
+			if(typeof product_data.fileArray == "undefined"){
+				html = "<img src='https://seoul-p-studio.bunjang.net/product/101832538_1_1557381938_w152.jpg'>"
+						+"<div class='sale-name'>"
+						+"<span class='span1'> 거래한 상품 </span><br>"
+						+"<span class='span2'>" + product_data.ptitle + "</span>"
+						+"</div>";
+			}else{
+				html = "<img src='http://localhost:9000/daangn/resources/upload/" + product_data.fileArray[0].pfile + "'>"
+						+"<div class='sale-name'>"
+						+"<span class='span1'> 거래한 상품 </span><br>"
+						+"<span class='span2'>" + product_data.ptitle + "</span>"
+						+"</div>";
+			}
+			$(".sale-content").append(html);
+		}
+	});
+}
+//판매 할 상품 채팅 목록 가져오기
+function chat_list(pid){
+	var html = "";
+	
+	$.ajax({
+		url : "chat_list.carrot",
+		type : "get",
+		data : "pid=" + pid,
+		dataType : "text",
+		success : function(data) {
+			var chat_data = JSON.parse(data);
+			if(chat_data == ""){
+				alert("채팅한 사람이 없습니다.");
+			}else{
+				for(var i in chat_data){
+					if(chat_data[i].mfile == null){
+						html = "<div class='buyer' id='buyer_" + chat_data[i].id + "'>"
+								+ "<img class='profile_img' src='http:;//localhost:9000/daangn/resources/images/rabbit.svg'>"
+								+ "<span class='buyer_span1'>" + chat_data[i].name + "</span>"
+								+ "<span class='buyer_span2'>" + chat_data[i].addr_bname + "</span>"
+								+ "</div>";
+					}else{
+						html = "<div class='buyer' id='buyer_" + chat_data[i].id + "'>"
+								+ "<img class='profile_img' src='http:;//localhost:9000/daangn/resources/upload/" + chat_data[i].mfile + "'>"
+								+ "<span class='buyer_span1'>" + chat_data[i].name + "</span>"
+								+ "<span class='buyer_span2'>" + chat_data[i].addr_bname + "</span>"
+								+ "</div>";
+					}
+					$(".buyer_list_append").append(html);
+					$("#myModal_2").css("display", "block");
+				}
+			}
+		}
+	});
+}
+
+// 상태 변경
+function pstate_change(pid, pstate){
+	$.ajax({
+		url : "product_state_change.carrot",
+		type : "get",
+		data : "pid=" + pid + "&pstate=" + pstate,
+		dataType : "text",
+		success : function(data) {
+			if(data != 1){
+				window.location.href = 'http://localhost:9000/daangn/error.carrot';
+			}
+		}
+	});
+}
+
+//리뷰 선택
+function sales_complete(){
+	if(buyer_id == null){
+		alert("구매자를 선택해주세요");
+	}else{
+		$(".buyer_review_choice_append").append("<span class='review_choice_span'>" + buyer_name + "님과 거래가 어떠셨나요?</span>");
+		$(".buyer_thank_you_append").append("<span class='thank_you_span1'>" + buyer_name + "님에게 감사 인사를 남겨보세요.</span>");
+		$("#myModal_2").css("display", "none");
+		$("#myModal_3").css("display", "block");
+	}
+}
+//선택 후 마지막 화면(리뷰 테이블로 폼 전송 및 상태 변경)
+function finish(){
+	var chkArray = new Array();
+
+	$("input:checkbox[name=rcomment]:checked").each(function() {
+		chkArray.push(this.value);
+	});
+	
+	rcomment = chkArray;
+	rdetail = $("textarea[name='rdetail']:visible").val();
+	
+	console.log("buyer_id - " + buyer_id);
+	console.log("buyer_name - " + buyer_name);
+	console.log("pid - " + pid);
+	console.log("rstate - " + rstate);
+	console.log("rcomment - "+rcomment);
+	console.log("rdetail - "+rdetail);
+	
+	if(rcomment == ""){
+		alert("구매자 평가를 선택해 주세요:)");
+	}else{
+		
+		$("input[name='id']").val(buyer_id);		
+		$("input[name='rstate']").val(rstate);		
+		$("input[name='rcomment']").val(rcomment);		
+		$("input[name='rdetail']").val(rdetail);		
+		$("input[name='pid']").val(pid);
+		
+        var sales_review_form = $("form[name='sales_review']").serialize() ;
+        
+        $.ajax({
+            type : 'post',
+            url : 'sales_review.carrot',
+            data : sales_review_form,
+            //dataType : 'text',
+            success : function(data){
+                //alert(data);
+               // pstate_change(pid, pstate);
+                
+        		$("#myModal_3").css("display", "none");
+        		$("#myModal_4").css("display", "block");
+                
+            }
+        });
+		//$("#myModal_3").css("display", "none");
+		//$("#myModal_4").css("display", "block");
+	}
+}
+// modal off
+function closeModal() {
+	var state = $(".pstate").val();
+	//판매완료 모달
+	if(state == "판매완료"){
+		$("#myModal_4").css("display", "none");
+	}
+	// 판매중, 예약중 모달
+	else if(state == "판매중" || state == "예약중"){
+		$("#myModal_1").css("display", "none");
+	}
+	// location.reload();
+}
+//모달 창 윈도우 화면 클릭시 종료
+window.onclick = function(event) {
+	// 판매중, 예약중일 때에만 진행 할 것
+	if (event.target == document.getElementById("myModal_1")) {
+		document.getElementById("myModal_1").style.display = "none";
+		location.reload();
+	}else if(event.target == document.getElementById("myModal_4")){
+		document.getElementById("myModal_4").style.display = "none";
+		location.reload();
+	}
+}
+//review img choice
+function best() {
+	$("#best").attr("src","http://localhost:9000/daangn/resources/images/best_after.jpg");
+	$("#good").attr("src","http://localhost:9000/daangn/resources/images/good_before.jpg");
+	$("#bad").attr("src","http://localhost:9000/daangn/resources/images/bad_before.jpg");
+	$(".buyer_best_choice").css("display", "block");
+	$(".buyer_bad_choice").css("display", "none");
+	
+}
+function good() {
+	$("#best").attr("src","http://localhost:9000/daangn/resources/images/best_before.jpg");
+	$("#good").attr("src","http://localhost:9000/daangn/resources/images/good_after.jpg");
+	$("#bad").attr("src","http://localhost:9000/daangn/resources/images/bad_before.jpg");
+	$(".buyer_best_choice").css("display", "block");
+	$(".buyer_bad_choice").css("display", "none");
+}
+function bad() {
+	$("#best").attr("src","http://localhost:9000/daangn/resources/images/best_before.jpg");
+	$("#good").attr("src","http://localhost:9000/daangn/resources/images/good_before.jpg");
+	$("#bad").attr("src","http://localhost:9000/daangn/resources/images/bad_after.jpg");
+	$(".buyer_bad_choice").css("display", "block");
+	$(".buyer_best_choice").css("display", "none");
+}
+
+
+
+/* 	
+ * select 값 set 하는 jquery - list를 return하여 사용 불가능
+ *$(".pstate option").each(function() {
+	 	//alert('${vo.pstate}');
+		if ($(this).val() == '${vo.pstate}') {
+			$(this).prop("selected", "selected"); // attr적용안될경우 prop으로 
+		}
+
+}); */

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.mypage">
+
+	<select id="cart_list" parameterType="map" resultType="com.elite.vo.DaangnProductVO">
+	select * from
+	(select rownum rno,cid,pfile,ptitle,pprice,pstate 
+	from(select c.cid,f.pfile,p.ptitle,p.pprice,p.pstate from DAANGN_PRODUCT p ,DAANGN_CART c,DAANGN_FILE f 
+	where p.pid=c.pid and c.pid=f.pid and c.id=#{id} order by cdate desc))where rno between #{start} and #{end} 
+	</select>
+
+	<select id="mypage_dbCount" parameterType="java.lang.String" resultType="int">
+		select count(*) from daangn_cart where id=#{id}
+	</select>
+
+
+	<select id="getChoice" parameterType="map" resultType="int">
+		select count(cid) from daangn_cart where pid=#{pid} and id=#{uid}
+	</select>
+	
+	<insert id="like" parameterType="map">
+		insert into daangn_cart
+		values(sequ_daangn_cart.nextval,#{pid},#{uid}, sysdate)
+	</insert>
+
+	<delete id="del_like" parameterType="java.lang.String">
+		delete from daangn_cart where pid=#{pid} and id=#{uid}
+	</delete>
+	
+	<!-- <select id="getCart" parameterType="java.lang.String"
+		resultType="com.elite.vo.DaangnProductVO">
+		select DAANGN_CART.cid,DAANGN_PRODUCT.ptitle, DAANGN_PRODUCT.pprice, DAANGN_PRODUCT.pstate
+		from DAANGN_PRODUCT ,DAANGN_CART
+		where DAANGN_PRODUCT.pid=DAANGN_CART.pid and DAANGN_CART.id=#{id} order by cdate desc
+	</select>
+ -->
+	<delete id="mypage_delete" parameterType="java.lang.String">
+		delete from daangn_cart where cid=#{cid}
+	</delete>
+	<delete id="mypage_delete2" parameterType="java.lang.String">
+		delete from daangn_cart where pid=#{pid}
+	</delete>
+	
+	<select id="getBox" parameterType = "map" resultType="com.elite.vo.DaangnMemberVO">
+		select m.mfile,m.name,m.address,o.bcount,p.scount
+		from(select count(oid)bcount from daangn_order where id=#{id})o,(select count(pid)scount 
+		from daangn_product where id=#{id})p, daangn_member m where id=#{id}
+	</select>
+	
+	<update id="updatePro" parameterType="com.elite.vo.DaangnMemberVO">
+	update daangn_member set mfile=#{mfile},omfile=#{omfile}
+	where id=#{id}
+	</update>
+	
+	<select id="pass_check" parameterType="map" resultType="int">
+		select count(*) from daangn_member where id=#{id} and pass=#{pass}
+	</select>
+	
+	<select id="info" parameterType="java.lang.String" resultType="com.elite.vo.DaangnMemberVO">
+		select id, name, email, phone from daangn_member where id = #{id}
+	</select>
+	
+	<update id="infoupdate" parameterType="com.elite.vo.DaangnMemberVO">
+		update daangn_member set pass=#{pass}, name=#{name}, email=#{email}, gender=#{gender}, phone=#{phone} where id=#{id}
+	</update>
+	
+	<delete id="infocancel" parameterType="java.lang.String">
+		DELETE FROM daangn_member WHERE id = #{id}
+	</delete>
+	
+	<select id="purchase_list" parameterType="java.lang.String" resultType="com.elite.vo.DaangnProductVO">
+			 SELECT test.pid,test.pfile,test.ptitle,test.pprice,to_char(test.bdate,'yyyy-mm-dd')bdate
+	  		FROM (
+	        SELECT odr.pid, files.pfile, pdt.ptitle, pdt.PPRICE,odr.bdate
+	             , ROW_NUMBER() OVER(PARTITION BY files.pid ORDER BY sysdate DESC) ITEM_RN
+	          FROM daangn_file files, (select pid,bdate from daangn_order where id=#{id}) odr,
+	            daangn_product pdt
+	          where odr.pid = pdt.pid
+	            and pdt.pid = files.pid(+)            
+	        ) TEST
+	 		WHERE ITEM_RN = 1
+	</select>
+	
+	<select id="purchase_list_finish" parameterType="java.lang.String" resultType="com.elite.vo.DaangnProductVO">
+		 SELECT test.pid,test.pfile,test.ptitle,test.pprice,to_char(test.bdate,'yyyy-mm-dd')bdate
+  		FROM (
+        SELECT odr.pid, files.pfile, pdt.ptitle, pdt.PPRICE,odr.bdate
+             , ROW_NUMBER() OVER(PARTITION BY files.pid ORDER BY sysdate DESC) ITEM_RN
+          FROM daangn_file files, (select pid,bdate from daangn_order_review where id=#{id}) odr,
+            daangn_product pdt
+          where odr.pid = pdt.pid
+            and pdt.pid = files.pid(+)            
+        ) TEST
+ 		WHERE ITEM_RN = 1
+	</select>
+	
+	<select id="review" parameterType="java.lang.String" resultType="com.elite.vo.DaangnProductVO">
+		select test.ptitle, test.id, test.pfile from(
+		select pdt.ptitle, pdt.id, files.PFILE, ROW_NUMBER() OVER (PARTITION BY files.pid ORDER BY sysdate desc) ITEM_RN
+		from DAANGN_PRODUCT pdt, daangn_file files, (select *from daangn_product where pid = #{pid}) odr
+		where odr.pid = pdt.pid 
+		and pdt.pid = files.pid(+))test where ITEM_RN =1
+	</select>
+	
+	<insert id="review_insert" parameterType="map">
+		insert into daangn_review values(seq_daangn_review.nextval,#{id},#{rstate},#{rcomment},#{rdetail},#{pid},'구매')
+	</insert>
+	
+	<delete id="order_delete" parameterType="java.lang.String">
+		delete from daangn_order where pid= #{pid}
+	</delete>
+	
+	<insert id="order_insert">
+		insert into daangn_order_review values(seq_daangn_order_review.nextval,#{pid},#{id},sysdate)
+	</insert>
+	
+	<select id="review_finish" parameterType="java.lang.String" resultType="com.elite.vo.DaangnReviewVO">
+		select *from daangn_review where id =#{id} and  pid= #{pid} and cors = '구매'
+	</select>
+
+</mapper>

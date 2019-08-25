@@ -1,0 +1,51 @@
+package com.elite.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.elite.vo.DaangnJusoVO;
+import com.elite.vo.DaangnMemberVO;
+import com.elite.vo.DaangnProductVO;
+import com.elite.vo.DaangnReviewVO;
+
+public interface ProductService {
+	boolean productInsert(DaangnProductVO vo, HttpServletRequest request, List<MultipartFile> fileList)throws Exception;
+
+	boolean getLike(String pid);
+
+	ArrayList<DaangnProductVO> getProductList(String state);
+
+	//ArrayList<DaangnProductVO> getSalesList(String id);
+
+	int getPstateUpdate(String pid, String pstate);
+
+	int getPdateUpdate(String pid);
+
+	void getProductDelete(String pid);
+
+	DaangnProductVO getProductContent(String pid);
+
+	boolean productUpdate(DaangnProductVO vo, HttpServletRequest request, List<MultipartFile> fileList)throws Exception;
+
+	//int productUpdate(DaangnProductVO vo);
+	
+	//ArrayList<DaangnProductVO> getSearch(String keyword);
+
+	ArrayList<DaangnJusoVO> getSido();
+
+	ArrayList<DaangnJusoVO> getSigungu(String sido);
+
+	ArrayList<DaangnJusoVO> getHname(String sigungu);
+
+	DaangnProductVO getSaleProductData(String pid);
+
+	ArrayList<DaangnMemberVO> getChatList(String pid, String rid);
+
+	boolean getSalesReview(DaangnReviewVO vo);
+
+	int getProductFileDelete(String pid);
+}

@@ -1,0 +1,251 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//Dth HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dth">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>당근마켓 - 우리 동네 중고 직거래 마켓</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:9000/daangn/resources/css/index.css">
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:9000/daangn/resources/css/admin.css">
+<link rel="stylesheet" type="text/css" 
+	href="http://localhost:9000/daangn/resources/css/am-pagination.css">
+<script src="http://localhost:9000/daangn/resources/js/jquery-3.3.1.min.js"></script>
+<script src="http://localhost:9000/daangn/resources/js/am-pagination.js"></script>
+<script>
+	function openForm(){
+		document.getElementById("member_modal").style.display="block";
+	}
+
+	function closeForm(){
+		document.getElementById("member_modal").style.display="none";
+	}
+ 	window.onclick = function(event){
+		if(event.target == document.getElementById("member_modal")){
+			document.getElementById("member_modal").style.display="none";
+			document.getElementById("ampaginationsm").style.display="block";
+		}
+	} 
+ 
+	
+	$(document).ready(function(){
+		var pager = jQuery('#ampaginationsm').pagination({
+			
+		    maxSize:7,	    		// max page size
+		    totals: '${dbCount}',	// total pages	
+		    page: '${rpage}',		// initial page		
+		    pageSize: '${pageSize}',	// max number items per page
+		
+		    // custom labels		
+		    lastText: '&raquo;&raquo;', 		
+		    firstText: '&laquo;&laquo;',		
+		    prevText: '&laquo;',		
+		    nextText: '&raquo;',
+				     
+		    btnSize:'sm'	// 'sm'  or 'lg'		
+		});
+		
+			jQuery('#ampaginationsm').on('am.pagination.change',function(e){
+				   jQuery('.showlabelsm').text('The selected page no: '+e.page);
+		           $(location).attr('href', "http://localhost:9000/daangn/admin_member.carrot?rpage="+e.page);
+
+	    });
+		
+		$(".admin_member_name").on('click',function(){
+			
+			$("#ampaginationsm").attr("style","display:none");
+			
+			var id= $(this).attr("id");
+			
+		  $.ajax({
+					url: "adminMemberContent.carrot",
+					type: "get",
+					data: "id="+id,
+					success:function(data){
+				
+						var jsonObj = JSON.parse(data);
+						
+						
+						$('input[name=name]').val(jsonObj.name);
+						$('input[name=id]').val(jsonObj.id);
+						$('input[name=nick]').val(jsonObj.nick);
+						$('input[name=email]').val(jsonObj.email);
+						
+						if(jsonObj.gender == "남자"){
+							$("input:radio[name='gender']:radio[value='남자']").attr("checked",true)
+						}else if(jsonObj.gender == "여자"){
+							$("input:radio[name='gender']:radio[value='여자']").attr("checked",true)
+						} 
+						
+						$('input[name=phone]').val(jsonObj.phone);
+						$('input[name=adate]').val(jsonObj.mdate); 
+						
+						/*  $("#btn_warn").attr("href","http://localhost:9000/daangn/warning_proc.carrot?id="+jsonObj.id); */
+						$("#warn_count").text("("+jsonObj.warn+"/3)");  
+						
+					/* $("#mail_a").attr("href","http://localhost:9000/daangn/mailForm.carrot?email="+jsonObj.email); */
+				
+	/* 					 $.ajax({
+								url: "mailForm.carrot",
+								type: "POST",
+								data: "mail="+jsonObj.email,
+								success:function(data){
+									if(data){
+										window.location.href='http://localhost:9000/daangn/mailForm.carrot';
+									}
+								}
+								  
+							}); */
+							
+							/*   $(".button_black").attr("onclick","mailForm("+jsonObj.email+");");   */
+
+						 $(".button_black").on("click", function(){
+
+							 mailForm(jsonObj.email)
+							
+						}); 
+						
+
+				}//function
+				  
+			});//ajax
+			
+		});//member name
+	
+		
+			 $(".button_warning").on('click',function(){
+				
+					 var id = $('input[name=id]').val();
+					 var count = $("#warn_count").text().substr(1,1);  
+					 
+					 if(count < 3 ){
+						
+							$.ajax({
+								url: "warning_proc.carrot",
+								type: "get",
+								data: "id="+id,
+								success:function(data){
+								
+									 $("#warn_count").text("("+data+"/3)"); 
+							
+								}
+							}); 
+							
+							return false;
+							
+					 }else if(count == 3){
+						 $(".button_warning").prop("disabled",true);  
+					 }
+			});//warning button
+	
+		 $(".close").on('click',function(){
+			 $("#ampaginationsm").attr("style","display:block");
+		 });
+		
+	});//end of function
+	
+	function mailForm(email){
+		var form = document.createElement('form');
+		var objs;
+		objs = document.createElement('input');
+		objs.setAttribute('type', 'hidden');
+		objs.setAttribute('name', 'mail');
+		objs.setAttribute('value', email);
+		form.appendChild(objs);
+		form.setAttribute('method', 'post');
+		form.setAttribute('action', "mailForm.carrot");
+		document.body.appendChild(form);
+		form.submit();
+	}//mailForm function	
+	
+</script>
+</head>
+<body>
+	<%-- <c:import url="http://localhost:9000/daangn/header.carrot" /> --%>
+	<div class="admin">
+	<div class="admin_h2">
+	
+		<h2 id="admin_span_member">관리자 페이지</h2>
+		<div class="admin_line_member"></div>	
+	</div>
+
+	<br>
+	<span class="tit_sub">회원관리</span>
+	
+	<div>
+		<table class="admin_member_table">
+			<tr class="admin_member_tr">
+				<th class="admin_member_th">번호</th>
+				<th class="admin_member_th_name">이름</th>
+				<th class="admin_member_th_id">아이디</th>
+				<th class="admin_member_th_nick">닉네임</th>
+				<th class="admin_member_th_date">가입날짜</th>
+			</tr>
+			
+			<c:forEach var="vo" items="${list}">
+			<tr class="admin_member_tr">
+				<td>${vo.rno}</td>
+				<td><a href="#" id="${vo.id}" class="admin_member_name" onclick="openForm()">${vo.name}</a></td>
+				<td>${vo.id}</td>
+				<td>${vo.nick}</td>
+				<td>${vo.mdate}</td>
+			</tr>
+			</c:forEach>
+		</table>
+		<div id="ampaginationsm"></div>
+		
+		<div class="admin_member_pop" id="member_modal">
+			
+			<div class="modal_content_admin_member">
+			<span class="close" onclick="closeForm()">&times;</span>
+			<h3>회원정보</h3>
+			
+				<ul>
+					<li><label >이름</label><input type="text" name="name"  disabled/></li>
+					<li><label>아이디</label><input type="text" name="id" disabled /></li>
+					<li><label>닉네임</label><input type="text" name="nick" disabled/></li>
+					<li><label>이메일</label><input type="text" name="email" disabled/></li>
+					<li ><label >성별 </label>
+					남자<input type="radio" name="gender" value="남자" style="width:40px; height:15px;" disabled />
+					여자<input type="radio" name="gender"  value="여자" style="width:40px; height:15px;" disabled/>
+					</li>
+					<li><label>휴대폰</label><input type="text" name="phone" disabled></li>
+					<li><label>가입날짜</label><input type="text" name="adate" disabled ></li>
+					
+					<li class="blackList">
+					<label >블랙리스트 
+					<img src="http://localhost:9000/daangn/resources/images/blackList.png"> </label>
+					<span class="warning_count" style="margin-right:7px;">누적경고 횟수</span><p style="display:inline-block;" id="warn_count"></p>
+					
+					</li>
+					
+					<li>
+ 					<button type="button" class="button_warning" style="vertical-align:middle"><span>WARNING</span></button>
+ 				
+					
+					
+				 <!-- <a href="http://localhost:9000/daangn/mailForm.carrot" id="mail_a">   -->
+					<button type="button" class="button_black" style="vertical-align:middle; background-color:#b30000;"><span>EMAIL</span></button>
+				<!-- </a>  -->
+				
+				
+					
+					
+					</li>
+					
+				</ul>
+			</div>
+		</div>	
+	</div>
+	<div class="admin_member_div">
+		<a href="http://localhost:9000/daangn/admin.carrot"><button
+				type="button" id="admin_member_btn1">이전 페이지</button></a> <a
+			href="http://localhost:9000/daangn/index.carrot"><button
+				type="button" id="admin_member_btn2">홈으로</button></a>
+	</div>
+	</div>
+	<%-- <c:import url="http://localhost:9000/daangn/footer.carrot" /> --%>
+</body>
+</html>

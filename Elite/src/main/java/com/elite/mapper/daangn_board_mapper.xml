@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+	<select id="board_content" parameterType="java.lang.String" resultType="com.elite.vo.DaangnProductVO">
+		select p.pid, p.id, pcate, ptitle, ptype, to_char(pprice,'999,999,999,999') pprice, pcontent, mfile, omfile,
+		(select floor(sysdate -(select pdate from daangn_product where pid=#{pid}))pdate from dual) pdate, 
+		pstate, phits, name, address, count(cid) cart, count(mid) msg
+		from daangn_product p, daangn_member m, daangn_cart c, daangn_message msg
+		where p.id=m.id and p.pid = c.pid(+) and p.pid = msg.pid(+) and p.pid=#{pid}
+		group by p.pid, p.id, pcate, ptitle, ptype, pprice, pcontent, pdate, pstate, phits, name, address, mfile, omfile
+	</select>
+
+	<select id="board_content2" parameterType="map" resultType="int">
+		select count(cid) from daangn_cart where pid=#{pid} and id=#{id}
+	</select>
+
+	<update id="hits_update" parameterType="java.lang.String">
+		update daangn_product set phits = phits +1 where pid = #{pid}
+	</update>
+	
+	<select id="product_list" resultType="com.elite.vo.DaangnProductVO">
+		select * from(
+		select p.pid, p.id, pcate, ptitle, ptype, to_char(pprice,'999,999,999,999') pprice, pcontent, pdate, pstate, phits, address, count(c.cid) cart, count(msg.mid) msg
+		from daangn_product p, daangn_cart c, daangn_member m, daangn_message msg
+		where p.pid=c.pid(+) and p.id = m.id and p.pid = msg.pid(+)
+		group by p.pid, p.id, pcate, ptitle, ptype, pprice, pcontent, pdate, pstate, phits, address
+		)order by cart desc
+	</select>
+	
+	<select id="chat_list" parameterType="map" resultType="com.elite.vo.DaangnChatVO">
+		<choose>
+			<when test="id != sid">
+				select * from
+				(select * from
+				(select mid, id, pid, message, to_char(mdate, 'yyyy.mm.dd hh24:mm') mdate, rid from daangn_message where pid=#{pid} and id=#{id} or id=#{sid})
+				where rid=#{id} or rid=#{sid})
+				order by mid
+			</when>
+			<otherwise>
+				select * from
+				(select * from
+				(select mid, id, pid, message, to_char(mdate, 'yyyy.mm.dd hh24:mm') mdate, rid from daangn_message where pid=#{pid} and id=#{id} or id=#{rid})
+				where rid=#{id} or rid=#{rid})
+				order by mid
+			</otherwise>
+		</choose>
+	</select>	
+	
+	<insert id="insert_chat" parameterType="map">
+		<choose>
+			<when test="id != sid">
+				insert into daangn_message(mid, id, pid, rid, message, mdate) values(sequ_daangn_message.nextval, #{id}, #{pid}, #{sid}, #{message}, sysdate)
+			</when>
+			<otherwise>
+				insert into daangn_message(mid, id, pid, rid, message, mdate) values(sequ_daangn_message.nextval, #{id}, #{pid}, #{rid}, #{message}, sysdate)
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<select id="chat_member_list" parameterType="java.lang.String" resultType="com.elite.vo.DaangnChatVO">
+		select distinct id from daangn_message where pid=#{pid}
+	</select>
+	
+</mapper>

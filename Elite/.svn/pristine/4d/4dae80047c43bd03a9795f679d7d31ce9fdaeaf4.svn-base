@@ -1,0 +1,283 @@
+package com.elite.daangn;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.elite.service.MemberService;
+import com.elite.service.NoticeService;
+import com.elite.service.PageService;
+import com.elite.vo.DaangnAnswerVO;
+import com.elite.vo.DaangnMemberVO;
+import com.elite.vo.DaangnNoticeVO;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+@Controller
+public class AdminController {
+	
+		@Resource(name="memberService")
+		private MemberService memberService;
+		@Resource(name="noticeService")
+		private NoticeService noticeService;
+		@Resource(name="pageService")
+		private PageService pageService;
+		
+		 @Autowired
+		  private JavaMailSender mailSender;	
+	
+	
+	@RequestMapping(value="/admin.carrot",method=RequestMethod.GET )
+	public String admin(){
+		return "/admin/admin";
+	}
+	
+	//회원정보 리스트
+	@RequestMapping(value="/admin_member.carrot",method=RequestMethod.GET )
+	public ModelAndView admin_member(String rpage){
+		ModelAndView mv= new ModelAndView();
+		String countName = "member";
+		
+		ArrayList<DaangnMemberVO> list= 
+				(ArrayList<DaangnMemberVO>)pageService.getPageList(rpage,"member").get("list");
+				/*(ArrayList<DaangnMemberVO>)memberService.getTotalList();*/
+		
+		mv.addObject("list",list);
+		mv.addObject("dbCount",pageService.getDbCount());
+		mv.addObject("pageSize",pageService.getPageSize());
+		mv.addObject("rpage",pageService.getReqPage());
+		mv.setViewName("/admin/admin_member");
+	
+		return mv;
+	}
+	//회원관리 상세
+	@RequestMapping(value="/adminMemberContent.carrot",method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String adminMemberContent(String id){
+		
+		Gson gson=new GsonBuilder().create();
+		
+		String json ="";
+		
+		DaangnMemberVO vo = memberService.getMemberContent(id);
+		
+		json=gson.toJson(vo);
+
+		return json;
+	}
+	//블랙리스트 경고 주혀니 바보
+	@RequestMapping(value="/warning_proc.carrot",method=RequestMethod.GET )
+	@ResponseBody
+	public String warning(String id){
+		memberService.getMemberWarn(id);
+		DaangnMemberVO vo = memberService.getMemberContent(id);
+		return String.valueOf(vo.getWarn());
+	}
+	
+	
+	//admin_notice_list
+	@RequestMapping(value="/admin_notice.carrot",method=RequestMethod.GET )
+	public ModelAndView admin_notice(String rpage){
+		ModelAndView mv= new ModelAndView();
+		String countName = "notice";
+	
+		ArrayList<DaangnNoticeVO>list=
+				(ArrayList<DaangnNoticeVO>)pageService.getPageList(rpage, "notice").get("list");
+		mv.addObject("list",list);
+		mv.addObject("dbCount",pageService.getDbCount());
+		mv.addObject("pageSize",pageService.getPageSize());
+		mv.addObject("rpage",pageService.getReqPage());
+		mv.setViewName("/admin/admin_notice");		
+		return mv;
+	}
+
+	//admin_notice_wirte_insert
+	@RequestMapping(value="/admin_notice_write_proc.carrot",method=RequestMethod.POST )
+	public ModelAndView admin_notice_proc(DaangnNoticeVO vo,HttpServletRequest request) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		boolean result = noticeService.getInsertResult(vo,request);
+		
+		if(result){
+			mv.setViewName("redirect:/admin_notice.carrot");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin_notice_content.carrot",method=RequestMethod.GET )
+	public ModelAndView admin_notice_content(String nid, String rno, String rpage){
+		ModelAndView mv = new ModelAndView();
+		DaangnNoticeVO vo= new DaangnNoticeVO();
+		
+		ArrayList<DaangnNoticeVO>list= (ArrayList<DaangnNoticeVO>)noticeService.noticeTotalListPre(nid);
+		
+		mv.addObject("vo",noticeService.getAdminContent(nid));
+		mv.addObject("nid",nid);
+		mv.addObject("rno",rno);
+		mv.addObject("list",list);
+		mv.addObject("rpage", rpage);
+		mv.setViewName("/admin/admin_notice_content");
+		return mv;
+	}
+	
+
+	@RequestMapping(value="/admin_notice_content_update_proc.carrot",method=RequestMethod.POST )
+	public ModelAndView admin_notice_content_update(DaangnNoticeVO vo,HttpServletRequest request) throws Exception{
+		ModelAndView mv= new ModelAndView();
+		
+		boolean result = noticeService.getAdminNoticeUpdate(vo,request);
+		
+		if(result){
+			mv.addObject("nid",vo.getNid());
+			mv.addObject("rno",vo.getRno());
+			
+			mv.setViewName("redirect:/admin_notice_content.carrot");
+		}
+		return mv;
+	}
+	@RequestMapping(value="/admin_notice_delete_proc.carrot")
+		public ModelAndView admin_notice_delete(String nid,String rno){
+			ModelAndView mv=new ModelAndView();
+			 
+			boolean result = noticeService.getAdminNoticeDelete(nid);
+			if(result){
+				mv.setViewName("redirect:/admin_notice.carrot");
+			}
+			
+		
+		return mv;
+	}
+	
+	
+	
+	@RequestMapping(value="admin_notice_check_delete.carrot")
+	public ModelAndView admin_notice_check_delete(String chkList){
+		ModelAndView mv = new ModelAndView();
+		
+		StringTokenizer st = new StringTokenizer(chkList,",");
+		
+		String[] stArray = new String[st.countTokens()];
+		for(int i=0; i<stArray.length;i++){
+			stArray[i]=st.nextToken();
+		}
+		boolean result=noticeService.getCheckDelete(stArray);
+		 if(result){
+			 mv.setViewName("redirect:/admin_notice.carrot");
+		 }
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="/admin_answer.carrot",method=RequestMethod.GET )
+	public ModelAndView admin_answer(String rpage){
+		ModelAndView mv = new ModelAndView();
+		String countName = "answer";
+		
+		ArrayList<DaangnAnswerVO> list = (ArrayList<DaangnAnswerVO>)pageService.getPageList(rpage, "answer").get("list");
+		
+		mv.addObject("list", list);
+		mv.addObject("dbCount",pageService.getDbCount());
+		mv.addObject("pageSize",pageService.getPageSize());
+		mv.addObject("rpage",pageService.getReqPage());
+		mv.setViewName("/admin/admin_answer");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin_answer_proc.carrot", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String admin_answer_proc(String aid){
+		
+		Gson gson = new GsonBuilder().create();
+		String json = "";
+		DaangnAnswerVO vo = noticeService.getAnswerContent(aid);
+		json = gson.toJson(vo);
+		/*System.out.println(json.toString());*/
+		return json;
+	}
+	
+	@RequestMapping(value="/admin_answer_return.carrot",method=RequestMethod.GET )
+	public ModelAndView admin_answer_return(String aid, String rpage){
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("vo",noticeService.getAnswerContent(aid));
+		mv.addObject("rpage", rpage);
+		mv.setViewName("/admin/admin_answer_return");
+		return mv;
+	}
+	
+	@RequestMapping(value="/admin_answer_return_proc.carrot", method=RequestMethod.POST)
+	public String admin_answer_return_proc(DaangnAnswerVO vo){
+		boolean result = false;
+		String page = "";
+		result = noticeService.getReturnQuestion(vo);
+		
+		if(result){
+			page = "redirect:/admin_answer.carrot";
+		}
+		
+		return page;
+	}
+	
+	@RequestMapping(value="/mailForm.carrot",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView mailForm (@RequestParam("mail") String mail){
+		ModelAndView mv = new ModelAndView();
+		/*System.out.println(mail);*/
+		mv.addObject("mail",mail);
+		mv.setViewName("/mailForm");
+		
+		return mv;
+	}
+	
+	 @RequestMapping(value = "/mailSending.carrot",method=RequestMethod.POST)
+	  public String mailSending (HttpServletRequest request ) {
+		 
+		 
+	    String setfrom = "daangn3333@gmail.com";         
+	    String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
+	    String title  = request.getParameter("title");      // 제목
+	    String content = request.getParameter("content");    // 내용
+	   
+	    try {
+	      MimeMessage message = mailSender.createMimeMessage();
+	      
+	      MimeMessageHelper messageHelper 
+	                        = new MimeMessageHelper(message, true, "UTF-8");
+	     
+	      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+	      messageHelper.setTo(tomail);     // 받는사람 이메일
+	      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	      messageHelper.setText(content);  // 메일 내용
+	      
+	     System.out.println(tomail);
+	     System.out.println(title);
+	     System.out.println(content);
+	     
+	      mailSender.send(message);
+	    } catch(Exception e){
+	      System.out.println(e);
+	    }
+	   
+	    return "redirect:/admin_member.carrot";
+	  }
+	 
+	
+	
+}
+
+
+
+

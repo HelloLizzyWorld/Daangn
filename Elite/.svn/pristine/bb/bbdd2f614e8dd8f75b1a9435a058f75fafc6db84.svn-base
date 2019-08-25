@@ -1,0 +1,70 @@
+div.board_content_header{
+	padding-top : 30px;
+}
+div.board_img_div{
+	width : 677px;
+	height : 500px;
+	margin : auto;
+}
+
+div.board_img_div img.mySlides{
+	display:none;
+	width : 677px;
+	height : 500px;
+	border-radius : 8px;
+	/* transform: translate(-50%, -50%); */
+}
+div.board_img_div img.mySlides:nth-child(1){
+	display : block;
+}
+div.board_img_div button.btn_slide_left{
+	position : relative;
+	bottom : 270px;
+	opacity: 0.1;
+}
+div.board_img_div button.btn_slide_right{
+	position : relative;
+	bottom: 270px;
+	left: 595px;
+	opacity: 0.1;
+}
+div.board_img_div button.btn_slide_left:hover, div.board_img_div button.btn_slide_right:hover{
+	opacity: 0.7;
+}
+p.board_dot_p{
+	position: relative;
+   	bottom: 65px;
+}
+p.board_dot_p span.board_img_dot {
+	cursor: pointer;
+	height: 8px;
+	width: 8px;
+	margin: 0 2px;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+	border : 1px solid white;
+	
+}
+p.board_dot_p span.board_img_dot.active, p.board_dot_p span.board_img_dot:hover {
+	background-color: white;
+	border : 1px solid white;
+}
+div#chatting_div button#btn_chatting{
+	position : relative;
+	left : 590px;
+	border: 1px solid #404040;
+	background-color: #404040;
+	color: white;
+	width: 90px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 11pt;
+}
+div#chatting_div button#btn_chatting:hover{
+	background-color:#f76707;
+	border:1px solid #f76707;
+}
+#content{
+	margin-top : 50px;
+}

@@ -1,0 +1,1585 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>당근마켓 - 우리 동네 중고 직거래 마켓</title>
+<link rel="stylesheet" type="text/css"
+	href="http://211.63.89.225:9000/daangn/resources/css/index.css">
+<link rel="stylesheet" type="text/css"
+	href="http://211.63.89.225:9000/daangn/resources/css/board.css">
+
+</head>
+<body>
+
+	<%-- <c:import url="http://211.63.89.225:9000/daangn/header.carrot" /> --%>
+
+
+	<section id="content">
+	<h1 class="head-title" id="hot-articles-head-title">인기 중고 매물</h1>
+	<div class="title-line-divider"></div>
+
+	<nav id="hot-articles-navigation"> <select name="region1"
+		id="region1" onchange="changeRegion(&#39;r1&#39;, this.value)"
+		class="hot-articles-nav-select"><option value="">지역을
+			선택하세요</option>
+		<option value="서울특별시">서울특별시</option>
+		<option value="부산광역시">부산광역시</option>
+		<option value="대구광역시">대구광역시</option>
+		<option value="인천광역시">인천광역시</option>
+		<option value="광주광역시">광주광역시</option>
+		<option value="대전광역시">대전광역시</option>
+		<option value="울산광역시">울산광역시</option>
+		<option value="세종특별자치시">세종특별자치시</option>
+		<option value="경기도">경기도</option>
+		<option value="강원도">강원도</option>
+		<option value="충청북도">충청북도</option>
+		<option value="충청남도">충청남도</option>
+		<option value="전라북도">전라북도</option>
+		<option value="전라남도">전라남도</option>
+		<option value="경상북도">경상북도</option>
+		<option value="경상남도">경상남도</option>
+		<option value="제주특별자치도">제주특별자치도</option></select> <select name="region2"
+		id="region2" disabled="disabled"
+		onchange="changeRegion(&#39;r2&#39;, this.value)"
+		class="hot-articles-nav-select"><option value="">동네를
+			선택하세요</option>
+		<option value="서울특별시">서울특별시</option>
+		<option value="부산광역시">부산광역시</option>
+		<option value="대구광역시">대구광역시</option>
+		<option value="인천광역시">인천광역시</option>
+		<option value="광주광역시">광주광역시</option>
+		<option value="대전광역시">대전광역시</option>
+		<option value="울산광역시">울산광역시</option>
+		<option value="세종특별자치시">세종특별자치시</option>
+		<option value="경기도">경기도</option>
+		<option value="강원도">강원도</option>
+		<option value="충청북도">충청북도</option>
+		<option value="충청남도">충청남도</option>
+		<option value="전라북도">전라북도</option>
+		<option value="전라남도">전라남도</option>
+		<option value="경상북도">경상북도</option>
+		<option value="경상남도">경상남도</option>
+		<option value="제주특별자치도">제주특별자치도</option></select> </nav> <section class="cards-wrap">
+	<article class="card-top "> <a class="card-link "
+		data-event-label="26016645"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="비전냄비세트"
+				src="http://211.63.89.225:9000/daangn/resources/images//7f8624104f19d6285e36fb8ccb1f79bcdbb2afbcb70216584994d2ebd09296ab.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">비전냄비세트</h2>
+			<div class="card-region-name">서울 영등포구 영등포동7가</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 14 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 33 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25814395"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="코치가방 팔아요"
+				src="http://211.63.89.225:9000/daangn/resources/images//FF154B459C31FD7DE9CFC517F0B31F67F5E7107CCCA34C3284BD52A2601E59ED.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">코치가방 팔아요</h2>
+			<div class="card-region-name">서울 영등포구 당산동1가</div>
+			<div class="card-price ">50,000원</div>
+			<div class="card-counts">
+				<span> 관심 68 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 108 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26024815"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="무료나눔) 테이블/의자"
+				src="http://211.63.89.225:9000/daangn/resources/images//54C8D8D31174A2C40459958117DFDBF185E56937FB5759030F5BB03470ED3F89.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">무료나눔) 테이블/의자</h2>
+			<div class="card-region-name">서울 동작구 상도제3동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 6 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 18 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26028105"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="냉장고와 세탁기 팝니다."
+				src="http://211.63.89.225:9000/daangn/resources/images//548c58de1b2eb799017184993b82cbf0f849b2b89f62b37a0214621b12d3328d.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">냉장고와 세탁기 팝니다.</h2>
+			<div class="card-region-name">제주 제주시 노형동</div>
+			<div class="card-price blank-price">-</div>
+			<div class="card-counts">
+				<span> 관심 1 </span> ∙ <span> 댓글 1 </span> ∙ <span> 채팅 17 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26042471"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="책장"
+				src="http://211.63.89.225:9000/daangn/resources/images//8E5C12E1C054FEA1E60B896BFED3978DC2BCBD073B20B452931D7BAC852D7FD5.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">책장</h2>
+			<div class="card-region-name">경기도 화성시 병점2동</div>
+			<div class="card-price ">15,000원</div>
+			<div class="card-counts">
+				<span> 관심 14 </span> ∙ <span> 댓글 1 </span> ∙ <span> 채팅 16 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26022786"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="가방"
+				src="http://211.63.89.225:9000/daangn/resources/images//1b8cb861901264049ad650d0fa529110afc85c725dbafa725e331138258748f9.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">가방</h2>
+			<div class="card-region-name">서울 서초구 서초3동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 17 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26031899"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="테이블, 의자 필요하신 분 가져가세요."
+				src="http://211.63.89.225:9000/daangn/resources/images//628f64021dfe25e07d0d21362bf17680f5530f65c8ba31b60b398fad47f072fa.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">테이블, 의자 필요하신 분 가져가세요.</h2>
+			<div class="card-region-name">제주 제주시 조천읍</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 2 </span> ∙ <span> 채팅 15 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26039413"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="LG 32인치 TV 32LJ561C 팝니다"
+				src="http://211.63.89.225:9000/daangn/resources/images//760c5f281602efc2972764f6a226fa75633ba808d9a8a61af8dcd08e62df198d.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">LG 32인치 TV 32LJ561C 팝니다</h2>
+			<div class="card-region-name">경기도 수원시 영통구 영통1동</div>
+			<div class="card-price ">200,000원</div>
+			<div class="card-counts">
+				<span> 관심 4 </span> ∙ <span> 댓글 1 </span> ∙ <span> 채팅 15 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25867658"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="구피와 청소물고기 어항과함께 드립니다"
+				src="http://211.63.89.225:9000/daangn/resources/images//e2c8801f1c91bd8ab0a4c11b9b3ed29fda24cfdb336121307d1bdedbdb335311.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">구피와 청소물고기 어항과함께 드립니다</h2>
+			<div class="card-region-name">서울 강남구 대치1동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 37 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 96 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26013315"
+		href="http://211.63.89.225:9000/daangn/board_content.carrot">
+		<div class="card-photo">
+			<img alt="하자없는 책상 무료로 가져가실 분"
+				src="http://211.63.89.225:9000/daangn/resources/images//3300712EFE31A1675FC381019594E88FD802B08EDB1599C84A47BCC09854FB35.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">하자없는 책상 무료로 가져가실 분</h2>
+			<div class="card-region-name">서울 관악구 신원동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 24 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 27 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26010304"
+		href="https://www.daangn.com/articles/26010304">
+		<div class="card-photo">
+			<img alt="식탁 팝니다 "
+				src="http://211.63.89.225:9000/daangn/resources/images//AFEEC0A73CADA518738B870B2EBC773171D6700CF477A6296640901F84DBCBD9.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">식탁 팝니다</h2>
+			<div class="card-region-name">경기도 광주시 오포읍</div>
+			<div class="card-price ">20,000원</div>
+			<div class="card-counts">
+				<span> 관심 48 </span> ∙ <span> 댓글 2 </span> ∙ <span> 채팅 29 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26030951"
+		href="https://www.daangn.com/articles/26030951">
+		<div class="card-photo">
+			<img alt="닥스 정품 가죽숄더백"
+				src="http://211.63.89.225:9000/daangn/resources/images//ed4728ee3d094074487439409bd6338731f7e17a64bcd36ebf7a4c652cd5a3ea.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">닥스 정품 가죽숄더백</h2>
+			<div class="card-region-name">경기도 시흥시 배곧동</div>
+			<div class="card-price ">15,000원</div>
+			<div class="card-counts">
+				<span> 관심 10 </span> ∙ <span> 댓글 2 </span> ∙ <span> 채팅 18 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26037105"
+		href="https://www.daangn.com/articles/26037105">
+		<div class="card-photo">
+			<img alt="이케아철제선반"
+				src="http://211.63.89.225:9000/daangn/resources/images//04BD7958BFED20206666F9FDD9D9E88BEE49B03D429C9F6580AFF1A64BDD5A64.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">이케아철제선반</h2>
+			<div class="card-region-name">강원도 강릉시 교동</div>
+			<div class="card-price ">5,000원</div>
+			<div class="card-counts">
+				<span> 관심 6 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 14 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25563714"
+		href="https://www.daangn.com/articles/25563714">
+		<div class="card-photo">
+			<img alt="식탁판매합니다~"
+				src="http://211.63.89.225:9000/daangn/resources/images//2E609A8805D159214F5B5694DAF0E527AAD3C4B3978526ADDA0A5739CFA46670.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">식탁판매합니다~</h2>
+			<div class="card-region-name">경기도 수원시 영통구 광교2동</div>
+			<div class="card-price ">9,000원</div>
+			<div class="card-counts">
+				<span> 관심 16 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 23 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26033011"
+		href="https://www.daangn.com/articles/26033011">
+		<div class="card-photo">
+			<img alt="버버리 여성시계 "
+				src="http://211.63.89.225:9000/daangn/resources/images//B2E01D230E9A088A7977A59FBA3759BD560A37A7ED79CA9AE9332A9F91ABA831.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">버버리 여성시계</h2>
+			<div class="card-region-name">경기도 용인시 기흥구 신갈동</div>
+			<div class="card-price ">40,000원</div>
+			<div class="card-counts">
+				<span> 관심 15 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 14 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26025070"
+		href="https://www.daangn.com/articles/26025070">
+		<div class="card-photo">
+			<img alt="모니터2개"
+				src="http://211.63.89.225:9000/daangn/resources/images//3d894190b8aad1df7117f948f3a7d4674df73ff695e0c0623abed3abb4d63a9a.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">모니터2개</h2>
+			<div class="card-region-name">전남 여수시 시전동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 1 </span> ∙ <span> 댓글 1 </span> ∙ <span> 채팅 17 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26021895"
+		href="https://www.daangn.com/articles/26021895">
+		<div class="card-photo">
+			<img alt="선반"
+				src="http://211.63.89.225:9000/daangn/resources/images//df8db2df34adfcd0855b3164d06e7aebc1d5ccfb3e7f345de7b8045c6feb6e1c.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">선반</h2>
+			<div class="card-region-name">경기도 용인시 수지구 동천동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 4 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 15 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26035365"
+		href="https://www.daangn.com/articles/26035365">
+		<div class="card-photo">
+			<img alt="현미쌀"
+				src="http://211.63.89.225:9000/daangn/resources/images//f363013cc658a4a8395a9eede412669936d515cf1085274945d81cb90e71dacb.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">현미쌀</h2>
+			<div class="card-region-name">경기도 용인시 처인구 모현읍</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 14 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26031645"
+		href="https://www.daangn.com/articles/26031645">
+		<div class="card-photo">
+			<img alt="드립 팟, 드립 세트, 글라인더 등 커피도구"
+				src="http://211.63.89.225:9000/daangn/resources/images//635317f5cb29db3e609fcb0241ca4341d79ce70b885738a0818482037df0ca2e.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">드립 팟, 드립 세트, 글라인더 등 커피도구</h2>
+			<div class="card-region-name">경기도 고양시 일산서구 대화동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 7 </span> ∙ <span> 댓글 2 </span> ∙ <span> 채팅 14 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25673875"
+		href="https://www.daangn.com/articles/25673875">
+		<div class="card-photo">
+			<img alt="철제 책장"
+				src="http://211.63.89.225:9000/daangn/resources/images//A3C0CFA5A4575173E275EB5A7FB55510164F13A6D75DE04399525616522C62E9.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">철제 책장</h2>
+			<div class="card-region-name">전북 전주시 덕진구 금암1동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 56 </span> ∙ <span> 댓글 16 </span> ∙ <span> 채팅 76 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26047824"
+		href="https://www.daangn.com/articles/26047824">
+		<div class="card-photo">
+			<img alt="위닉스 제습기"
+				src="http://211.63.89.225:9000/daangn/resources/images//2D0775C71B1C549E0C9AFC77F1C47EB9E6B969CE0FB6B22FD1BD7A13C529C003.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">위닉스 제습기</h2>
+			<div class="card-region-name">제주 제주시 아라동</div>
+			<div class="card-price ">30,000원</div>
+			<div class="card-counts">
+				<span> 관심 1 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 12 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26026348"
+		href="https://www.daangn.com/articles/26026348">
+		<div class="card-photo">
+			<img alt="그릇 2세트 (세제품)"
+				src="http://211.63.89.225:9000/daangn/resources/images//3aec9a2bb7e3648a9b5842d8d9e4ee5c38c400dc5817e40f0d80daa7070f13b2.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">그릇 2세트 (세제품)</h2>
+			<div class="card-region-name">경기도 수원시 영통구 매탄3동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 2 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 14 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26023267"
+		href="https://www.daangn.com/articles/26023267">
+		<div class="card-photo">
+			<img alt="구스차렵이불"
+				src="http://211.63.89.225:9000/daangn/resources/images//601e8a8cdc378a5293128cb82f9ed3a30c352c36c591da3f1a75e124b2352fae.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">구스차렵이불</h2>
+			<div class="card-region-name">서울 서초구 서초3동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 13 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26019188"
+		href="https://www.daangn.com/articles/26019188">
+		<div class="card-photo">
+			<img alt="식탁의자 개당가격입니다"
+				src="http://211.63.89.225:9000/daangn/resources/images//2f5391cab80e654bfaf4d797a6f660545560288962df75d1bd598b32ca3e2dc0.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">식탁의자 개당가격입니다</h2>
+			<div class="card-region-name">강원도 원주시 단계동</div>
+			<div class="card-price ">7,000원</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 14 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26028522"
+		href="https://www.daangn.com/articles/26028522">
+		<div class="card-photo">
+			<img alt="티비 LG 48인치"
+				src="http://211.63.89.225:9000/daangn/resources/images//62da1f634df60c5c63a53b26dafe0a09aa712c633d8bad1dba62948758dd4c7f.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">티비 LG 48인치</h2>
+			<div class="card-region-name">대구 북구 침산동</div>
+			<div class="card-price ">100,000원</div>
+			<div class="card-counts">
+				<span> 관심 11 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 14 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26019657"
+		href="https://www.daangn.com/articles/26019657">
+		<div class="card-photo">
+			<img alt="정품 영제버버리."
+				src="http://211.63.89.225:9000/daangn/resources/images//b866ad7030015d6dfe8aa3be3db24559f7280df29dbe65dc29f5d7c05aff6f2e.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">정품 영제버버리.</h2>
+			<div class="card-region-name">경기도 고양시 덕양구 주교동</div>
+			<div class="card-price ">50,000원</div>
+			<div class="card-counts">
+				<span> 관심 7 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 14 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26040737"
+		href="https://www.daangn.com/articles/26040737">
+		<div class="card-photo">
+			<img alt="2인용쇼파"
+				src="http://211.63.89.225:9000/daangn/resources/images//d59805d621d26a602a59a8b5bdfa4c9ba27696f493e19efc2e73f3961d35dc98.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">2인용쇼파</h2>
+			<div class="card-region-name">제주 제주시 오라이동</div>
+			<div class="card-price ">40,000원</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 3 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26039297"
+		href="https://www.daangn.com/articles/26039297">
+		<div class="card-photo">
+			<img alt="에몬스 렌지대"
+				src="http://211.63.89.225:9000/daangn/resources/images//DAED9599691E8CA6BEA9297C66EA88432BBA769BC6C715CDD2A38FBC6ACC4992.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">에몬스 렌지대</h2>
+			<div class="card-region-name">경기도 성남시 분당구 이매1동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 8 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 12 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26039058"
+		href="https://www.daangn.com/articles/26039058">
+		<div class="card-photo">
+			<img alt="냉온풍기 "
+				src="http://211.63.89.225:9000/daangn/resources/images//9737014C2A1ED12D52D34057534A85E25882F23AF8B46FFC230FD685F844203E.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">냉온풍기</h2>
+			<div class="card-region-name">광주 광산구 신창동</div>
+			<div class="card-price blank-price">-</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 12 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26020899"
+		href="https://www.daangn.com/articles/26020899">
+		<div class="card-photo">
+			<img alt="구찌 선글라스(정품)"
+				src="http://211.63.89.225:9000/daangn/resources/images//5d4f0f4a319b911508d9781f3cc54bbe12caf57af653235970b8ec7ecde1b5b0.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">구찌 선글라스(정품)</h2>
+			<div class="card-region-name">경기도 광주시 오포읍</div>
+			<div class="card-price ">40,000원</div>
+			<div class="card-counts">
+				<span> 관심 14 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 13 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26046507"
+		href="https://www.daangn.com/articles/26046507">
+		<div class="card-photo">
+			<img alt="무료"
+				src="http://211.63.89.225:9000/daangn/resources/images//8886669e8244e89e16c46c6fbf92b75ea1c1e8b661818ba4d0b40cefb1af937d.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">무료</h2>
+			<div class="card-region-name">전남 목포시 옥암동</div>
+			<div class="card-price blank-price">-</div>
+			<div class="card-counts">
+				<span> 관심 2 </span> ∙ <span> 댓글 2 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26037446"
+		href="https://www.daangn.com/articles/26037446">
+		<div class="card-photo">
+			<img alt="화장대 겸 서랍장 무료나눔합니다."
+				src="http://211.63.89.225:9000/daangn/resources/images//504cb40a4fae4b61bfec99f8c8cae4f315b2941430cdf5a31b04577d5617afb6.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">화장대 겸 서랍장 무료나눔합니다.</h2>
+			<div class="card-region-name">제주 제주시 연동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 7 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26000750"
+		href="https://www.daangn.com/articles/26000750">
+		<div class="card-photo">
+			<img alt="아이폰용 이어폰"
+				src="http://211.63.89.225:9000/daangn/resources/images//FEA73839E63CF5D76963FC5D2BC57DDABE06EA62ECD9C23E958888713CD70952.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">아이폰용 이어폰</h2>
+			<div class="card-region-name">제주 제주시 연동</div>
+			<div class="card-price ">25,000원</div>
+			<div class="card-counts">
+				<span> 관심 4 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 22 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25714742"
+		href="https://www.daangn.com/articles/25714742">
+		<div class="card-photo">
+			<img alt="이사를 하게되어 가구 세탁기 무료나눔 합니다"
+				src="http://211.63.89.225:9000/daangn/resources/images//3b79f96bc65fd79d1ae729a9251a041670f397b8f8a1c5526fe936c62d36d45b.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">이사를 하게되어 가구 세탁기 무료나눔 합니다</h2>
+			<div class="card-region-name">서울 노원구 상계8동</div>
+			<div class="card-price blank-price">-</div>
+			<div class="card-counts">
+				<span> 관심 26 </span> ∙ <span> 댓글 4 </span> ∙ <span> 채팅 79 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25982741"
+		href="https://www.daangn.com/articles/25982741">
+		<div class="card-photo">
+			<img alt="무료"
+				src="http://211.63.89.225:9000/daangn/resources/images//5170f18d915078f1a10bf6678efac559664d696d2cd6f89edceb6df7ee979bdb.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">무료</h2>
+			<div class="card-region-name">인천 남동구 간석4동</div>
+			<div class="card-price blank-price">-</div>
+			<div class="card-counts">
+				<span> 관심 10 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 23 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26028204"
+		href="https://www.daangn.com/articles/26028204">
+		<div class="card-photo">
+			<img alt="가정용 미니 빔프로젝터"
+				src="http://211.63.89.225:9000/daangn/resources/images//BC58FBEF3F411649BAE732C471B076B0ED2A44B2049A728A1DD2F71F2C08DEDF.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">가정용 미니 빔프로젝터</h2>
+			<div class="card-region-name">제주 제주시 일도2동</div>
+			<div class="card-price ">20,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 12 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26026506"
+		href="https://www.daangn.com/articles/26026506">
+		<div class="card-photo">
+			<img alt="오쿠"
+				src="http://211.63.89.225:9000/daangn/resources/images//6e58f53e030de6c9f6d48b85cd82446970a2912032b0ab96967477ea97a8209a.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">오쿠</h2>
+			<div class="card-region-name">울산 울주군 범서읍</div>
+			<div class="card-price ">80,000원</div>
+			<div class="card-counts">
+				<span> 관심 8 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 12 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26016679"
+		href="https://www.daangn.com/articles/26016679">
+		<div class="card-photo">
+			<img alt="뚝배기2세트"
+				src="http://211.63.89.225:9000/daangn/resources/images//f38814060feba39438277ee6edde996d13e534fa3f70ba25463af1ba784e2ef1.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">뚝배기2세트</h2>
+			<div class="card-region-name">서울 영등포구 영등포동7가</div>
+			<div class="card-price ">5,000원</div>
+			<div class="card-counts">
+				<span> 관심 11 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 16 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26047970"
+		href="https://www.daangn.com/articles/26047970">
+		<div class="card-photo">
+			<img alt="여성플랫    슬립온"
+				src="http://211.63.89.225:9000/daangn/resources/images//679a08075cb78355631850af840e00601b5f42ab5d83917016879a723a3996fe.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">여성플랫 슬립온</h2>
+			<div class="card-region-name">대전 서구 둔산1동</div>
+			<div class="card-price ">5,000원</div>
+			<div class="card-counts">
+				<span> 관심 0 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 12 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25994944"
+		href="https://www.daangn.com/articles/25994944">
+		<div class="card-photo">
+			<img alt="삼성 제습기"
+				src="http://211.63.89.225:9000/daangn/resources/images//6833806a3339c26cdd9f5e7f403f5d9a2a768ec58857607a90fbdc008335545b.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">삼성 제습기</h2>
+			<div class="card-region-name">제주 제주시 도련일동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 20 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26033021"
+		href="https://www.daangn.com/articles/26033021">
+		<div class="card-photo">
+			<img alt="아들이 쓰는 컴 의자 나눔합니다"
+				src="http://211.63.89.225:9000/daangn/resources/images//24f0a88aa2ec11c272bc7f49e623b7111448140a6265b66d75af359789b9dd93.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">아들이 쓰는 컴 의자 나눔합니다</h2>
+			<div class="card-region-name">강원도 원주시 우산동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 0 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26020905"
+		href="https://www.daangn.com/articles/26020905">
+		<div class="card-photo">
+			<img alt="4단 수납 선반"
+				src="http://211.63.89.225:9000/daangn/resources/images//aee4579f8f8ab6d29574fc0620d1ec7c6230c9c2c042714f7a1e83c47f1ab2cf.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">4단 수납 선반</h2>
+			<div class="card-region-name">인천 부평구 산곡1동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 8 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26046334"
+		href="https://www.daangn.com/articles/26046334">
+		<div class="card-photo">
+			<img alt="고구마 싸게 드립니다"
+				src="http://211.63.89.225:9000/daangn/resources/images//0fa7a9af64783dbbbed30d67e4daa8b3599c89afa15f7b088337b0b2cbd2b4a8.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">고구마 싸게 드립니다</h2>
+			<div class="card-region-name">제주 제주시 노형동</div>
+			<div class="card-price ">30,000원</div>
+			<div class="card-counts">
+				<span> 관심 11 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26030973"
+		href="https://www.daangn.com/articles/26030973">
+		<div class="card-photo">
+			<img alt="협탁 "
+				src="http://211.63.89.225:9000/daangn/resources/images//3275BE1FAF4C6CF8E63DA45A8B468DF8B35F78872F03E276F4BF843BA45624D1.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">협탁</h2>
+			<div class="card-region-name">경기도 수원시 영통구 광교2동</div>
+			<div class="card-price ">5,000원</div>
+			<div class="card-counts">
+				<span> 관심 11 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25983216"
+		href="https://www.daangn.com/articles/25983216">
+		<div class="card-photo">
+			<img alt="엔틱 책꽂이"
+				src="http://211.63.89.225:9000/daangn/resources/images//59D5B6DFA4EFF72A3757E0B27603E40CEF7BFE882C26C3DB4413A8A9C84A3FF6.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">엔틱 책꽂이</h2>
+			<div class="card-region-name">경기도 용인시 기흥구 보정동</div>
+			<div class="card-price ">20,000원</div>
+			<div class="card-counts">
+				<span> 관심 13 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 17 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26029334"
+		href="https://www.daangn.com/articles/26029334">
+		<div class="card-photo">
+			<img alt="신발장, 책장, 의자3개, 화분받침, 학원책상 드림합니다."
+				src="http://211.63.89.225:9000/daangn/resources/images//329a91de6bee80855d104ca6ad3978f4308f616c75065f3ed40da3892494e090.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">신발장, 책장, 의자3개, 화분받침, 학원책상 드림합니다.</h2>
+			<div class="card-region-name">강원도 원주시 단계동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 0 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26038389"
+		href="https://www.daangn.com/articles/26038389">
+		<div class="card-photo">
+			<img alt="애터미 헤모힘"
+				src="http://211.63.89.225:9000/daangn/resources/images//944d8ec510ab20cb71356521ac87e3d3f5c6eaa659ba22ac6200f77f223d15f1.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">애터미 헤모힘</h2>
+			<div class="card-region-name">부산 동래구 명륜동</div>
+			<div class="card-price ">45,000원</div>
+			<div class="card-counts">
+				<span> 관심 6 </span> ∙ <span> 댓글 1 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25999214"
+		href="https://www.daangn.com/articles/25999214">
+		<div class="card-photo">
+			<img alt="블루 소파"
+				src="http://211.63.89.225:9000/daangn/resources/images//bc6922d47842447bab90a26da5cf8feacf89abe0782be575d98572fd384cd77d.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">블루 소파</h2>
+			<div class="card-region-name">부산 수영구 망미동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 23 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 20 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26046839"
+		href="https://www.daangn.com/articles/26046839">
+		<div class="card-photo">
+			<img alt="조말론 잉글리쉬 피어 프리지아"
+				src="http://211.63.89.225:9000/daangn/resources/images//D164BECE3EFBE919F54D43DD64E18714C27377B7D5F0C0A666B5CED3F9E41FBC.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">조말론 잉글리쉬 피어 프리지아</h2>
+			<div class="card-region-name">서울 송파구 가락2동</div>
+			<div class="card-price ">8,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25989425"
+		href="https://www.daangn.com/articles/25989425">
+		<div class="card-photo">
+			<img alt="냉장고 판매합니다."
+				src="http://211.63.89.225:9000/daangn/resources/images//d5ca3c3aedaf45f7f6a0d7107ea348d1d0c60d2948d9075b50ee1c76b0d7e180.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">냉장고 판매합니다.</h2>
+			<div class="card-region-name">제주 제주시 한림읍</div>
+			<div class="card-price ">123,456,789원</div>
+			<div class="card-counts">
+				<span> 관심 1 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 19 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26019808"
+		href="https://www.daangn.com/articles/26019808">
+		<div class="card-photo">
+			<img alt="고가구 입니다  "
+				src="http://211.63.89.225:9000/daangn/resources/images//C434B4C55F65BF9A92206AF1044605002DDA6EA97497D388CCAA0C2EEE4E4D59.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">고가구 입니다</h2>
+			<div class="card-region-name">제주 제주시 연동</div>
+			<div class="card-price ">300,000원</div>
+			<div class="card-counts">
+				<span> 관심 9 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25979798"
+		href="https://www.daangn.com/articles/25979798">
+		<div class="card-photo">
+			<img alt="LG 넷북"
+				src="http://211.63.89.225:9000/daangn/resources/images//d1123e14325b3e6cd4c18f34ea553532bf21f68588ce2522157d95d6fe82a6a6.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">LG 넷북</h2>
+			<div class="card-region-name">서울 금천구 시흥제2동</div>
+			<div class="card-price ">1,000원</div>
+			<div class="card-counts">
+				<span> 관심 8 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 24 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26029377"
+		href="https://www.daangn.com/articles/26029377">
+		<div class="card-photo">
+			<img alt="LG로봇청소기"
+				src="http://211.63.89.225:9000/daangn/resources/images//b4945dd738c8639143f98511552f75f2c8686a54f4d59124c954c064f272b7c5.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">LG로봇청소기</h2>
+			<div class="card-region-name">경남 창원시 성산구 신촌동</div>
+			<div class="card-price ">30,000원</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26033838"
+		href="https://www.daangn.com/articles/26033838">
+		<div class="card-photo">
+			<img alt="20k 쌀"
+				src="http://211.63.89.225:9000/daangn/resources/images//7C776A1D8C170938D853D955A9F93849B823366B0E0023805E97C5B067398FB6.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">20k 쌀</h2>
+			<div class="card-region-name">경기도 시흥시 군자동</div>
+			<div class="card-price ">25,000원</div>
+			<div class="card-counts">
+				<span> 관심 4 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26049166"
+		href="https://www.daangn.com/articles/26049166">
+		<div class="card-photo">
+			<img alt="이케아 스텝퍼"
+				src="http://211.63.89.225:9000/daangn/resources/images//31f35de5ae896757184ad336444b3dcbaee79710d0212750a5ac5698e825af30.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">이케아 스텝퍼</h2>
+			<div class="card-region-name">경기도 성남시 분당구 이매1동</div>
+			<div class="card-price ">3,000원</div>
+			<div class="card-counts">
+				<span> 관심 7 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26017121"
+		href="https://www.daangn.com/articles/26017121">
+		<div class="card-photo">
+			<img alt="파티션내놔요"
+				src="http://211.63.89.225:9000/daangn/resources/images//c811b55475de01a51d6cbd1626a079d4d466adc8b4d3e3fac3fefc480e5630dd.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">파티션내놔요</h2>
+			<div class="card-region-name">제주 제주시 아라동</div>
+			<div class="card-price ">40,000원</div>
+			<div class="card-counts">
+				<span> 관심 15 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26032341"
+		href="https://www.daangn.com/articles/26032341">
+		<div class="card-photo">
+			<img alt="4단 라지서랍장 "
+				src="http://211.63.89.225:9000/daangn/resources/images//B9F75CA2E2CDF24189E50E92FD381252978026B7A9A0E2C3CCA192C5E9567BD0.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">4단 라지서랍장</h2>
+			<div class="card-region-name">강원도 원주시 우산동</div>
+			<div class="card-price ">25,000원</div>
+			<div class="card-counts">
+				<span> 관심 6 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26019555"
+		href="https://www.daangn.com/articles/26019555">
+		<div class="card-photo">
+			<img alt="2.5리터 압력솥"
+				src="http://211.63.89.225:9000/daangn/resources/images//C350AF2FF50B15CDF3BE945D70A5DB86EB05F46B1965BD2B242FA57FAD217CA0.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">2.5리터 압력솥</h2>
+			<div class="card-region-name">경기도 성남시 분당구 정자2동</div>
+			<div class="card-price ">3,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 11 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26035725"
+		href="https://www.daangn.com/articles/26035725">
+		<div class="card-photo">
+			<img alt="컴퓨터책상&amp;의자 있어요~~"
+				src="http://211.63.89.225:9000/daangn/resources/images//4cc3ae6cbb786ad7e299ec683629b5f505b4cc76567a386e932f3ed44e549637.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">컴퓨터책상&amp;의자 있어요~~</h2>
+			<div class="card-region-name">제주 제주시 노형동</div>
+			<div class="card-price ">40,000원</div>
+			<div class="card-counts">
+				<span> 관심 2 </span> ∙ <span> 댓글 1 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26018168"
+		href="https://www.daangn.com/articles/26018168">
+		<div class="card-photo">
+			<img alt="에초기 ,55인치 티비 ,라자 화장대 드립니다."
+				src="http://211.63.89.225:9000/daangn/resources/images//39fa2ba53d6f84455fb0a4ad065a55c9670aa50506a1444895ea5faf9135671b.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">에초기 ,55인치 티비 ,라자 화장대 드립니다.</h2>
+			<div class="card-region-name">제주 서귀포시 대정읍</div>
+			<div class="card-price ">100원</div>
+			<div class="card-counts">
+				<span> 관심 2 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26047603"
+		href="https://www.daangn.com/articles/26047603">
+		<div class="card-photo">
+			<img alt="골프채셋트 백까지 판매합니다"
+				src="http://211.63.89.225:9000/daangn/resources/images//ec56b1cc4e69b61efefa810bb1d6668d3eb5da483f3319b1a9b6ea7873a974af.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">골프채셋트 백까지 판매합니다</h2>
+			<div class="card-region-name">경기도 용인시 기흥구 기흥동</div>
+			<div class="card-price ">50,000원</div>
+			<div class="card-counts">
+				<span> 관심 4 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25668439"
+		href="https://www.daangn.com/articles/25668439">
+		<div class="card-photo">
+			<img alt="편안핫의자 2개 간이책상 3개"
+				src="http://211.63.89.225:9000/daangn/resources/images//ec8ee9ea29919dfc7f2aca005f9e2530349aabd1e4450c95bee98ce48a8c4d72.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">편안핫의자 2개 간이책상 3개</h2>
+			<div class="card-region-name">서울 강서구 마곡동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 35 </span> ∙ <span> 댓글 7 </span> ∙ <span> 채팅 82 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26037642"
+		href="https://www.daangn.com/articles/26037642">
+		<div class="card-photo">
+			<img alt="전자렌지 팝니다"
+				src="http://211.63.89.225:9000/daangn/resources/images//037D101C2F85562AC12967F112710F9A182B3431AE736B9038412233B3EDF388.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">전자렌지 팝니다</h2>
+			<div class="card-region-name">서울 양천구 신정동</div>
+			<div class="card-price ">20,000원</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26040314"
+		href="https://www.daangn.com/articles/26040314">
+		<div class="card-photo">
+			<img alt="여성속옷"
+				src="http://211.63.89.225:9000/daangn/resources/images//aa2ef8dfb774ca1d8aed43e3e03424faf6ddfabaac863ad5a505f095d3dee5ad.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">여성속옷</h2>
+			<div class="card-region-name">광주 서구 유촌동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 2 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26025535"
+		href="https://www.daangn.com/articles/26025535">
+		<div class="card-photo">
+			<img alt="버버리 런던 퀼팅점퍼 베이지 M"
+				src="http://211.63.89.225:9000/daangn/resources/images//796c38150bb53d1fc85e1acb7b9f3ff815fe50cb8044574f72743db00e1bc0f9.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">버버리 런던 퀼팅점퍼 베이지 M</h2>
+			<div class="card-region-name">서울 강동구 천호제2동</div>
+			<div class="card-price ">150,000원</div>
+			<div class="card-counts">
+				<span> 관심 24 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25712549"
+		href="https://www.daangn.com/articles/25712549">
+		<div class="card-photo">
+			<img alt="토리버치 정품~패턴 가방~"
+				src="http://211.63.89.225:9000/daangn/resources/images//A2F3D234A4B1840D2EE8AE0A999ED0147E40BC4683900FE1ECBE6CF09ECE78A3.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">토리버치 정품~패턴 가방~</h2>
+			<div class="card-region-name">서울 송파구 잠실2동</div>
+			<div class="card-price ">30,000원</div>
+			<div class="card-counts">
+				<span> 관심 46 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 41 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26027209"
+		href="https://www.daangn.com/articles/26027209">
+		<div class="card-photo">
+			<img alt="전자레인지(10년사용) 무료나눔"
+				src="http://211.63.89.225:9000/daangn/resources/images//1a3a25e4460ad2095a31ea6c2436b2bbf66495da918b5a16ccb12bd718b18ce8.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">전자레인지(10년사용) 무료나눔</h2>
+			<div class="card-region-name">경기도 용인시 수지구 동천동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 2 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26024041"
+		href="https://www.daangn.com/articles/26024041">
+		<div class="card-photo">
+			<img alt="벤치"
+				src="http://211.63.89.225:9000/daangn/resources/images//1480946ed322dc02a40537f42bd861788a0076ef5602ad4f586828f112870faa.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">벤치</h2>
+			<div class="card-region-name">충북 청주시 흥덕구 오송읍</div>
+			<div class="card-price ">20,000원</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25995970"
+		href="https://www.daangn.com/articles/25995970">
+		<div class="card-photo">
+			<img alt="건강하게  쓰시길~~~^^"
+				src="http://211.63.89.225:9000/daangn/resources/images//e15b4e0ad4a04868c027ce3d27399873e8f2a856e12026ab42f4cc54f64fee36.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">건강하게 쓰시길~~~^^</h2>
+			<div class="card-region-name">충북 제천시 중앙로1가</div>
+			<div class="card-price blank-price">-</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 20 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26035916"
+		href="https://www.daangn.com/articles/26035916">
+		<div class="card-photo">
+			<img alt="미싱"
+				src="http://211.63.89.225:9000/daangn/resources/images//b316b67b46edef3e0addc4b233fd111f936f284316cae5ce440ca1958189f3e6.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">미싱</h2>
+			<div class="card-region-name">전북 전주시 완산구 효자1동</div>
+			<div class="card-price ">50,000원</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26039269"
+		href="https://www.daangn.com/articles/26039269">
+		<div class="card-photo">
+			<img alt="스탠드  자석칠판  무료"
+				src="http://211.63.89.225:9000/daangn/resources/images//2b92cfaaab89a0575eedfc73bada1be711b80bdc3ac4346ba721ddecc571ef9b.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">스탠드 자석칠판 무료</h2>
+			<div class="card-region-name">경남 김해시 장유2동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 1 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26044578"
+		href="https://www.daangn.com/articles/26044578">
+		<div class="card-photo">
+			<img alt="포트메리온"
+				src="http://211.63.89.225:9000/daangn/resources/images//99742f66e40f5f0365a561aa30e76af79c4335c308802edf1ee05ad4b72eb2cd.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">포트메리온</h2>
+			<div class="card-region-name">서울 서초구 서초3동</div>
+			<div class="card-price ">15,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 8 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26031299"
+		href="https://www.daangn.com/articles/26031299">
+		<div class="card-photo">
+			<img alt="fugi  미니세탁기"
+				src="http://211.63.89.225:9000/daangn/resources/images//8b08c2977c5ef5039b218ae1eaf7567738c0d5ba7a14bdcaae1db38b1dc59787.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">fugi 미니세탁기</h2>
+			<div class="card-region-name">인천 부평구 부평1동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26020825"
+		href="https://www.daangn.com/articles/26020825">
+		<div class="card-photo">
+			<img alt="선반"
+				src="http://211.63.89.225:9000/daangn/resources/images//e3320fbbabe4720058604b306c354b559deaa27ca16249206035bcaaa89e9102.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">선반</h2>
+			<div class="card-region-name">서울 강북구 송중동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 11 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26037990"
+		href="https://www.daangn.com/articles/26037990">
+		<div class="card-photo">
+			<img alt="제작년 쌀입니다."
+				src="http://211.63.89.225:9000/daangn/resources/images//681d96f29104c0bb50628701ca4747a9ec5ab3e18e95335934e0d42455215ab0.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">제작년 쌀입니다.</h2>
+			<div class="card-region-name">경기도 안산시 단원구 선부3동</div>
+			<div class="card-price blank-price">-</div>
+			<div class="card-counts">
+				<span> 관심 1 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 8 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26038446"
+		href="https://www.daangn.com/articles/26038446">
+		<div class="card-photo">
+			<img alt="밀크티 갤럭시탭 SM-P600 16기가 와이파이전용"
+				src="http://211.63.89.225:9000/daangn/resources/images//C9B00842D72442700FB0C17F23A518B59FAFF10F63ED28A6BCD5B2A092681420.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">밀크티 갤럭시탭 SM-P600 16기가 와이파이전용</h2>
+			<div class="card-region-name">서울 은평구 신사동</div>
+			<div class="card-price ">60,000원</div>
+			<div class="card-counts">
+				<span> 관심 7 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25979448"
+		href="https://www.daangn.com/articles/25979448">
+		<div class="card-photo">
+			<img alt="메트로시티 크로스 백 -가로8반 ㅡ세로6cm -막지막 사진 크기 보세요"
+				src="http://211.63.89.225:9000/daangn/resources/images//acfc5a443548cc752bba4bbbaad26393573592bffdf09d5b7c273bc5c21760bb.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">메트로시티 크로스 백 -가로8반 ㅡ세로6cm -막지막 사진 크기 보세요</h2>
+			<div class="card-region-name">대전 서구 변동</div>
+			<div class="card-price ">25,000원</div>
+			<div class="card-counts">
+				<span> 관심 14 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 19 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25988434"
+		href="https://www.daangn.com/articles/25988434">
+		<div class="card-photo">
+			<img alt="장식장"
+				src="http://211.63.89.225:9000/daangn/resources/images//58c2b7f099dd7e403d4cda966ce3e6335f5738cb7d9b25b8dce28160a14e5b3a.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">장식장</h2>
+			<div class="card-region-name">경기도 수원시 팔달구 인계동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 30 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 17 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26040601"
+		href="https://www.daangn.com/articles/26040601">
+		<div class="card-photo">
+			<img alt="메스티지 데코 화장대 (1200)"
+				src="http://211.63.89.225:9000/daangn/resources/images//01936c8231e17ace193979acfb9946636a6008fa43732df86261e549c5c0a42b.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">메스티지 데코 화장대 (1200)</h2>
+			<div class="card-region-name">제주 제주시 이도2동</div>
+			<div class="card-price ">70,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 7 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25942140"
+		href="https://www.daangn.com/articles/25942140">
+		<div class="card-photo">
+			<img alt="프리미엄  제면가"
+				src="http://211.63.89.225:9000/daangn/resources/images//6a15c96176460166794ffe3c36586a573cc56c7472c79d79d9ba2b7763669f5f.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">프리미엄 제면가</h2>
+			<div class="card-region-name">서울 영등포구 신길제3동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 20 </span> ∙ <span> 댓글 2 </span> ∙ <span> 채팅 35 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26049151"
+		href="https://www.daangn.com/articles/26049151">
+		<div class="card-photo">
+			<img alt="기타 중고물품" class="category-image"
+				src="http://211.63.89.225:9000/daangn/resources/images//thumb_etc.png">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">온누리 상품권</h2>
+			<div class="card-region-name">서울 송파구 가락2동</div>
+			<div class="card-price ">200,000원</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25544755"
+		href="https://www.daangn.com/articles/25544755">
+		<div class="card-photo">
+			<img alt="이사관계로.내놓습니다."
+				src="http://211.63.89.225:9000/daangn/resources/images//5af089ff4ae2d737dfdac3b547039da2eb951313d7bcbc87eb51f2b356ad7dd2.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">이사관계로.내놓습니다.</h2>
+			<div class="card-region-name">제주 제주시 노형동</div>
+			<div class="card-price ">30원</div>
+			<div class="card-counts">
+				<span> 관심 7 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 22 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26036747"
+		href="https://www.daangn.com/articles/26036747">
+		<div class="card-photo">
+			<img alt="보시고 맘에 드시는거 찍어 주시어요"
+				src="http://211.63.89.225:9000/daangn/resources/images//a3ff9da5df81c03a816f9e341256023350784e8aac7ef7a5eb4ce066f51d5649.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">보시고 맘에 드시는거 찍어 주시어요</h2>
+			<div class="card-region-name">서울 서초구 서초3동</div>
+			<div class="card-price ">1,234원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 8 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25918243"
+		href="https://www.daangn.com/articles/25918243">
+		<div class="card-photo">
+			<img alt="153ss &lt;&lt;&lt; 카톡주세요"
+				src="http://211.63.89.225:9000/daangn/resources/images//257eea2c3574cabcd41c023e3b0bbe505fc04f731deabf790a5507714a03ee2d.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">153ss &lt;&lt;&lt; 카톡주세요</h2>
+			<div class="card-region-name">충남 보령시 대천동</div>
+			<div class="card-price ">1원</div>
+			<div class="card-counts">
+				<span> 관심 8 </span> ∙ <span> 댓글 20 </span> ∙ <span> 채팅 48 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26020514"
+		href="https://www.daangn.com/articles/26020514">
+		<div class="card-photo">
+			<img alt="(미사용) 포토메리온 그릇 "
+				src="http://211.63.89.225:9000/daangn/resources/images//D0062BD2D6DF9BC0919F3F2AF6CA06C0AAD631B6E5AD55AB5B2E6E8B05CFA365.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">(미사용) 포토메리온 그릇</h2>
+			<div class="card-region-name">서울 양천구 신정3동</div>
+			<div class="card-price ">8,000원</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26033404"
+		href="https://www.daangn.com/articles/26033404">
+		<div class="card-photo">
+			<img alt="전면책장"
+				src="http://211.63.89.225:9000/daangn/resources/images//04a815ac31bfdae1d33e36bfa20b7537f3f823272987fa479db5ddecc44cefa6.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">전면책장</h2>
+			<div class="card-region-name">서울 송파구 잠실4동</div>
+			<div class="card-price ">2,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 8 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26029704"
+		href="https://www.daangn.com/articles/26029704">
+		<div class="card-photo">
+			<img alt="캠핑 접이식 웨건"
+				src="http://211.63.89.225:9000/daangn/resources/images//18650c38a39446be1a3531edd717fb01f16e41f603d32529945cdcb1a75683d2.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">캠핑 접이식 웨건</h2>
+			<div class="card-region-name">서울 서초구 서초1동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 8 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 8 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26043405"
+		href="https://www.daangn.com/articles/26043405">
+		<div class="card-photo">
+			<img alt="♥데코라인 3인용 쇼파 무료나눔♥"
+				src="http://211.63.89.225:9000/daangn/resources/images//4425d20b6bf31886830c55d02af000119a4fd168c581bc13129f2cd968ae8fdb.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">♥데코라인 3인용 쇼파 무료나눔♥</h2>
+			<div class="card-region-name">대전 서구 가장동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 1 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 7 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26045406"
+		href="https://www.daangn.com/articles/26045406">
+		<div class="card-photo">
+			<img alt="일룸 화장대"
+				src="http://211.63.89.225:9000/daangn/resources/images//B899602279340D5369E874C6A8FD256E8723169ECE8877679E903D5BBD44D38E.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">일룸 화장대</h2>
+			<div class="card-region-name">대전 서구 둔산3동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 7 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26043079"
+		href="https://www.daangn.com/articles/26043079">
+		<div class="card-photo">
+			<img alt="테이블과쇼파"
+				src="http://211.63.89.225:9000/daangn/resources/images//2458f2f08f170e48ee87574c33de3f8eef6d75e688d80beaf402d61a85bfe610.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">테이블과쇼파</h2>
+			<div class="card-region-name">대전 서구 변동</div>
+			<div class="card-price ">80,000원</div>
+			<div class="card-counts">
+				<span> 관심 14 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 6 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26033485"
+		href="https://www.daangn.com/articles/26033485">
+		<div class="card-photo">
+			<img alt="골프세트"
+				src="http://211.63.89.225:9000/daangn/resources/images//443cd16d66ab5ce1769463d4220665ab0aadf973492e546804e73afa61e2d49c.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">골프세트</h2>
+			<div class="card-region-name">광주 북구 연제동</div>
+			<div class="card-price ">30,000원</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 8 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26046572"
+		href="https://www.daangn.com/articles/26046572">
+		<div class="card-photo">
+			<img alt="2단 원목 선반 정리대"
+				src="http://211.63.89.225:9000/daangn/resources/images//190ebe94740fba1f542991a8850e3a3dd50092a823fe7cca06116e17a38eae63.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">2단 원목 선반 정리대</h2>
+			<div class="card-region-name">광주 북구 문흥2동</div>
+			<div class="card-price ">10,000원</div>
+			<div class="card-counts">
+				<span> 관심 1 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 7 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25994854"
+		href="https://www.daangn.com/articles/25994854">
+		<div class="card-photo">
+			<img alt="언더아머 운동화"
+				src="http://211.63.89.225:9000/daangn/resources/images//3B6FC8F5F557C8E5D444A16E0659A90F7AA1E4FF7B0FEC7D31771CD3CE51B503.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">언더아머 운동화</h2>
+			<div class="card-region-name">인천 미추홀구 주안2동</div>
+			<div class="card-price ">30,000원</div>
+			<div class="card-counts">
+				<span> 관심 6 </span> ∙ <span> 댓글 2 </span> ∙ <span> 채팅 15 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26035521"
+		href="https://www.daangn.com/articles/26035521">
+		<div class="card-photo">
+			<img alt="전자레인지"
+				src="http://211.63.89.225:9000/daangn/resources/images//b79afd1f751066021dfd96131cc12f080f3997744fb061dc49d9a871809aaaba.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">전자레인지</h2>
+			<div class="card-region-name">서울 서초구 서초3동</div>
+			<div class="card-price ">15,000원</div>
+			<div class="card-counts">
+				<span> 관심 3 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 8 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26033282"
+		href="https://www.daangn.com/articles/26033282">
+		<div class="card-photo">
+			<img alt="맥포머스 "
+				src="http://211.63.89.225:9000/daangn/resources/images//F6D366AEEF7DDA368063CEAF7CA932B41D726AAD96311EE9430F8326013D733B.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">맥포머스</h2>
+			<div class="card-region-name">서울 송파구 잠실6동</div>
+			<div class="card-price ">50,000원</div>
+			<div class="card-counts">
+				<span> 관심 6 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 8 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26005158"
+		href="https://www.daangn.com/articles/26005158">
+		<div class="card-photo">
+			<img alt="정품 구찌 쟈가드 숄더백 판매합니다~"
+				src="http://211.63.89.225:9000/daangn/resources/images//50d82a79999006b0e7c0d07fe6809342c5f557c8ed2129f65dc1e6480220e4d0.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">정품 구찌 쟈가드 숄더백 판매합니다~</h2>
+			<div class="card-region-name">경기도 성남시 분당구 정자동</div>
+			<div class="card-price ">150,000원</div>
+			<div class="card-counts">
+				<span> 관심 21 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 10 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26036807"
+		href="https://www.daangn.com/articles/26036807">
+		<div class="card-photo">
+			<img alt="휴대용 유모차 나눔"
+				src="http://211.63.89.225:9000/daangn/resources/images//f926b1992bd03bbae35646c8ec39c7d821b87bd434bc99c412fbd77dae92d4de.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">휴대용 유모차 나눔</h2>
+			<div class="card-region-name">경기도 화성시 동탄1동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 5 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 8 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26044182"
+		href="https://www.daangn.com/articles/26044182">
+		<div class="card-photo">
+			<img alt="양파즙 가져가세요~"
+				src="http://211.63.89.225:9000/daangn/resources/images//a7b43b7d8f722051a628265a62fea9e628e7464d3724aae68ba1e219d08ad559.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">양파즙 가져가세요~</h2>
+			<div class="card-region-name">강원도 원주시 개운동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 2 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 7 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="26018880"
+		href="https://www.daangn.com/articles/26018880">
+		<div class="card-photo">
+			<img alt="안녕마음아 50권+마음더하기 (세이펜버전)"
+				src="http://211.63.89.225:9000/daangn/resources/images//eca825c63c5ba8a7ff155d9093599b9ddd7825236b5661a24c84be5b9b72c4ae.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">안녕마음아 50권+마음더하기 (세이펜버전)</h2>
+			<div class="card-region-name">경기도 성남시 분당구 서현2동</div>
+			<div class="card-price ">180,000원</div>
+			<div class="card-counts">
+				<span> 관심 10 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 9 </span>
+			</div>
+		</div>
+	</a></article> <article class="card-top "> <a class="card-link "
+		data-event-label="25985356"
+		href="https://www.daangn.com/articles/25985356">
+		<div class="card-photo">
+			<img alt="무료로 드립니다."
+				src="http://211.63.89.225:9000/daangn/resources/images/0C275F30D6E8B4A9AC46FA0EEA5E230D417138D63924EDB10F6D281C9E74CABF.jpg">
+		</div>
+		<div class="card-desc">
+			<h2 class="card-title">무료로 드립니다.</h2>
+			<div class="card-region-name">충북 청주시 흥덕구 복대1동</div>
+			<div class="card-price ">무료 나눔</div>
+			<div class="card-counts">
+				<span> 관심 2 </span> ∙ <span> 댓글 0 </span> ∙ <span> 채팅 14 </span>
+			</div>
+		</div>
+	</a></article> </section> <section id="hot-articles-go-download">
+	<h3>더 구경하고 싶나요?</h3>
+	<p>당근마켓 앱에서 따뜻한 거래를 직접 경험해보세요!</p>
+	<div id="hot-articles-download-buttons">
+		<a target="_blank" class="download-button"
+			href="https://itunes.apple.com/kr/app/pangyojangteo/id1018769995?l=ko&amp;ls=1&amp;mt=8">
+			<div class="home-apple-store-bar-white"></div>
+			<div class="download-text">App Store</div>
+		</a> <a target="_blank" class="download-button"
+			href="https://play.google.com/store/apps/details?id=com.towneers.www">
+			<div class="home-google-play-bar-white"></div>
+			<div class="download-text">Google Play</div>
+		</a>
+	</div>
+	</section> </section>
+
+	<%-- <c:import url="http://211.63.89.225:9000/daangn/footer.carrot" /> --%>
+
+</body>
+</html>

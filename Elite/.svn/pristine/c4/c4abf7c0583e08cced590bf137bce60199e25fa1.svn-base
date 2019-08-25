@@ -1,0 +1,237 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://211.63.89.225:9000/daangn/resources/css/index.css">
+<link rel="stylesheet" type="text/css"
+	href="http://211.63.89.225:9000/daangn/resources/css/admin.css">
+<script
+	src="http://211.63.89.225:9000/daangn/resources/js/jquery-3.3.1.min.js"></script>
+<script>
+	function openForm() {
+		document.getElementById("myModal").style.display = "block";
+	}
+
+	function closeForm() {
+		document.getElementById("myModal").style.display = "none";
+	}
+
+	/* window.onclick = function(event) {
+		if (event.target == document.getElementById("myModal")) {
+			document.getElementById("myModal").style.display = "none";
+		}
+	} */
+	
+	
+
+
+	$(document).ready(function() {
+		
+		   var str = $('#dd').val();
+		 str = str.split('<br>').join("\r\n");
+		 $('#admin_pop_content1').html(str);  
+
+	/* 	$("#admin_pop_content1").text(content); */
+		
+				$(".close").on('click', function() {
+					$("form")[0].reset();
+				});
+
+				$("input[type=file]").on('change', function() {
+					if (window.FileReader) {
+						var fileName = $(this)[0].files[0].name;
+						$("#afile").text("").text(fileName);
+					}
+				});
+
+				$(".btn_admin_write_pop").click(function() {
+					
+					var nid = $('input[name="nid"]').val();
+					
+					
+					if ($("#admin_pop_title").val() == "") {
+						alert("제목을 입력해주세요.");
+						$("#admin_pop_title").focus();
+						return false;
+
+					}
+
+					admin_contentUpdate_modal_Form.submit();
+				});
+
+
+				$(".btn_admin_content_delete").on('click',function() {
+							var result = confirm("정말로 삭제하시겠습니까?");
+							var nid = $(this).val();
+							if (result) {
+								$(location).attr(
+										"href",
+										"admin_notice_delete_proc.carrot?nid="
+												+ nid);
+
+							}
+
+						});
+				
+				
+				
+	
+			});
+</script>
+<style>
+#afile {
+	margin-left: -320px;
+	background-color: white;
+	display: inline-block;
+	width: 200px;
+}
+</style>
+</head>
+<body>
+	<%-- <c:import url="http://211.63.89.225:9000/daangn/header.carrot" /> --%>
+	<div class="admin">
+		<div class="admin_h2">
+			<h2 id="admin_span_member">관리자 페이지</h2>
+			<div class="admin_line_member"></div>
+		</div>
+		<br>
+
+		<div class="btn_admin_content">
+			<button type="button" class="btn_admin_content_update"
+				onclick="openForm()">수정하기</button>
+			<%-- <a href="admin_notice_delete_proc.carrot?nid=${nid }"></a> --%>
+			<button type="button" class="btn_admin_content_delete"
+				value="${nid }">삭제하기</button>
+		</div>
+		
+		<!-- 수정하기 모달창 -->
+		<div class="admin_write_pop" id="myModal">
+
+			<div class="modal-content">
+				<span class="close" onclick="closeForm()">&times;</span>
+
+				<form action="admin_notice_content_update_proc.carrot"
+					name="admin_contentUpdate_modal_Form" method="post"
+					enctype="multipart/form-data" class="admin_form_box">
+
+					<h3>수정하기</h3>
+					<ul>
+						<li><label for="title" class="admin_pop_tit">제목 </label> <input
+							type="text" name="ntitle" class="admin_tit_input"
+							id="admin_pop_title" value="${vo.ntitle}"></li>
+
+						<li><label for="content" class="admin_pop_content"
+							id="admin_pop_content">내용</label> <textarea
+								class="admin_pop_content_textarea" id="admin_pop_content1" name="ncontent"></textarea></li>
+				 	<input type="hidden" id="dd" value="${vo.ncontent}"> 
+						<li><label>파일</label>
+						 <c:choose>
+								<c:when test="${vo.onfile ne null }">
+									<input type="file" name="file1" class="admin_pop_file">
+									<span id="afile">${vo.onfile}</span>
+								</c:when>
+								<c:otherwise>
+									<input type="file" name="file1" class="admin_pop_file">
+									<span id="afile"></span>
+								</c:otherwise>
+							</c:choose></li>
+
+
+						<li class="admin_pop_btn">
+						<input type="hidden" name="nid"	value="${nid}">
+							<button type="button" class="btn_admin_write_pop"
+								id="modal_update">등록</button>
+							<button type="button" id="btn_admin_cancel_pop"
+								onclick="closeForm()" class="close">취소</button></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+
+
+
+
+		<table class="admin_notice_content">
+
+			<tr>
+				<td>${vo.ntitle }</td>
+			</tr>
+			<tr>
+				<td class="admin_notice_content_date">${vo.ndate }</td>
+			</tr>
+
+			<tr style="display:inline-block; width:800px; min-height:200px;">
+
+				<td colspan=3 class="admin_notice_content_text">${vo.ncontent }<br>
+				
+
+					<c:if test="${vo.nfile ne null }">
+						<img
+							src="http://211.63.89.225:9000/daangn/resources/upload/${vo.nfile}"
+							class="admin_notice_img">
+					</c:if>
+
+				</td>
+			</tr>
+
+		</table>
+
+		<div class="admin_notice_div">
+			<a
+				href="http://211.63.89.225:9000/daangn/admin_notice.carrot?nid=${ nid }&rno=${ rno }"><button
+					type="button" id="admin_notice_btn12">목록</button></a>
+			<!--  <a
+				href="http://211.63.89.225:9000/daangn/index.carrot"><button
+					type="button" id="admin_notice_btn2">홈으로</button></a> -->
+		</div>
+
+		<table class="pre_next">
+			<c:forEach items="${list}" var="vo">
+				<c:choose>
+					<c:when test="${vo.pt !=null }">
+						<tr>
+							<th><img
+								src="http://211.63.89.225:9000/daangn/resources/images/iconfinder_icon_set_outlinder-04_2519697.png">이전글</th>
+							<td class="prev"><a
+								href="http://211.63.89.225:9000/daangn/admin_notice_content.carrot?nid=${vo.pp}&rno=${rno}&rpage=${rpage}">
+									${vo.pt}</a></td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<th><img
+							src="http://211.63.89.225:9000/daangn/resources/images/iconfinder_icon_set_outlinder-04_2519697.png">이전글</th>
+						<td class="prev">이전글이 없습니다.</td>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${vo.nt !=null }">
+						<tr>
+							<th><img
+								src="http://211.63.89.225:9000/daangn/resources/images/iconfinder_icon_set_outlinder-02_2519700.png">다음글</th>
+							<td class="next"><a
+								href="http://211.63.89.225:9000/daangn/admin_notice_content.carrot?nid=${vo.np}&rno=${rno}&rpage=${rpage}">
+									${vo.nt}</a></td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<th><img
+								src="http://211.63.89.225:9000/daangn/resources/images/iconfinder_icon_set_outlinder-02_2519700.png">다음글</th>
+							<td class="next">다음글이 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		</table>
+
+	</div>
+
+
+	<%-- <c:import url="http://211.63.89.225:9000/daangn/footer.carrot" /> --%>
+</body>
+</html>

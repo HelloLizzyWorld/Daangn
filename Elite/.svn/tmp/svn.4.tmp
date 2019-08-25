@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.product">
+	<!-- insert -->
+	<insert id="insert_product" parameterType="com.elite.vo.DaangnProductVO" useGeneratedKeys="true" keyProperty="pid">
+		INSERT INTO
+		DAANGN_PRODUCT(PID, ID, PCATE, PTITLE, PTYPE, PPRICE, PCONTENT, PDATE, PSTATE, PHITS)
+		VALUES(SEQU_DAANGN_PRODUCT.NEXTVAL, #{id}, #{pcate},#{ptitle}, #{ptype}, #{pprice}, #{pcontent}, sysdate, '판매중', 0)
+		
+		<selectKey keyProperty="pid" resultType="java.lang.String">
+				SELECT SEQU_DAANGN_PRODUCT.CURRVAL AS PID FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<!-- file insert -->
+	<insert id="insert_product_file" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="INSERT ALL " separator=" " close="SELECT * FROM DUAL">
+			INTO
+			DAANGN_FILE(FID,PID,PFILE,OPFILE) 
+			VALUES(GET_FID(),#{item.pid},#{item.pfile},#{item.opfile})
+		</foreach>
+	</insert>
+	
+	<!-- list -->
+	<select id="list_product" parameterType="map" resultType="com.elite.vo.DaangnProductVO">
+		<if test='page == "main"'>
+			SELECT * FROM(
+		</if>
+		SELECT * FROM(
+		SELECT CT.PID, CT.PTITLE, CT.PPRICE, CT.PDATE, CT.PSTATE, CT.ADDRESS, CT.CART, MT.MSG,MT.PFILE
+		FROM(
+			SELECT P.PID, P.PTITLE, P.PPRICE, P.PDATE, P.PSTATE, ME.ADDRESS, COUNT(C.PID) CART
+			FROM DAANGN_PRODUCT P, DAANGN_CART C, DAANGN_MEMBER ME
+			WHERE P.PID = C.PID(+)
+			AND P.ID=ME.ID
+			GROUP BY C.PID, P.PID, P.PTITLE, P.PPRICE, P.PDATE, P.PSTATE, ME.ADDRESS, C.PID) CT,
+			(SELECT P.PID, COUNT(M.PID) MSG,F.PFILE
+			FROM DAANGN_PRODUCT P,DAANGN_MESSAGE M,DAANGN_FILE F
+			WHERE P.PID = M.PID(+) AND P.PID=F.PID(+)
+			GROUP BY P.PID, M.PID,F.PFILE) MT
+		WHERE CT.PID = MT.PID)
+		ORDER BY PDATE DESC
+		<if test='page == "main"'>
+			)WHERE ROWNUM BETWEEN 1 AND 11
+		</if>
+	</select>
+	
+	<!-- sales count -->
+	<select id="getSalesDbCount" parameterType="java.lang.String" resultType="int">
+		SELECT COUNT(PID) FROM DAANGN_PRODUCT WHERE ID=#{id}
+	</select>
+
+	<!-- sales -->
+	<select id="sales_list" parameterType="java.lang.String" resultType="com.elite.vo.DaangnProductVO">
+		SELECT * FROM( 
+		SELECT CT.PID, CT.PTITLE, CT.PPRICE, TO_CHAR(CT.PDATE,'YYYY-MM-DD HH24:MI:SS') PDATE, CT.PSTATE, CT.CART, MT.MSG FROM   
+		(SELECT P.PID, P.PTITLE, P.PPRICE, P.PDATE, P.PSTATE, COUNT(C.PID) CART
+		FROM DAANGN_PRODUCT P, DAANGN_CART C
+		WHERE P.PID = C.PID(+) 
+		AND P.ID=#{id}
+		GROUP BY C.PID, P.PID, P.PTITLE, P.PPRICE, P.PDATE, P.PSTATE) CT,
+		(SELECT P.PID, COUNT(M.PID) MSG FROM 
+		(SELECT * FROM DAANGN_PRODUCT WHERE ID=#{id}) P, 
+		(SELECT * FROM (SELECT DISTINCT ID, PID, RID FROM DAANGN_MESSAGE) WHERE RID = #{id}) M
+		WHERE P.PID = M.PID(+)
+		GROUP BY P.PID) MT
+		WHERE CT.PID = MT.PID)
+		ORDER BY PDATE DESC	
+	</select>
+	
+	<!-- sales file -->
+	<select id="sales_file_list" parameterType="java.lang.String" resultType="com.elite.vo.DaangnFileVO">
+		SELECT FID, PFILE, OPFILE FROM DAANGN_FILE WHERE PID=#{pid} ORDER BY FID
+	</select> 
+	
+	<!-- product_list -->
+	<select id="product_list" parameterType="map" resultType="com.elite.vo.DaangnProductVO">
+		
+		SELECT * FROM(
+		SELECT * FROM(
+		SELECT ROWNUM RNO,CT.PID, CT.PTITLE, CT.PPRICE, CT.PDATE, CT.PSTATE, CT.ADDRESS, CT.CART, MT.MSG,MT.PFILE 
+		FROM(
+			SELECT P.PID, P.PTITLE, P.PPRICE, P.PDATE, P.PSTATE, ME.ADDRESS, COUNT(C.PID) CART
+			FROM DAANGN_PRODUCT P, DAANGN_CART C, DAANGN_MEMBER ME
+			<choose>
+				<when test="cate != 'all'">
+					WHERE P.PID = C.PID(+)
+					AND P.ID=ME.ID AND PCATE=#{cate}
+				</when>
+				<otherwise>
+					WHERE P.PID = C.PID(+)
+					AND P.ID=ME.ID
+				</otherwise>
+			</choose>
+			GROUP BY C.PID, P.PID, P.PTITLE, P.PPRICE, P.PDATE, P.PSTATE, ME.ADDRESS, C.PID) CT,
+			(SELECT P.PID, COUNT(M.PID) MSG,F.PFILE
+			FROM DAANGN_PRODUCT P,DAANGN_MESSAGE M, DAANGN_FILE F
+			WHERE P.PID = M.PID(+) AND P.PID=F.PID(+)
+			GROUP BY P.PID, M.PID,F.PFILE) MT
+		WHERE CT.PID = MT.PID)
+		ORDER BY PDATE DESC)WHERE RNO BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- dbCount -->
+	<select id="dbCount" resultType="int">
+		select count(*) from daangn_product
+	</select>
+	
+	<select id="dbProductCount" parameterType="java.lang.String" resultType="int">
+		<choose>
+			<when test="cate != 'all'">
+				select count(*) from daangn_product where pcate=#{cate}
+			</when>
+			<otherwise>
+				select count(*) from daangn_product
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- pstate update -->
+	<update id="pstate_update" parameterType="map">
+		UPDATE DAANGN_PRODUCT SET PSTATE=#{pstate} WHERE PID=#{pid}
+	</update>
+	
+	<!-- pdate update -->
+	<update id="pdate_update" parameterType="java.lang.String">
+		UPDATE DAANGN_PRODUCT SET PDATE=SYSDATE WHERE PID=#{pid}
+	</update>
+
+	<!-- product content -->
+	<select id="product_content" parameterType="java.lang.String" resultType="com.elite.vo.DaangnProductVO">
+		SELECT  PID, PCATE, PTITLE, PTYPE, PPRICE, PCONTENT FROM DAANGN_PRODUCT WHERE PID=#{pid}
+	</select>
+	
+	<!-- product update -->
+	<update id="update_product" parameterType="com.elite.vo.DaangnProductVO">
+		UPDATE DAANGN_PRODUCT 
+		SET PCATE=#{pcate}, PTITLE=#{ptitle}, PTYPE=#{ptype}, PPRICE=#{pprice}, PCONTENT=#{pcontent}
+		WHERE PID=#{pid}
+	</update>
+	
+	<!-- product delete -->
+	<delete id="product_delete" parameterType="java.lang.String">
+		DELETE FROM DAANGN_PRODUCT WHERE PID=#{pid}
+	</delete>
+	
+	<select parameterType="map" id="getSearch" resultType="com.elite.vo.DaangnProductVO">
+	select * from (select p.id, p.ptitle, p.pcontent,p.pprice, m.address,f.pfile from 
+	(select id, address from daangn_member) m, daangn_product p, daangn_file f where p.id = m.id and p.pid=f.pid)where address 
+	like '%'||#{keyword}||'%' or ptitle like '%'||#{keyword}||'%' 
+	</select>
+	
+    <select id="searchCount" parameterType="java.lang.String" resultType="int">
+		select count(*) from daangn_product where ptitle like '%'||#{keyword}||'%'
+	</select>
+	
+	<!-- get sido -->
+	<select id="getSido" resultType="com.elite.vo.DaangnJusoVO">
+		SELECT DISTINCT SIDO FROM DAANGN_JUSO ORDER BY SIDO
+	</select>
+	
+	<!-- get sigungu -->
+	<select id="getSigungu" parameterType="java.lang.String" resultType="com.elite.vo.DaangnJusoVO">
+		SELECT DISTINCT SIGUNGU FROM DAANGN_JUSO WHERE SIDO=#{sido} ORDER BY SIGUNGU
+	</select>
+	
+	<!-- get hname -->
+	<select id="getHname" parameterType="java.lang.String" resultType="com.elite.vo.DaangnJusoVO">
+		SELECT DISTINCT HNAME FROM DAANGN_JUSO WHERE SIGUNGU=#{sigungu} ORDER BY HNAME
+	</select>
+	
+	<!-- chat id list -->
+	<select id="getChatIDList" parameterType="map" resultType="com.elite.vo.DaangnChatVO">
+		SELECT ID FROM DAANGN_MESSAGE WHERE PID=#{pid} AND RID=#{rid}
+	</select>
+	
+	<!-- review insert -->
+	<insert id="getReviewResult" parameterType="com.elite.vo.DaangnReviewVO">
+		INSERT INTO DAANGN_REVIEW(RID, ID, RSTATE, RCOMMENT, RDETAIL, PID, CORS)
+		VALUES(SEQ_DAANGN_REVIEW.NEXTVAL, #{id},#{rstate},#{rcomment},#{rdetail},#{pid},'판매')
+	</insert>
+	<!-- order insert -->
+	<insert id="getOrderResult" parameterType="com.elite.vo.DaangnReviewVO">
+		INSERT INTO DAANGN_ORDER(OID, ID, PID, BDATE)
+		VALUES(SEQ_DAANGN_ORDER.NEXTVAL, #{id},#{pid},sysdate)
+	</insert>
+	
+</mapper>

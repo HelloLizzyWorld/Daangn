@@ -1,0 +1,74 @@
+.login_p {
+	height: 80px;
+}
+
+.login_logo {
+	border: 1px solid #404040;
+	background: #404040;
+	height: 50px;
+}
+
+.login_img {
+	width: 40px;
+	padding-left: 18px;
+	padding-top: 5px;
+}
+
+.input_css {
+	height: 50px;
+	margin-top: -10px;
+	margin-left: -2px;
+	padding: 14px 10px;
+	border-radius: 5px;
+}
+
+.id_pass_join_menu {
+	margin-top: 10px;
+}
+
+.id_pass_menu {
+	font-size: 14px;
+	padding-left: 110px;
+}
+
+.join_menu { 
+	font-size: 14px;
+	padding-left: 210px;
+}
+
+#login_f {
+	margin-left: 110px;
+}
+
+#bth_login_id {
+	width: 420px;
+	margin-top: 60px;
+	margin-left: 112px;
+	font-size: 24px;
+	border-radius: 5px;
+}
+
+#bth_login_pass {
+	width: 420px;
+	margin-top: 60px;
+	margin-left: 112px;
+	font-size: 24px;
+	border-radius: 5px;
+}
+
+
+
+#login_height {
+	height: 450px;
+}
+
+#id, #pass{
+	height: 50px; width: 400px;
+}
+
+.fail_msg {
+	color: red;
+	font-size: 13px;
+	padding-left: 100px;
+	padding-top: 50px;
+}

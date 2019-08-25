@@ -1,0 +1,183 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//Dth HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dth">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>당근마켓 -관리자</title>
+
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:9000/daangn/resources/css/index.css">
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:9000/daangn/resources/css/admin.css">
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:9000/daangn/resources/css/notice.css">
+<link rel="stylesheet" type="text/css" 
+	href="http://localhost:9000/daangn/resources/css/am-pagination.css">
+<script src="http://localhost:9000/daangn/resources/js/jquery-3.3.1.min.js"></script>
+<script src="http://localhost:9000/daangn/resources/js/am-pagination.js"></script>
+<script>
+
+function openForm() {
+	  document.getElementById("myModal").style.display = "block";
+	}
+
+function closeForm() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == document.getElementById("myModal")) {
+	  document.getElementById("myModal").style.display = "none";
+  }
+}
+
+$(document).ready(function(){
+	
+	var pager = jQuery('#ampaginationsm').pagination({
+		
+	    maxSize:7,	    		// max page size
+	    totals: '${dbCount}',	// total pages	
+	    page: '${rpage}',		// initial page		
+	    pageSize: '${pageSize}',	// max number items per page
+	
+	    // custom labels		
+	    lastText: '&raquo;&raquo;', 		
+	    firstText: '&laquo;&laquo;',		
+	    prevText: '&laquo;',		
+	    nextText: '&raquo;',
+			     
+	    btnSize:'sm'	// 'sm'  or 'lg'		
+	});
+	
+	jQuery('#ampaginationsm').on('am.pagination.change',function(e){
+		   jQuery('.showlabelsm').text('The selected page no: '+e.page);
+           $(location).attr('href', "http://localhost:9000/daangn/notice.carrot?rpage="+e.page);
+
+    });
+	
+	$(".btn_notice_q1").click(function(){
+		$(".notice_tr_a1").toggle();
+		
+	});
+	$(".btn_notice_q2").click(function(){
+		$(".notice_tr_a2").toggle();
+		
+	});
+	$(".btn_notice_q3").click(function(){
+		$(".notice_tr_a3").toggle();
+		
+	});
+	$(".btn_notice_q4").click(function(){
+		$(".notice_tr_a4").toggle();
+		
+	});
+	$(".btn_notice_q5").click(function(){
+		$(".notice_tr_a5").toggle();
+		
+	});
+	
+	$(".notice_search_button").click(function(){
+		if($("#admin_search").val() ==""){
+			alert("검색어를 입력해주세요.");
+			$("#admin_search").focus();
+			return false;
+		}
+		notice_search_form.submit();
+	});
+	
+});
+
+</script>
+<style>
+	tr#notice_tr_a{
+		display:none;
+	}
+input#admin_search:focus {
+  outline: none;
+}
+	input#admin_search{
+		/* margin-left:665px; */
+		border:none;
+		height:30px;
+		width:180px; 
+		position:relative;
+		bottom:9px;
+		margin-bottom:10px;
+		margin-left:5px;
+	}
+	img.admin_search_icon{
+	 width:27px;
+	margin-top:3px;
+	 height:28px;
+	margin-left:6px;
+	 border-left: none;
+	
+	}
+	div.search_admin{
+		padding-bottom:10px;
+		
+	}
+	section.search_section{
+		border:1px solid #bfbfbf;
+		width:230px;
+		margin-left:715px;
+		height:35px;
+	
+</style>
+</head>
+
+<body>
+	<%-- <c:import url="http://localhost:9000/daangn/header.carrot" /> --%>
+	<div class="admin">
+		<div class="admin_h2">
+			<h2 id="admin_span_member">공지사항<span>당근마켓의 새로운 소식들과 유용한 정보를 한곳에서 확인하세요.</span></h2>
+			<div class="admin_line_member"></div>
+		</div>
+
+		<br>
+		
+		<form action="notice_search.carrot" name="notice_search_form" method="get">
+		
+		<div class="search_admin">
+		<section class="search_section">
+			<input type="text" name="keyword" id="admin_search">
+			<button type="button" class="notice_search_button">
+				<img src="http://localhost:9000/daangn/resources/images/musica-searcher.png" class="admin_search_icon">
+			</button>
+			</section>	
+		</div>
+		
+		</form>
+			<div>
+			<table class="notice_table">
+				<tr class="notice_tr">
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성일</th>
+					<th>조회수</th>
+					
+				</tr>
+				<c:forEach var="vo" items="${list}">
+				
+						<tr>
+							<td>${ vo.rno }</td>
+							<td><a href="notice_content.carrot?nid=${vo.nid}&rno=${vo.rno}&rpage=${rpage}" id="notice_name">${ vo.ntitle }</a></td>
+							<td>${ vo.ndate }</td>
+							<td>${ vo.nhits }</td>
+						</tr>
+					
+				</c:forEach>
+			</table>
+			<div id="ampaginationsm"></div>
+		</div>
+		<div class="notice_div">
+			 <a href="http://localhost:9000/daangn/index.carrot"><button
+					type="button" id="notice_btn2">홈으로</button></a>
+		</div>
+	</div>
+
+	<%-- <c:import url="http://localhost:9000/daangn/footer.carrot" /> --%>
+</body>
+</html>

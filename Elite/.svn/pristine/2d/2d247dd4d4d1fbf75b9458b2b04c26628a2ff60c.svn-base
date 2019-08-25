@@ -1,0 +1,211 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//Dth HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dth">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>당근마켓 - 우리 동네 중고 직거래 마켓</title>
+
+<link rel="stylesheet" type="text/css" href="http://211.63.89.225:9000/daangn/resources/css/index.css">
+<link rel="stylesheet" type="text/css" href="http://211.63.89.225:9000/daangn/resources/css/admin.css">
+<link rel="stylesheet" type="text/css" href="http://211.63.89.225:9000/daangn/resources/css/am-pagination.css">
+<script	src="http://211.63.89.225:9000/daangn/resources/js/jquery-3.3.1.min.js"></script>
+<script src="http://211.63.89.225:9000/daangn/resources/js/am-pagination.js"></script>
+<script>
+
+var btn = document.getElementById("btn_admin_answer");
+
+function openForm() {
+	  document.getElementById("admin_answer_preview").style.display = "block";
+	  document.getElementById("ampaginationsm").style.display = "none";
+	}
+
+function closeForm() {
+  document.getElementById("admin_answer_preview").style.display = "none";
+  document.getElementById("ampaginationsm").style.display = "block";
+}
+
+window.onclick = function(event) {
+  if (event.target == document.getElementById("myModal")) {
+	  document.getElementById("myModal").style.display = "none";
+  }
+}
+
+</script>
+<script>
+	$(document).ready(function(){
+		var pager = jQuery('#ampaginationsm').pagination({
+			
+		    maxSize:7,	    		// max page size
+		    totals: '${dbCount}',	// total pages	
+		    page: '${rpage}',		// initial page		
+		    pageSize: '${pageSize}',	// max number items per page
+		
+		    // custom labels		
+		    lastText: '&raquo;&raquo;', 		
+		    firstText: '&laquo;&laquo;',		
+		    prevText: '&laquo;',		
+		    nextText: '&raquo;',
+				     
+		    btnSize:'sm'	// 'sm'  or 'lg'		
+		});
+		
+		jQuery('#ampaginationsm').on('am.pagination.change',function(e){
+			   jQuery('.showlabelsm').text('The selected page no: '+e.page);
+	           $(location).attr('href', "http://211.63.89.225:9000/daangn/admin_answer.carrot?rpage="+e.page);
+
+	    });
+		
+ 	
+	
+		$(".btn_admin_answer").click(function(){
+			var aid = $(this).attr("id").substr(17,4);
+			$.ajax({
+				url: "admin_answer_proc.carrot",
+				type: "post",
+				data: "aid="+aid,
+				dataType: "json",
+				success:function(data){
+					console.log(data);
+					/* var jsonObj = JSON.parse(data); */
+					var fileList = data.afile;
+					var fileName;
+					if(fileList != undefined){
+	     				 fileName = fileList.split(',',4);
+						
+					}
+     				
+					$("#admin_answer_name").text(data.name);
+					$("#admin_answer_id").text(data.id);
+					$("#admin_answer_phone").text(data.phone);
+					$("#admin_answer_type").text(data.atype);
+					$("#admin_answer_title").text(data.atitle);
+					$("#admin_answer_content").text(data.acontent);
+					
+					if(data.afile != null){
+						for(var i=0; i<fileName.length; i++){
+							/* $("#answer_content_img").attr("src","http://211.63.89.225:9000/daangn/resources/upload/"+fileName[i]).css("display","block"); */
+							$("#admin_answer_img_td").append("<img id='admin_answer_img' style = 'max-width:300px; max-height:200px;' src='http://211.63.89.225:9000/daangn/resources/upload/"+fileName[i]+"'><br/>");
+						}
+					}
+					
+					$("#admin_answer_link").attr("href","http://211.63.89.225:9000/daangn/admin_answer_return.carrot?aid="+data.aid+"&rpage="+'${rpage}');	
+					$("#admin_answer_reply").text(data.reply);
+				}	
+	 		}); 
+		});
+		$("#btn_admin_cancel").click(function(){
+			$("#admin_answer_img").css("display","none");
+		});
+		
+	});
+
+</script>
+</head>
+
+<body>
+	<div class="admin">
+		<div class="admin_h2">
+			<h2 id="admin_span_member">관리자 페이지</h2>
+		</div>
+
+		<br>
+		<div>
+			<div class="admin_answer_preview" id="admin_answer_preview">
+				<div class="admin_answer_content">
+					
+						<h1 class="answer_preview_h1">상담내용</h1>
+						<span class="admin_answer_preview_span" onclick="closeForm()">&times;</span>
+					
+						<table class="answer_preview_table">
+							<tr class="preview_tr">
+								<td class="preview_td1">이름</td>
+								<td class="preview_td2" id="admin_answer_name"></td>
+							</tr>
+							<tr class="preview_tr">
+								<td class="preview_td1">아이디</td>
+								<td class="preview_td2" id="admin_answer_id"></td>
+							</tr>
+							<tr class="preview_tr">
+								<td class="preview_td1">연락처</td>
+								<td class="preview_td2" id="admin_answer_phone"></td>
+							</tr>
+							<tr class="preview_tr">
+								<td class="preview_td1">유형</td>
+								<td class="preview_td2" id="admin_answer_type"></td>
+							</tr>
+							<tr class="preview_tr">
+								<td class="preview_td1">제목</td>
+								<td class="preview_td2" id="admin_answer_title"></td>
+							</tr>
+							<tr class="preview_tr">
+								<td class="preview_td1">내용</td>
+								<td class="preview_td2" id="admin_answer_img_td">
+									<p id="admin_answer_content"></p>
+									<!-- <img id="admin_answer_img" src="" style="max-width:300px; max-height:200px;"> -->
+								</td>
+							</tr>
+							<tr class="preview_tr">
+								<td class="preview_td1">답변</td>
+								<td class="preview_td2" id="admin_answer_reply"></td>
+							</tr>
+						</table>
+						<div id="btn_preview_div">
+							<a href="" id="admin_answer_link">
+								<button type="button" id="btn_answer_preview">답변하기</button>
+							</a>
+							<a href="http://211.63.89.225:9000/daangn/admin_answer.carrot?rpage=${ rpage }">
+								<button type="button" id="btn_admin_cancel">취소하기</button>
+							</a>
+						</div>
+				</div>
+			</div>
+			
+			
+				<span class="tit_sub">상담내역</span>
+			
+
+			<table class="admin_notice_table">
+				<tr class="admin_notice_tr">
+					<th>번호</th>
+					<th class="admin_notice_th">제목</th>
+					<th class="admin_notice_date" style="width:200px;">날짜</th>
+					<th></th>
+				</tr>
+				<c:forEach var="vo" items="${ list }">
+					<tr class="admin_notice_tr">
+						<td>${ vo.rno }</td>
+						<td>${ vo.atitle }</td>
+						<td>${ vo.adate }</td>
+						<td>
+							<c:choose>
+								<c:when test="${ vo.reply == null}">
+									<c:choose>
+									<c:when test="${ vo.atype == '신고'}">
+										<button type="button" id="btn_admin_answer_${ vo.aid }" class="btn_admin_answer report" onclick="openForm()">신고접수</button>
+									</c:when>
+									<c:otherwise>
+										<button type="button" id="btn_admin_answer_${ vo.aid }" class="btn_admin_answer check" onclick="openForm()">내용확인</button>
+									</c:otherwise>
+								</c:choose>
+								</c:when>
+								<c:otherwise>
+									<button type="button" id="btn_admin_answer_${ vo.aid }" class="btn_admin_answer" onclick="openForm()">답변완료</button>
+								</c:otherwise>
+							</c:choose>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="ampaginationsm"></div>
+		</div>
+		<div class="admin_notice_div">
+			<a href="http://211.63.89.225:9000/daangn/admin.carrot"><button
+					type="button" id="admin_notice_btn1">이전 페이지</button></a> <a
+				href="http://211.63.89.225:9000/daangn/index.carrot"><button
+					type="button" id="admin_notice_btn2">홈으로</button></a>
+		</div>
+	</div>
+</body>
+</html>
