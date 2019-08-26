@@ -18,8 +18,6 @@
 		<div id="top_div">
 			<div id="title_div"></div>
 		</div>
-		<%-- <c:import url="http://localhost:9000/daangn/box.carrot" /> --%>
-		<%-- <jsp:include page="../mypage/mypage_box.jsp"></jsp:include> --%>
 
 		<div class="main">
 			<div class="title_div">
@@ -206,8 +204,6 @@
 										<span class="cat_text">삽니다</span>
 								</a></li>
 							</ul>
-
-
 
 						</div>
 

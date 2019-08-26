@@ -52,7 +52,6 @@ public class PageServiceImpl implements PageService {
 
 	@Override
 	public int getDbCount(String countName) {
-
 		if (countName.equals("answer")) {
 			dbCount = noticeDAO.getDbCount();
 		} else if (countName.equals("notice")) {
@@ -60,11 +59,6 @@ public class PageServiceImpl implements PageService {
 		} else if (countName.equals("member")) {
 			dbCount = memberDAO.getDbcount();
 		}
-		/*
-		 * else if (countName.equals("product")) { dbCount =
-		 * productDAO.getDbcount(); }
-		 */
-
 		return dbCount;
 	}
 
@@ -77,7 +71,6 @@ public class PageServiceImpl implements PageService {
 	// id가 필요한 페이징 처리 데이터 갯수
 	@Override
 	public int getDbCount(String countName, String id) {
-
 		if (countName.equals("answer")) { // 문의 답변
 			dbCount = noticeDAO.getDbCount(id);
 		} else if (countName.equals("cart")) { // 관심 목록
@@ -85,7 +78,6 @@ public class PageServiceImpl implements PageService {
 		} else if (countName.equals("sales")) { // 판매 목록
 			dbCount = productDAO.getSalesDbCount(id);
 		}
-
 		return dbCount;
 	}
 
@@ -268,7 +260,7 @@ public class PageServiceImpl implements PageService {
 			startCount = 1;
 			endCount = pageSize;
 		}
-
+        // DAO는 mapper에 연동 될 데이터만 가져오기 위해 business logic은 Service단에서 수행
 		if (countName.equals("product")) {
 			ArrayList<DaangnProductVO> list = new ArrayList<DaangnProductVO>();
 
@@ -285,10 +277,10 @@ public class PageServiceImpl implements PageService {
 
 			for (DaangnProductVO vo : list) {
 				String priceType = vo.getPtype();
-
+                // 판매 종류가 ‘판매’ 이외일 때 해당 판매 종류를 필드명 pType에 넣어 목록에 띄워 줄 예정
 				if (!priceType.equals("판매"))
 					vo.setPprice(priceType);
-
+                // pid를 가져와 해당하는 물품의 file을 가져옴(fileArray)
 				String pid = vo.getPid();
 				ArrayList<DaangnFileVO> fileArray = productDAO.getProductFileList(pid);
 				vo.setFileArray(fileArray);

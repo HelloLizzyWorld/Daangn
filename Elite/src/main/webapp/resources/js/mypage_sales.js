@@ -315,8 +315,6 @@ function last_modal(rstate){
 	$(".review_result").append(html);
 }
 
-
-
 /* 	
  * select 값 set 하는 jquery - list를 return하여 사용 불가능
  *$(".pstate option").each(function() {
@@ -324,5 +322,4 @@ function last_modal(rstate){
 		if ($(this).val() == '${vo.pstate}') {
 			$(this).prop("selected", "selected"); // attr적용안될경우 prop으로 
 		}
-
 }); */

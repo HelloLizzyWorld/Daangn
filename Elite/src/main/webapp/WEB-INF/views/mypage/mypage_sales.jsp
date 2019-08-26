@@ -37,7 +37,6 @@ $(document).ready(function() {
 	jQuery('#ampaginationsm').on('am.pagination.change',function(e){
 		   jQuery('.showlabelsm').text('The selected page no: '+e.page);
 		   $(location).attr('href', "http://localhost:9000/daangn/mypage_sales.carrot?rpage="+e.page);
-
     });
 });
 </script>

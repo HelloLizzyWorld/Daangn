@@ -11,7 +11,6 @@
 		INSERT INTO
 		DAANGN_PRODUCT(PID, ID, PCATE, PTITLE, PTYPE, PPRICE, PCONTENT, PDATE, PSTATE, PHITS)
 		VALUES(SEQU_DAANGN_PRODUCT.NEXTVAL, #{id}, #{pcate},#{ptitle}, #{ptype}, #{pprice}, #{pcontent}, sysdate, '판매중', 0)
-		
 		<selectKey keyProperty="pid" resultType="java.lang.String">
 				SELECT SEQU_DAANGN_PRODUCT.CURRVAL AS PID FROM DUAL
 		</selectKey>

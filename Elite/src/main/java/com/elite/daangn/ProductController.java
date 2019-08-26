@@ -63,13 +63,14 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<DaangnProductVO> list = new ArrayList<DaangnProductVO>();
 		ArrayList<DaangnJusoVO> sigunguList = new ArrayList<DaangnJusoVO>();
-
+		// 페이지 수와 목록 상태, 검색할 키워드를 매개변수로 전달하여 해당 목록의 데이터를 가져옴
 		list = (ArrayList<DaangnProductVO>) pageService.getProductePageList(rpage, "product", state, keyword).get("list");
 
 		// select box 시도 데이터 가져오기
 		ArrayList<DaangnJusoVO> sido = productService.getSido();
 		mv.addObject("sido", sido);
-
+		
+		// state가 시도  혹은 시군구이고 keyword가 존재할 때 시군구 목록 데이터
 		if (state.equals("4") || state.equals("5") && !keyword.equals("0")) {
 			sigunguList = productService.getSigungu(keyword);
 			mv.addObject("sigungu", sigunguList);

@@ -196,6 +196,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ArrayList<DaangnJusoVO> getSigungu(String sido) {
 		if(sido.length()>2){
+			 // 시도는 항상 2글자이므로 keyword가 2글자 이상이면 시도 keyword를 자르고 뒤에 시군구 데이터를 검색
 			sido = sido.substring(0,2);
 		}
 		return productDAO.getSigungu(sido);

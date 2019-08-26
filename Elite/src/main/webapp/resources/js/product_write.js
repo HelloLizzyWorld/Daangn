@@ -245,6 +245,5 @@ function uploadForm(){
         		location.href = "http://localhost:9000/daangn/mypage_sales.carrot";
         	}
         }
-    
     });
 }
