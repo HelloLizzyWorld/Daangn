@@ -5,7 +5,7 @@
 >  * 지역별로 채팅을 통해 중고거래를 중개하는 웹페이지
 
 
-#### 개발환경
+#### 개발환경 :pushpin:
 * 프로젝트 기간 : 2019.03.25 ~ 2019.06.17(85일간)
 * 개발 인원 : 5명
 * 개발 플랫폼 : Windows10
@@ -14,12 +14,12 @@
 * DataBase : Oracle 11g
 * Programming Tool : STS 3.8.2, sqldeveloper, SVN
 
-#### 담당 업무
+#### 담당 업무 :clipboard:
 * 상품 등록
 * 상품 목록
 * 내가 판매한 상품
 
-#### 기능별 페이지 열람
+#### 기능별 페이지 열람 :mag:
 * 상품 등록
   + [product_write.jsp](https://github.com/HelloLizzyWorld/MyProject/blob/master/Elite/src/main/webapp/WEB-INF/views/product/product_write.jsp)
   + [product_wirte.js](https://github.com/HelloLizzyWorld/MyProject/blob/master/Elite/src/main/webapp/resources/js/product_write.js)
@@ -55,5 +55,3 @@
   + [ProductServiceImpl.java](https://github.com/HelloLizzyWorld/MyProject/blob/master/Elite/src/main/java/com/elite/service/ProductServiceImpl.java)
   + [DaangnMemberDAO.java](https://github.com/HelloLizzyWorld/MyProject/blob/master/Elite/src/main/java/com/elite/dao/DaangnMemberDAO.java)
   + [daangn_member_mapper.xml](https://github.com/HelloLizzyWorld/MyProject/blob/master/Elite/src/main/java/com/elite/mapper/daangn_member_mapper.xml)
-
-
