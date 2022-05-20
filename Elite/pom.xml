@@ -195,7 +195,7 @@
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.8.0</version>
+			<version>2.8.9</version>
 		</dependency>
 		
 		<!-- ajax 406 (Not Acceptable)때문에 라이브러리 추가 -->
